@@ -47,3 +47,71 @@ model Region {
   createdAt DateTime @default(now())
   User      User[]
 }
+
+model Capacity {
+  id        String   @id @default(uuid())
+  name_uz   String
+  name_ru   String
+  name_en   String
+  createdAt DateTime @default(now())
+  Tool      Tool[]
+}
+
+model Brand {
+  id        String   @id @default(uuid())
+  name_uz   String
+  name_ru   String
+  name_en   String
+  createdAt DateTime @default(now())
+  Tool      Tool[]
+}
+
+model Size {
+  id        String   @id @default(uuid())
+  name_uz   String
+  name_ru   String
+  name_en   String
+  createdAt DateTime @default(now())
+  Tool      Tool[]
+}
+
+model Level {
+  id        String   @id @default(uuid())
+  name_uz   String
+  name_ru   String
+  name_en   String
+  createdAt DateTime @default(now())
+}
+
+model GeneralInfo {
+  id          String   @id @default(uuid())
+  phone       String
+  email       String
+  address     String?
+  telegram    String?
+  instagram   String?
+  description String?
+  createdAt   DateTime @default(now())
+}
+
+model Tool {
+  id         String   @id @default(uuid())
+  name_uz    String
+  name_ru    String
+  name_en    String
+  desc_uz    String
+  desc_ru    String
+  desc_en    String
+  image      String
+  price      Int
+  quantity   Int
+  code       Int?
+  isActive   Boolean?
+  createdAt  DateTime @default(now())
+  brandId    String
+  Brand      Brand    @relation(fields: [brandId], references: [id])
+  capacityId String
+  Capacity   Capacity @relation(fields: [capacityId], references: [id])
+  sizeId     String
+  Size       Size     @relation(fields: [sizeId], references: [id])
+}

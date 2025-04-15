@@ -45,7 +45,7 @@ export class OtpService {
         'https://notify.eskiz.uz/api/message/sms/send',
         {
           mobile_phone: phone.replace('+', ''),
-          message: `Sizning tasdiqlash kodingiz`,
+          message: `Bu Eskiz dan test`,
           from: '4546',
         },
         {

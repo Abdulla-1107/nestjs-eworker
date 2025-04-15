@@ -141,6 +141,68 @@ exports.Prisma.RegionScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.CapacityScalarFieldEnum = {
+  id: 'id',
+  name_uz: 'name_uz',
+  name_ru: 'name_ru',
+  name_en: 'name_en',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.BrandScalarFieldEnum = {
+  id: 'id',
+  name_uz: 'name_uz',
+  name_ru: 'name_ru',
+  name_en: 'name_en',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.SizeScalarFieldEnum = {
+  id: 'id',
+  name_uz: 'name_uz',
+  name_ru: 'name_ru',
+  name_en: 'name_en',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.LevelScalarFieldEnum = {
+  id: 'id',
+  name_uz: 'name_uz',
+  name_ru: 'name_ru',
+  name_en: 'name_en',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.GeneralInfoScalarFieldEnum = {
+  id: 'id',
+  phone: 'phone',
+  email: 'email',
+  address: 'address',
+  telegram: 'telegram',
+  instagram: 'instagram',
+  description: 'description',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ToolScalarFieldEnum = {
+  id: 'id',
+  name_uz: 'name_uz',
+  name_ru: 'name_ru',
+  name_en: 'name_en',
+  desc_uz: 'desc_uz',
+  desc_ru: 'desc_ru',
+  desc_en: 'desc_en',
+  image: 'image',
+  price: 'price',
+  quantity: 'quantity',
+  code: 'code',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  brandId: 'brandId',
+  capacityId: 'capacityId',
+  sizeId: 'sizeId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -165,7 +227,13 @@ exports.UserRole = exports.$Enums.UserRole = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Region: 'Region'
+  Region: 'Region',
+  Capacity: 'Capacity',
+  Brand: 'Brand',
+  Size: 'Size',
+  Level: 'Level',
+  GeneralInfo: 'GeneralInfo',
+  Tool: 'Tool'
 };
 
 /**
