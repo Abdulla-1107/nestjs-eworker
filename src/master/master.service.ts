@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateMasterDto } from './dto/create-master.dto';
 import { UpdateMasterDto } from './dto/update-master.dto';
 import { Prisma } from 'generated/prisma';
@@ -8,6 +12,12 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class MasterService {
   constructor(private readonly prisma: PrismaService) {}
   async create(createMasterDto: CreateMasterDto) {
+    const master = await this.prisma.master.findFirst({
+      where: { phone: createMasterDto.phone },
+    });
+    if (master) {
+      throw new ConflictException('Telefon raqamga tegishli master bor');
+    }
     const newMaster = await this.prisma.master.create({
       data: { ...createMasterDto, isActive: true },
     });

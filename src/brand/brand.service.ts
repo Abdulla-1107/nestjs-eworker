@@ -53,6 +53,9 @@ export class BrandService {
 
     const [data, total] = await this.prisma.$transaction([
       this.prisma.brand.findMany({
+        include: {
+          Tool: { include: { Capacity: true, Size: true } },
+        },
         where,
         skip,
         take: Number(limit),
@@ -77,6 +80,9 @@ export class BrandService {
   async findOne(id: string) {
     try {
       const brand = await this.prisma.brand.findUnique({
+        include: {
+          Tool: { include: { Brand: true, Capacity: true, Size: true } },
+        },
         where: { id },
       });
       if (!brand) {

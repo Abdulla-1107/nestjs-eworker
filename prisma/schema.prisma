@@ -30,6 +30,7 @@ model User {
   regionId  String
   Region    Region   @relation(fields: [regionId], references: [id])
   Order     Order[]
+  Basket    Basket[]
 }
 
 enum UserRole {
@@ -84,6 +85,8 @@ model Level {
   createdAt        DateTime           @default(now())
   MasterProfession MasterProfession[]
   professionLevel  professionLevel[]
+  Basket           Basket[]
+  orderProduct     orderProduct[]
 }
 
 model GeneralInfo {
@@ -118,6 +121,8 @@ model Tool {
   sizeId         String
   Size           Size             @relation(fields: [sizeId], references: [id])
   professionTool professionTool[]
+  Basket         Basket[]
+  orderProduct   orderProduct[]
 }
 
 model Master {
@@ -132,6 +137,7 @@ model Master {
   about            String
   createdAt        DateTime           @default(now())
   MasterProfession MasterProfession[]
+  OrderMaster      OrderMaster[]
 }
 
 model Profession {
@@ -144,6 +150,8 @@ model Profession {
   MasterProfession MasterProfession[]
   professionTool   professionTool[]
   professionLevel  professionLevel[]
+  Basket           Basket[]
+  orderProduct     orderProduct[]
 }
 
 model MasterProfession {
@@ -180,17 +188,59 @@ model professionLevel {
 }
 
 model Order {
-  id              String   @id @default(uuid())
+  id              String         @id @default(uuid())
   userId          String
-  User            User     @relation(fields: [userId], references: [id])
+  User            User           @relation(fields: [userId], references: [id])
   address         String
   latitude        String
   longitude       String
-  date            DateTime @default(now())
+  date            DateTime       @default(now())
   totalPrice      Decimal
   paymentType     String
   withDelivery    Boolean
   status          String
   deliveryComment String?
-  createdAt       DateTime @default(now())
+  createdAt       DateTime       @default(now())
+  OrderMaster     OrderMaster[]
+  orderProduct    orderProduct[]
+}
+
+model OrderMaster {
+  id       String @id @default(uuid())
+  orderId  String
+  Order    Order  @relation(fields: [orderId], references: [id])
+  masterId String
+  Master   Master @relation(fields: [masterId], references: [id])
+}
+
+model Basket {
+  id           String     @id @default(uuid())
+  userId       String
+  User         User       @relation(fields: [userId], references: [id])
+  professionId String
+  Profession   Profession @relation(fields: [professionId], references: [id])
+  toolId       String
+  Tool         Tool       @relation(fields: [toolId], references: [id])
+  levelId      String
+  Level        Level      @relation(fields: [levelId], references: [id])
+  count        Int
+  workingTime  Int
+  totalPrice   Decimal
+  timeUnit     String
+}
+
+model orderProduct {
+  id           String     @id @default(uuid())
+  orderId      String
+  Order        Order      @relation(fields: [orderId], references: [id])
+  professionId String
+  Profession   Profession @relation(fields: [professionId], references: [id])
+  toolId       String
+  Tool         Tool       @relation(fields: [toolId], references: [id])
+  levelId      String
+  Level        Level      @relation(fields: [levelId], references: [id])
+  workingTime  Int
+  price        Decimal
+  count        Int
+  timeUnit     String
 }

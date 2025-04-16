@@ -41,10 +41,10 @@ export class SizeService {
     }
   }
 
-  // Bitta hajmni olish
   async findOne(id: string) {
     try {
       const size = await this.prisma.size.findUnique({
+        include: { Tool: { include: { Brand: true, Capacity: true } } },
         where: { id },
       });
       if (!size) {

@@ -33,19 +33,19 @@ export class CapacityService {
     sortOrder: 'asc' | 'desc';
   }) {
     const { page, limit, search, searchField, sortBy, sortOrder } = query;
-  
+
     const skip = (page - 1) * limit;
-  
+
     const allowedFields = ['createdAt', 'name_uz', 'name_ru', 'name_en'];
-  
+
     if (!allowedFields.includes(sortBy)) {
       throw new NotFoundException(`Saralash maydoni topilmadi: ${sortBy}`);
     }
-  
+
     if (search && !allowedFields.includes(searchField)) {
       throw new NotFoundException(`Qidiruv maydoni topilmadi: ${searchField}`);
     }
-  
+
     const where = search
       ? {
           [searchField]: {
@@ -54,10 +54,11 @@ export class CapacityService {
           },
         }
       : {};
-  
+
     try {
       const [data, total] = await this.prisma.$transaction([
         this.prisma.capacity.findMany({
+          include: { Tool: { include: { Brand: true, Size: true } } },
           where,
           skip,
           take: limit,
@@ -67,7 +68,7 @@ export class CapacityService {
         }),
         this.prisma.capacity.count({ where }),
       ]);
-  
+
       return {
         data,
         meta: {
@@ -78,10 +79,11 @@ export class CapacityService {
         },
       };
     } catch (error) {
-      throw new InternalServerErrorException('Quvvatlar ro‘yxatini olishda xatolik yuz berdi');
+      throw new InternalServerErrorException(
+        'Quvvatlar ro‘yxatini olishda xatolik yuz berdi',
+      );
     }
   }
-  
 
   async findOne(id: string) {
     try {

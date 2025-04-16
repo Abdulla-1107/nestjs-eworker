@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -28,6 +29,12 @@ export class ToolService {
     });
     if (!size) {
       throw new NotFoundException('Size topilmadi');
+    }
+    if (createToolDto.price < 0) {
+      throw new BadRequestException("Price noto'g'ri formatda");
+    }
+    if (createToolDto.quantity < 0) {
+      throw new BadRequestException("Quantity noto'g'ri formatda");
     }
     const randomNumber = Number(
       Array.from({ length: 6 }, () => Math.floor(Math.random() * 10)).join(''),
@@ -91,6 +98,6 @@ export class ToolService {
 
     let deleteTool = await this.prisma.tool.delete({ where: { id } });
 
-    return { data: deleteTool  };
+    return { data: deleteTool };
   }
 }

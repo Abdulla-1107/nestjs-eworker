@@ -22,6 +22,7 @@ import { ProfessionModule } from './profession/profession.module';
 import { MasterProfessionModule } from './master-profession/master-profession.module';
 import { ProfessionLevelModule } from './profession-level/profession-level.module';
 import { OrderModule } from './order/order.module';
+import { OrderProductModule } from './order-product/order-product.module';
 
 @Module({
   imports: [
@@ -60,6 +61,7 @@ import { OrderModule } from './order/order.module';
     MasterProfessionModule,
     ProfessionLevelModule,
     OrderModule,
+    OrderProductModule,
   ],
   controllers: [AppController, UploadController],
   providers: [AppService, PrismaService],

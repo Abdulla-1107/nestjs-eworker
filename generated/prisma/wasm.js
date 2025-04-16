@@ -266,6 +266,36 @@ exports.Prisma.OrderScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.OrderMasterScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  masterId: 'masterId'
+};
+
+exports.Prisma.BasketScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  professionId: 'professionId',
+  toolId: 'toolId',
+  levelId: 'levelId',
+  count: 'count',
+  workingTime: 'workingTime',
+  totalPrice: 'totalPrice',
+  timeUnit: 'timeUnit'
+};
+
+exports.Prisma.OrderProductScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  professionId: 'professionId',
+  toolId: 'toolId',
+  levelId: 'levelId',
+  workingTime: 'workingTime',
+  price: 'price',
+  count: 'count',
+  timeUnit: 'timeUnit'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -302,7 +332,10 @@ exports.Prisma.ModelName = {
   MasterProfession: 'MasterProfession',
   professionTool: 'professionTool',
   professionLevel: 'professionLevel',
-  Order: 'Order'
+  Order: 'Order',
+  OrderMaster: 'OrderMaster',
+  Basket: 'Basket',
+  orderProduct: 'orderProduct'
 };
 
 /**
