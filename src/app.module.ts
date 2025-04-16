@@ -17,6 +17,11 @@ import { ToolModule } from './tool/tool.module';
 import { UploadController } from './upload/upload.controller';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { MasterModule } from './master/master.module';
+import { ProfessionModule } from './profession/profession.module';
+import { MasterProfessionModule } from './master-profession/master-profession.module';
+import { ProfessionLevelModule } from './profession-level/profession-level.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -50,6 +55,11 @@ import { join } from 'path';
     SizeModule,
     LevelModule,
     ToolModule,
+    MasterModule,
+    ProfessionModule,
+    MasterProfessionModule,
+    ProfessionLevelModule,
+    OrderModule,
   ],
   controllers: [AppController, UploadController],
   providers: [AppService, PrismaService],

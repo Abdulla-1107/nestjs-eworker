@@ -24,17 +24,64 @@ export class CapacityService {
     }
   }
 
-  async findAll() {
+  async findAll(query: {
+    page: number;
+    limit: number;
+    search?: string;
+    searchField: string;
+    sortBy: string;
+    sortOrder: 'asc' | 'desc';
+  }) {
+    const { page, limit, search, searchField, sortBy, sortOrder } = query;
+  
+    const skip = (page - 1) * limit;
+  
+    const allowedFields = ['createdAt', 'name_uz', 'name_ru', 'name_en'];
+  
+    if (!allowedFields.includes(sortBy)) {
+      throw new NotFoundException(`Saralash maydoni topilmadi: ${sortBy}`);
+    }
+  
+    if (search && !allowedFields.includes(searchField)) {
+      throw new NotFoundException(`Qidiruv maydoni topilmadi: ${searchField}`);
+    }
+  
+    const where = search
+      ? {
+          [searchField]: {
+            contains: search,
+            mode: 'insensitive',
+          },
+        }
+      : {};
+  
     try {
-      return await this.prisma.capacity.findMany({
-        orderBy: { createdAt: 'desc' },
-      });
+      const [data, total] = await this.prisma.$transaction([
+        this.prisma.capacity.findMany({
+          where,
+          skip,
+          take: limit,
+          orderBy: {
+            [sortBy]: sortOrder,
+          },
+        }),
+        this.prisma.capacity.count({ where }),
+      ]);
+  
+      return {
+        data,
+        meta: {
+          total,
+          page,
+          limit,
+          lastPage: Math.ceil(total / limit),
+        },
+      };
     } catch (error) {
-      throw new InternalServerErrorException(
-        'Quvvatlar ro‘yxatini olishda xatolik yuz berdi',
-      );
+      throw new InternalServerErrorException('Quvvatlar ro‘yxatini olishda xatolik yuz berdi');
     }
   }
+  
 
   async findOne(id: string) {
     try {

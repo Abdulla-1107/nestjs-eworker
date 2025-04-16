@@ -6,11 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { CapacityService } from './capacity.service';
 import { CreateCapacityDto } from './dto/create-capacity.dto';
 import { UpdateCapacityDto } from './dto/update-capacity.dto';
-import { ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@nestjs/swagger';
 
 @Controller('capacity')
 export class CapacityController {
@@ -30,19 +31,34 @@ export class CapacityController {
     return this.capacityService.create(createCapacityDto);
   }
 
-  @Get("/all")
-  @ApiOperation({ summary: 'Barcha quvvatlarni olish' })
-  @ApiResponse({
-    status: 200,
-    description: 'Barcha quvvatlar muvaffaqiyatli qaytarildi',
-  })
-  @ApiResponse({
-    status: 500,
-    description: 'Server xatosi yuz berdi',
-  })
-  findAll() {
-    return this.capacityService.findAll();
+  @Get('/all')
+  @ApiOperation({ summary: 'Barcha quvvatlarni olish (paginate, search, sort)' })
+  @ApiResponse({ status: 200, description: 'Barcha quvvatlar muvaffaqiyatli qaytarildi' })
+  @ApiResponse({ status: 500, description: 'Server xatosi yuz berdi' })
+  @ApiQuery({ name: 'page', required: false, example: 1 })
+  @ApiQuery({ name: 'limit', required: false, example: 10 })
+  @ApiQuery({ name: 'search', required: false, example: '500' })
+  @ApiQuery({ name: 'searchField', required: false, example: 'name_uz' })
+  @ApiQuery({ name: 'sortBy', required: false, example: 'createdAt' })
+  @ApiQuery({ name: 'sortOrder', required: false,enum: ['asc', 'desc'], example: 'desc' })
+  findAll(
+    @Query('page') page = 1,
+    @Query('limit') limit = 10,
+    @Query('search') search?: string,
+    @Query('searchField') searchField: string = 'name_uz',
+    @Query('sortBy') sortBy: string = 'createdAt',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+  ) {
+    return this.capacityService.findAll({
+      page: Number(page),
+      limit: Number(limit),
+      search,
+      searchField,
+      sortBy,
+      sortOrder,
+    });
   }
+  
 
   @Get(':id')
   @ApiOperation({ summary: 'Maxsus quvvatni olish' })

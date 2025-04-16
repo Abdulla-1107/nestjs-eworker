@@ -203,6 +203,69 @@ exports.Prisma.ToolScalarFieldEnum = {
   sizeId: 'sizeId'
 };
 
+exports.Prisma.MasterScalarFieldEnum = {
+  id: 'id',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  phone: 'phone',
+  birthYear: 'birthYear',
+  isActive: 'isActive',
+  image: 'image',
+  passportImg: 'passportImg',
+  about: 'about',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ProfessionScalarFieldEnum = {
+  id: 'id',
+  name_uz: 'name_uz',
+  name_ru: 'name_ru',
+  name_en: 'name_en',
+  image: 'image',
+  isActive: 'isActive'
+};
+
+exports.Prisma.MasterProfessionScalarFieldEnum = {
+  id: 'id',
+  professionId: 'professionId',
+  masterId: 'masterId',
+  levelId: 'levelId',
+  minWorkingHours: 'minWorkingHours',
+  priceHourly: 'priceHourly',
+  priceDaily: 'priceDaily',
+  experience: 'experience'
+};
+
+exports.Prisma.ProfessionToolScalarFieldEnum = {
+  id: 'id',
+  professionId: 'professionId',
+  toolId: 'toolId'
+};
+
+exports.Prisma.ProfessionLevelScalarFieldEnum = {
+  id: 'id',
+  professionId: 'professionId',
+  levelId: 'levelId',
+  minWorkingHours: 'minWorkingHours',
+  priceHourly: 'priceHourly',
+  priceDaily: 'priceDaily'
+};
+
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  address: 'address',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  date: 'date',
+  totalPrice: 'totalPrice',
+  paymentType: 'paymentType',
+  withDelivery: 'withDelivery',
+  status: 'status',
+  deliveryComment: 'deliveryComment',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -233,7 +296,13 @@ exports.Prisma.ModelName = {
   Size: 'Size',
   Level: 'Level',
   GeneralInfo: 'GeneralInfo',
-  Tool: 'Tool'
+  Tool: 'Tool',
+  Master: 'Master',
+  Profession: 'Profession',
+  MasterProfession: 'MasterProfession',
+  professionTool: 'professionTool',
+  professionLevel: 'professionLevel',
+  Order: 'Order'
 };
 
 /**

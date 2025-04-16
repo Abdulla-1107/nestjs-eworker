@@ -6,13 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiParam, ApiTags, ApiQuery } from '@nestjs/swagger';
 import { BrandService } from './brand.service';
 import { CreateBrandDto } from './dto/create-brand.dto';
 import { UpdateBrandDto } from './dto/update-brand.dto';
 
-@ApiTags('Brendlar') // Swagger hujjatlarida bu controllerni "Brendlar" deb nomlaymiz
+@ApiTags('Brend ') // Swagger hujjatlarida bu controllerni "Brendlar" deb nomlaymiz
 @Controller('brand')
 export class BrandController {
   constructor(private readonly brandService: BrandService) {}
@@ -31,20 +32,33 @@ export class BrandController {
     return this.brandService.create(createBrandDto);
   }
 
-  @Get("/all")
-  @ApiOperation({ summary: 'Barcha brendlarni olish' })
-  @ApiResponse({
-    status: 200,
-    description: 'Barcha brendlar muvaffaqiyatli qaytarildi',
+  @Get('/all')
+  @ApiOperation({ summary: 'Barcha brendlarni olish (pagination, filter, sort, search)' })
+  @ApiResponse({ status: 200, description: 'Brendlar muvaffaqiyatli olindi' })
+  @ApiResponse({ status: 500, description: 'Brendlarni olishda xatolik' })
+  @ApiQuery({ name: 'page', required: false, example: 1, description: 'Sahifa raqami' })
+  @ApiQuery({ name: 'limit', required: false, example: 10, description: 'Har bir sahifadagi elementlar soni' })
+  @ApiQuery({ name: 'search', required: false, example: 'Samsung', description: 'Brend nomi bo‘yicha qidirish' })
+  @ApiQuery({ name: 'sortBy', required: false, example: 'name_uz', description: 'Saralash maydoni (masalan: name_uz, createdAt)' })
+  @ApiQuery({
+    name: 'sortOrder',
+    required: false,
+    enum: ['asc', 'desc'],
+    example: 'asc',
+    description: 'Saralash tartibi: asc yoki desc (standart: desc)',
   })
-  @ApiResponse({
-    status: 500,
-    description: 'Brendlarni olishda xatolik',
-  })
-  findAll() {
-    return this.brandService.findAll();
+  
+  findAll(
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 10,
+    @Query('search') search?: string,
+    @Query('sortBy') sortBy: string = 'createdAt',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+  ) {
+    return this.brandService.findAll({ page, limit, search, sortBy, sortOrder });
   }
-
+  
+  
   @Get(':id')
   @ApiOperation({ summary: 'Brendni id bo‘yicha olish' })
   @ApiParam({ name: 'id', description: 'Brendning IDsi' })

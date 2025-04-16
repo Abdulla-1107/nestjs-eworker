@@ -6,11 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { LevelService } from './level.service';
 import { CreateLevelDto } from './dto/create-level.dto';
 import { UpdateLevelDto } from './dto/update-level.dto';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiQuery } from '@nestjs/swagger';
 
 @ApiTags('Levels') // Swagger tags
 @Controller('level')
@@ -31,19 +32,40 @@ export class LevelController {
     return this.levelService.create(createLevelDto);
   }
 
-  @Get("/all")
-  @ApiOperation({ summary: 'Barcha darajalarni olish' })
-  @ApiResponse({
-    status: 200,
-    description: 'Barcha darajalar muvaffaqiyatli qaytarildi',
-  })
-  @ApiResponse({
-    status: 500,
-    description: 'Darajalarni olishda xatolik yuz berdi',
-  })
-  findAll() {
-    return this.levelService.findAll();
+  @Get('/all')
+  @ApiOperation({ summary: 'Barcha darajalarni olish (paginate, search, sort, filter)' })
+  @ApiResponse({ status: 200, description: 'Barcha darajalar muvaffaqiyatli qaytarildi' })
+  @ApiResponse({ status: 500, description: 'Darajalarni olishda xatolik yuz berdi' })
+  @ApiQuery({ name: 'page', required: false, example: 1 })
+  @ApiQuery({ name: 'limit', required: false, example: 10 })
+  @ApiQuery({ name: 'search', required: false, example: 'boshlang\'ich' })
+  @ApiQuery({ name: 'searchField', required: false, example: 'name_uz' })
+  @ApiQuery({ name: 'sortBy', required: false, example: 'createdAt' })
+  @ApiQuery({ name: 'sortOrder', required: false, example: 'desc' })
+  @ApiQuery({ name: 'filterField', required: false, example: 'name_uz' })
+  @ApiQuery({ name: 'filterValue', required: false, example: 'Boshlang\'ich' })
+  findAll(
+    @Query('page') page = 1,
+    @Query('limit') limit = 10,
+    @Query('search') search?: string,
+    @Query('searchField') searchField: string = 'name_uz',
+    @Query('sortBy') sortBy: string = 'createdAt',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+    @Query('filterField') filterField?: string,
+    @Query('filterValue') filterValue?: string,
+  ) {
+    return this.levelService.findAll({
+      page: Number(page),
+      limit: Number(limit),
+      search,
+      searchField,
+      sortBy,
+      sortOrder,
+      filterField,
+      filterValue,
+    });
   }
+  
 
   @Get(':id')
   @ApiOperation({ summary: 'Bitta darajani olish' })

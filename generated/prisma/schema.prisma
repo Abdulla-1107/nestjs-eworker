@@ -47,3 +47,110 @@ model Region {
   createdAt DateTime @default(now())
   User      User[]
 }
+
+model Capacity {
+  id        String   @id @default(uuid())
+  name_uz   String
+  name_ru   String
+  name_en   String
+  createdAt DateTime @default(now())
+  Tool      Tool[]
+}
+
+model Brand {
+  id        String   @id @default(uuid())
+  name_uz   String
+  name_ru   String
+  name_en   String
+  createdAt DateTime @default(now())
+  Tool      Tool[]
+}
+
+model Size {
+  id        String   @id @default(uuid())
+  name_uz   String
+  name_ru   String
+  name_en   String
+  createdAt DateTime @default(now())
+  Tool      Tool[]
+}
+
+model Level {
+  id               String             @id @default(uuid())
+  name_uz          String
+  name_ru          String
+  name_en          String
+  createdAt        DateTime           @default(now())
+  MasterProfession MasterProfession[]
+}
+
+model GeneralInfo {
+  id          String   @id @default(uuid())
+  phone       String
+  email       String
+  address     String?
+  telegram    String?
+  instagram   String?
+  description String?
+  createdAt   DateTime @default(now())
+}
+
+model Tool {
+  id         String   @id @default(uuid())
+  name_uz    String
+  name_ru    String
+  name_en    String
+  desc_uz    String
+  desc_ru    String
+  desc_en    String
+  image      String
+  price      Int
+  quantity   Int
+  code       Int?
+  isActive   Boolean?
+  createdAt  DateTime @default(now())
+  brandId    String
+  Brand      Brand    @relation(fields: [brandId], references: [id])
+  capacityId String
+  Capacity   Capacity @relation(fields: [capacityId], references: [id])
+  sizeId     String
+  Size       Size     @relation(fields: [sizeId], references: [id])
+}
+
+model Master {
+  id               String             @id @default(uuid())
+  firstName        String
+  lastName         String
+  phone            String
+  birthYear        Int
+  isActive         Boolean?
+  image            String?
+  passportImg      String?
+  about            String
+  createdAt        DateTime           @default(now())
+  MasterProfession MasterProfession[]
+}
+
+model Profession {
+  id               String             @id @default(uuid())
+  name_uz          String
+  name_ru          String
+  name_en          String
+  image            String
+  isActive         Boolean
+  MasterProfession MasterProfession[]
+}
+
+model MasterProfession {
+  id              String     @id @default(uuid())
+  professionId    String
+  Pofession       Profession @relation(fields: [professionId], references: [id])
+  masterId        String
+  Master          Master     @relation(fields: [masterId], references: [id])
+  levelId         String
+  Level           Level      @relation(fields: [levelId], references: [id])
+  minWorkingHours Int
+  priceHourly     Decimal
+  priceDaily      Decimal
+  experience      Decimal
+}

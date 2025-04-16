@@ -29,11 +29,84 @@ export class LevelService {
   }
 
   // Barcha darajalarni olish
-  async findAll() {
+  async findAll(query: {
+    page: number;
+    limit: number;
+    search?: string;
+    searchField: string;
+    sortBy: string;
+    sortOrder: 'asc' | 'desc';
+    filterField?: string;
+    filterValue?: string;
+  }) {
+    const {
+      page,
+      limit,
+      search,
+      searchField,
+      sortBy,
+      sortOrder,
+      filterField,
+      filterValue,
+    } = query;
+
+    const skip = (page - 1) * limit;
+
+    const allowedFields = ['createdAt', 'name_uz', 'name_ru', 'name_en'];
+
+    if (!allowedFields.includes(sortBy)) {
+      throw new NotFoundException(`Saralash maydoni topilmadi: ${sortBy}`);
+    }
+
+    if (search && !allowedFields.includes(searchField)) {
+      throw new NotFoundException(`Qidiruv maydoni topilmadi: ${searchField}`);
+    }
+
+    const where: any = {};
+
+    // Qidiruv shartlarini qo'shish
+    if (search) {
+      where[searchField] = {
+        contains: search,
+        mode: 'insensitive',
+      };
+    }
+
+    // Filtrlash shartlarini qo'shish
+    if (filterField && filterValue) {
+      if (!allowedFields.includes(filterField)) {
+        throw new NotFoundException(
+          `Filtrlash maydoni topilmadi: ${filterField}`,
+        );
+      }
+      where[filterField] = {
+        contains: filterValue,
+        mode: 'insensitive',
+      };
+    }
+
     try {
-      return await this.prisma.level.findMany({
-        orderBy: { createdAt: 'desc' },
-      });
+      const [data, total] = await this.prisma.$transaction([
+        this.prisma.level.findMany({
+          where,
+          skip,
+          take: limit,
+          orderBy: {
+            [sortBy]: sortOrder,
+          },
+        }),
+        this.prisma.level.count({ where }),
+      ]);
+
+      return {
+        data,
+        meta: {
+          total,
+          page,
+          limit,
+          lastPage: Math.ceil(total / limit),
+        },
+      };
     } catch (error) {
       throw new InternalServerErrorException(
         'Darajalarni olishda xatolik yuz berdi',
@@ -102,7 +175,7 @@ export class LevelService {
       return { message: `Daraja muvaffaqiyatli o'chirildi: ${id}` };
     } catch (error) {
       if (error instanceof NotFoundException) {
-        throw error; 
+        throw error;
       }
       throw new NotFoundException(`Daraja topilmadi: ${id}`);
     }

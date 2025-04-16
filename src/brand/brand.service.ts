@@ -6,6 +6,7 @@ import {
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateBrandDto } from './dto/create-brand.dto';
 import { UpdateBrandDto } from './dto/update-brand.dto';
+import { Prisma } from 'generated/prisma';
 
 @Injectable()
 export class BrandService {
@@ -23,17 +24,54 @@ export class BrandService {
       );
     }
   }
+  async findAll(query: {
+    page: number;
+    limit: number;
+    search?: string;
+    sortBy: string;
+    sortOrder: 'asc' | 'desc';
+  }) {
+    const { page, limit, search, sortBy, sortOrder } = query;
 
-  async findAll() {
-    try {
-      return await this.prisma.brand.findMany({
-        orderBy: { createdAt: 'desc' },
-      });
-    } catch (error) {
-      throw new InternalServerErrorException(
-        'Brendlar roʻyxatini olishda xatolik yuz berdi',
-      );
+    const skip = (page - 1) * limit;
+    const allowedSortFields = ['createdAt', 'name_uz', 'name_ru', 'name_en'];
+    if (!allowedSortFields.includes(sortBy)) {
+      throw new NotFoundException(`Saralash maydoni topilmadi: ${sortBy}`);
     }
+    // if (search && !allowedSortFields.includes(search)) {
+    //   throw new NotFoundException(`Qidiruv maydoni topilmadi: ${search}`);
+    // }
+    const where: Prisma.BrandWhereInput = search
+      ? {
+          OR: [
+            { name_uz: { contains: search, mode: 'insensitive' } },
+            { name_ru: { contains: search, mode: 'insensitive' } },
+            { name_en: { contains: search, mode: 'insensitive' } },
+          ],
+        }
+      : {};
+
+    const [data, total] = await this.prisma.$transaction([
+      this.prisma.brand.findMany({
+        where,
+        skip,
+        take: Number(limit),
+        orderBy: {
+          [sortBy]: sortOrder,
+        },
+      }),
+      this.prisma.brand.count({ where }),
+    ]);
+
+    return {
+      data,
+      meta: {
+        total,
+        page: Number(page),
+        limit: Number(limit),
+        lastPage: Math.ceil(total / limit),
+      },
+    };
   }
 
   async findOne(id: string) {

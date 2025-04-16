@@ -29,6 +29,7 @@ model User {
   createdAt DateTime @default(now())
   regionId  String
   Region    Region   @relation(fields: [regionId], references: [id])
+  Order     Order[]
 }
 
 enum UserRole {
@@ -76,11 +77,13 @@ model Size {
 }
 
 model Level {
-  id        String   @id @default(uuid())
-  name_uz   String
-  name_ru   String
-  name_en   String
-  createdAt DateTime @default(now())
+  id               String             @id @default(uuid())
+  name_uz          String
+  name_ru          String
+  name_en          String
+  createdAt        DateTime           @default(now())
+  MasterProfession MasterProfession[]
+  professionLevel  professionLevel[]
 }
 
 model GeneralInfo {
@@ -95,23 +98,99 @@ model GeneralInfo {
 }
 
 model Tool {
-  id         String   @id @default(uuid())
-  name_uz    String
-  name_ru    String
-  name_en    String
-  desc_uz    String
-  desc_ru    String
-  desc_en    String
-  image      String
-  price      Int
-  quantity   Int
-  code       Int?
-  isActive   Boolean?
-  createdAt  DateTime @default(now())
-  brandId    String
-  Brand      Brand    @relation(fields: [brandId], references: [id])
-  capacityId String
-  Capacity   Capacity @relation(fields: [capacityId], references: [id])
-  sizeId     String
-  Size       Size     @relation(fields: [sizeId], references: [id])
+  id             String           @id @default(uuid())
+  name_uz        String
+  name_ru        String
+  name_en        String
+  desc_uz        String
+  desc_ru        String
+  desc_en        String
+  image          String
+  price          Int
+  quantity       Int
+  code           Int?
+  isActive       Boolean?
+  createdAt      DateTime         @default(now())
+  brandId        String
+  Brand          Brand            @relation(fields: [brandId], references: [id])
+  capacityId     String
+  Capacity       Capacity         @relation(fields: [capacityId], references: [id])
+  sizeId         String
+  Size           Size             @relation(fields: [sizeId], references: [id])
+  professionTool professionTool[]
+}
+
+model Master {
+  id               String             @id @default(uuid())
+  firstName        String
+  lastName         String
+  phone            String
+  birthYear        Int
+  isActive         Boolean?
+  image            String?
+  passportImg      String?
+  about            String
+  createdAt        DateTime           @default(now())
+  MasterProfession MasterProfession[]
+}
+
+model Profession {
+  id               String             @id @default(uuid())
+  name_uz          String
+  name_ru          String
+  name_en          String
+  image            String
+  isActive         Boolean
+  MasterProfession MasterProfession[]
+  professionTool   professionTool[]
+  professionLevel  professionLevel[]
+}
+
+model MasterProfession {
+  id              String     @id @default(uuid())
+  professionId    String
+  Pofession       Profession @relation(fields: [professionId], references: [id])
+  masterId        String
+  Master          Master     @relation(fields: [masterId], references: [id])
+  levelId         String
+  Level           Level      @relation(fields: [levelId], references: [id])
+  minWorkingHours Int
+  priceHourly     Decimal
+  priceDaily      Decimal
+  experience      Decimal
+}
+
+model professionTool {
+  id           String     @id @default(uuid())
+  professionId String
+  Profession   Profession @relation(fields: [professionId], references: [id])
+  toolId       String
+  Tool         Tool       @relation(fields: [toolId], references: [id])
+}
+
+model professionLevel {
+  id              String     @id @default(uuid())
+  professionId    String
+  Profession      Profession @relation(fields: [professionId], references: [id])
+  levelId         String
+  Level           Level      @relation(fields: [levelId], references: [id])
+  minWorkingHours Int
+  priceHourly     Decimal
+  priceDaily      Decimal
+}
+
+model Order {
+  id              String   @id @default(uuid())
+  userId          String
+  User            User     @relation(fields: [userId], references: [id])
+  address         String
+  latitude        String
+  longitude       String
+  date            DateTime @default(now())
+  totalPrice      Decimal
+  paymentType     String
+  withDelivery    Boolean
+  status          String
+  deliveryComment String?
+  createdAt       DateTime @default(now())
 }
