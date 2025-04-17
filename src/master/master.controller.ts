@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { MasterService } from './master.service';
 import { CreateMasterDto } from './dto/create-master.dto';
@@ -17,6 +18,7 @@ import {
   ApiParam,
   ApiBody,
 } from '@nestjs/swagger';
+import { MasterQueryDto } from './dto/master-query.dto';
 
 @ApiTags('Master') 
 @Controller('master')
@@ -44,8 +46,8 @@ export class MasterController {
     status: 200,
     description: 'Masterlar ro‘yxati',
   })
-  findAll() {
-    return this.masterService.findAll();
+  findAll(@Query() query: MasterQueryDto) {
+    return this.masterService.findAll(query);
   }
 
   @Get(':id')

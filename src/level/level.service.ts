@@ -88,6 +88,9 @@ export class LevelService {
     try {
       const [data, total] = await this.prisma.$transaction([
         this.prisma.level.findMany({
+          include: {
+            MasterProfession: true,
+          },
           where,
           skip,
           take: limit,

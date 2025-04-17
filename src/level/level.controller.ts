@@ -18,7 +18,7 @@ import { ApiTags, ApiOperation, ApiResponse, ApiQuery } from '@nestjs/swagger';
 export class LevelController {
   constructor(private readonly levelService: LevelService) {}
 
-  @Post("/create")
+  @Post('/create')
   @ApiOperation({ summary: 'Yangi daraja yaratish' })
   @ApiResponse({
     status: 201,
@@ -33,17 +33,25 @@ export class LevelController {
   }
 
   @Get('/all')
-  @ApiOperation({ summary: 'Barcha darajalarni olish (paginate, search, sort, filter)' })
-  @ApiResponse({ status: 200, description: 'Barcha darajalar muvaffaqiyatli qaytarildi' })
-  @ApiResponse({ status: 500, description: 'Darajalarni olishda xatolik yuz berdi' })
-  @ApiQuery({ name: 'page', required: false, example: 1 })
-  @ApiQuery({ name: 'limit', required: false, example: 10 })
-  @ApiQuery({ name: 'search', required: false, example: 'boshlang\'ich' })
-  @ApiQuery({ name: 'searchField', required: false, example: 'name_uz' })
-  @ApiQuery({ name: 'sortBy', required: false, example: 'createdAt' })
-  @ApiQuery({ name: 'sortOrder', required: false, example: 'desc' })
-  @ApiQuery({ name: 'filterField', required: false, example: 'name_uz' })
-  @ApiQuery({ name: 'filterValue', required: false, example: 'Boshlang\'ich' })
+  @ApiOperation({
+    summary: 'Barcha darajalarni olish (paginate, search, sort, filter)',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Barcha darajalar muvaffaqiyatli qaytarildi',
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Darajalarni olishda xatolik yuz berdi',
+  })
+  @ApiQuery({ name: 'page', required: false })
+  @ApiQuery({ name: 'limit', required: false })
+  @ApiQuery({ name: 'search', required: false })
+  @ApiQuery({ name: 'searchField', required: false })
+  @ApiQuery({ name: 'sortBy', required: false })
+  @ApiQuery({ name: 'sortOrder', required: false, enum: ['asc', 'desc'] })
+  @ApiQuery({ name: 'filterField', required: false })
+  @ApiQuery({ name: 'filterValue', required: false })
   findAll(
     @Query('page') page = 1,
     @Query('limit') limit = 10,
@@ -65,7 +73,6 @@ export class LevelController {
       filterValue,
     });
   }
-  
 
   @Get(':id')
   @ApiOperation({ summary: 'Bitta darajani olish' })

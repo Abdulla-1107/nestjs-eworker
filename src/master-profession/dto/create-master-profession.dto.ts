@@ -40,6 +40,7 @@ export class CreateMasterProfessionDto {
   })
   @Transform(({ value }) => parseFloat(value))
   @IsNumber({}, { message: 'Narx raqam bo‘lishi kerak' })
+  @Min(1)
   priceHourly: number;
 
   @ApiProperty({
@@ -49,6 +50,7 @@ export class CreateMasterProfessionDto {
   })
   @Transform(({ value }) => parseFloat(value))
   @IsNumber({}, { message: 'Kunlik narx raqam bo‘lishi kerak' })
+  @Min(1)
   priceDaily: number;
 
   @ApiProperty({
@@ -58,5 +60,6 @@ export class CreateMasterProfessionDto {
   })
   @Transform(({ value }) => parseFloat(value))
   @IsNumber({}, { message: 'Tajriba yillari raqam bo‘lishi kerak' })
+  @Min(1)
   experience: number;
 }

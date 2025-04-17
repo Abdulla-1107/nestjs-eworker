@@ -17,7 +17,7 @@ import { ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@nestjs/swagger';
 export class CapacityController {
   constructor(private readonly capacityService: CapacityService) {}
 
-  @Post("/create")
+  @Post('/create')
   @ApiOperation({ summary: 'Yangi quvvat yaratish' })
   @ApiResponse({
     status: 201,
@@ -32,15 +32,20 @@ export class CapacityController {
   }
 
   @Get('/all')
-  @ApiOperation({ summary: 'Barcha quvvatlarni olish (paginate, search, sort)' })
-  @ApiResponse({ status: 200, description: 'Barcha quvvatlar muvaffaqiyatli qaytarildi' })
+  @ApiOperation({
+    summary: 'Barcha quvvatlarni olish (paginate, search, sort)',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Barcha quvvatlar muvaffaqiyatli qaytarildi',
+  })
   @ApiResponse({ status: 500, description: 'Server xatosi yuz berdi' })
-  @ApiQuery({ name: 'page', required: false, example: 1 })
-  @ApiQuery({ name: 'limit', required: false, example: 10 })
-  @ApiQuery({ name: 'search', required: false, example: '500' })
-  @ApiQuery({ name: 'searchField', required: false, example: 'name_uz' })
-  @ApiQuery({ name: 'sortBy', required: false, example: 'createdAt' })
-  @ApiQuery({ name: 'sortOrder', required: false,enum: ['asc', 'desc'], example: 'desc' })
+  @ApiQuery({ name: 'page', required: false })
+  @ApiQuery({ name: 'limit', required: false })
+  @ApiQuery({ name: 'search', required: false })
+  @ApiQuery({ name: 'searchField', required: false })
+  @ApiQuery({ name: 'sortBy', required: false })
+  @ApiQuery({ name: 'sortOrder', required: false, enum: ['asc', 'desc'] })
   findAll(
     @Query('page') page = 1,
     @Query('limit') limit = 10,
@@ -58,7 +63,6 @@ export class CapacityController {
       sortOrder,
     });
   }
-  
 
   @Get(':id')
   @ApiOperation({ summary: 'Maxsus quvvatni olish' })

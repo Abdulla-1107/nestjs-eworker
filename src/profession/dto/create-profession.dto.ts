@@ -3,7 +3,7 @@ import { IsBoolean, IsNotEmpty, IsString, IsUrl } from 'class-validator';
 
 export class CreateProfessionDto {
   @ApiProperty({
-    description: 'Kasb nomi o\'zbek tilida',
+    description: "Kasb nomi o'zbek tilida",
     example: 'Dasturchi',
   })
   @IsString()

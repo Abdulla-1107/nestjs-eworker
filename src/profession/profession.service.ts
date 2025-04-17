@@ -21,12 +21,68 @@ export class ProfessionService {
     }
   }
 
-  async findAll() {
-    return { data: await this.prisma.profession.findMany() };
+  async findAll(query: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    sortBy?: string;
+    sortOrder?: 'asc' | 'desc';
+    isActive?: boolean;
+  }) {
+    const {
+      page = 1,
+      limit = 10,
+      search,
+      sortBy = 'name_uz', // Agar bunday ustun bo‘lmasa, 'name_uz' qilib qo‘ying
+      sortOrder = 'asc',
+      isActive,
+    } = query;
+
+    const where: any = {};
+
+    if (search) {
+      where.OR = [
+        { name_uz: { contains: search, mode: 'insensitive' } },
+        { name_ru: { contains: search, mode: 'insensitive' } },
+        { name_en: { contains: search, mode: 'insensitive' } },
+      ];
+    }
+
+    if (isActive !== undefined) {
+      where.isActive = isActive;
+    }
+
+    const [data, total] = await this.prisma.$transaction([
+      this.prisma.profession.findMany({
+        include: {
+          MasterProfession: { include: { Master: true } },
+          professionLevel: { include: { Level: true } },
+        },
+        where,
+        skip: (page - 1) * limit,
+        take: limit,
+        orderBy: {
+          [sortBy || 'name_uz']: sortOrder, // fallback to name_uz
+        },
+      }),
+      this.prisma.profession.count({ where }),
+    ]);
+
+    return {
+      data,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    };
   }
 
   async findOne(id: string) {
     const profession = await this.prisma.profession.findFirst({
+      include: {
+        MasterProfession: { include: { Master: true } },
+        professionLevel: { include: { Level: true } },
+      },
       where: { id },
     });
     if (!profession) {

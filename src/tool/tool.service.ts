@@ -30,12 +30,6 @@ export class ToolService {
     if (!size) {
       throw new NotFoundException('Size topilmadi');
     }
-    if (createToolDto.price < 0) {
-      throw new BadRequestException("Price noto'g'ri formatda");
-    }
-    if (createToolDto.quantity < 0) {
-      throw new BadRequestException("Quantity noto'g'ri formatda");
-    }
     const randomNumber = Number(
       Array.from({ length: 6 }, () => Math.floor(Math.random() * 10)).join(''),
     );
@@ -51,15 +45,67 @@ export class ToolService {
     }
   }
 
-  async findAll() {
-    return {
-      data: await this.prisma.tool.findMany({
+  async findAll(query: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    sortBy?: string;
+    sortOrder?: 'asc' | 'desc';
+    brandId?: string;
+    capacityId?: string;
+    sizeId?: string;
+  }) {
+    const {
+      page = 1,
+      limit = 10,
+      search,
+      sortBy = 'createdAt',
+      sortOrder = 'desc',
+      brandId,
+      capacityId,
+      sizeId,
+    } = query;
+
+    const where: any = {};
+
+    if (search) {
+      where.OR = [
+        { name_uz: { contains: search, mode: 'insensitive' } },
+        { name_ru: { contains: search, mode: 'insensitive' } },
+        { name_en: { contains: search, mode: 'insensitive' } },
+        { desc_uz: { contains: search, mode: 'insensitive' } },
+        { desc_ru: { contains: search, mode: 'insensitive' } },
+        { desc_en: { contains: search, mode: 'insensitive' } },
+      ];
+    }
+
+    if (brandId) where.brandId = brandId;
+    if (capacityId) where.capacityId = capacityId;
+    if (sizeId) where.sizeId = sizeId;
+
+    const [data, total] = await this.prisma.$transaction([
+      this.prisma.tool.findMany({
+        where,
+        skip: (page - 1) * limit,
+        take: limit,
+        orderBy: {
+          [sortBy]: sortOrder,
+        },
         include: {
           Brand: true,
           Size: true,
           Capacity: true,
         },
       }),
+      this.prisma.tool.count({ where }),
+    ]);
+
+    return {
+      data,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
     };
   }
 
@@ -82,6 +128,24 @@ export class ToolService {
     const tool = await this.prisma.tool.findFirst({ where: { id } });
     if (!tool) {
       throw new NotFoundException('Tool topilmadi');
+    }
+    const brand = await this.prisma.brand.findFirst({
+      where: { id: updateToolDto.brandId },
+    });
+    if (!brand) {
+      throw new NotFoundException('Brand topilmadi');
+    }
+    const capacity = await this.prisma.capacity.findFirst({
+      where: { id: updateToolDto.capacityId },
+    });
+    if (!capacity) {
+      throw new NotFoundException('Capacity topilmadi');
+    }
+    const size = await this.prisma.size.findFirst({
+      where: { id: updateToolDto.sizeId },
+    });
+    if (!size) {
+      throw new NotFoundException('Size topilmadi');
     }
     const updateTool = await this.prisma.tool.update({
       where: { id },

@@ -73,10 +73,10 @@ export class CreateOrderDto {
   @IsBoolean()
   withDelivery: boolean;
 
-    @ApiProperty({
-      description: 'Buyurtma holati (masalan: pending, accepted, delivered)',
-      example: 'pending',
-    })
+    // @ApiProperty({
+    //   description: 'Buyurtma holati (masalan: pending, accepted, delivered)',
+    //   example: 'pending',
+    // })
   @IsString()
   @IsEnum(OrderStatus)
   //   @IsNotEmpty()

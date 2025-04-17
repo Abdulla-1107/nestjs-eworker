@@ -6,6 +6,7 @@ import {
   IsOptional,
   IsString,
   IsUUID,
+  Min,
 } from 'class-validator';
 
 export class CreateToolDto {
@@ -53,39 +54,41 @@ export class CreateToolDto {
   @ApiProperty({ example: 150000, description: 'Narxi (so‘mda)' })
   @IsInt()
   @IsNotEmpty()
+  @Min(0)
   price: number;
 
   @ApiProperty({ example: 10, description: 'Miqdori' })
   @IsInt()
   @IsNotEmpty()
+  @Min(0)
   quantity: number;
 
-//   @ApiProperty({ example: 123456, description: 'Maxsus kodi', required: false })
+  //   @ApiProperty({ example: 123456, description: 'Maxsus kodi', required: false })
   @IsOptional()
   @IsInt()
   code?: number;
 
-//   @ApiProperty({
-//     example: true,
-//     description: 'Faollik holati',
-//     required: false,
-//   })
+  //   @ApiProperty({
+  //     example: true,
+  //     description: 'Faollik holati',
+  //     required: false,
+  //   })
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
 
   @ApiProperty({ example: 'brand-uuid', description: 'Brend ID (UUID)' })
-//   @IsUUID()
+  //   @IsUUID()
   @IsNotEmpty()
   brandId: string;
 
   @ApiProperty({ example: 'capacity-uuid', description: 'Sig‘im ID (UUID)' })
-//   @IsUUID()
+  //   @IsUUID()
   @IsNotEmpty()
   capacityId: string;
 
   @ApiProperty({ example: 'size-uuid', description: 'O‘lcham ID (UUID)' })
-//   @IsUUID()
+  //   @IsUUID()
   @IsNotEmpty()
   sizeId: string;
 }

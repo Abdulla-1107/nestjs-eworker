@@ -8,7 +8,6 @@ import { RegionModule } from './region/region.module';
 import { PrismaService } from './prisma/prisma.service';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { JwtModule } from '@nestjs/jwt';
-import { SessionModule } from './session/session.module';
 import { CapacityModule } from './capacity/capacity.module';
 import { BrandModule } from './brand/brand.module';
 import { SizeModule } from './size/size.module';
@@ -50,7 +49,6 @@ import { OrderProductModule } from './order-product/order-product.module';
     UserModule,
     RegionModule,
     OtpModule,
-    SessionModule,
     CapacityModule,
     BrandModule,
     SizeModule,

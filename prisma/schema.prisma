@@ -244,3 +244,39 @@ model orderProduct {
   count        Int
   timeUnit     String
 }
+
+model Contact {
+  id      String @id @default(uuid())
+  name    String
+  surName String
+  phone   String
+  address String
+  message String
+}
+
+model Showcase {
+  id      String @id @default(uuid())
+  name_uz String
+  name_ru String
+  name_en String
+  desc_uz String
+  desc_ru String
+  desc_en String
+  image   String
+  link    String
+}
+
+model Partners {
+  id      String @id @default(uuid())
+  name_uz String
+  name_ru String
+  name_en String
+  image   String
+}
+
+model faq {
+  id        String   @id @default(uuid())
+  question  String
+  answer    String
+  createdAt DateTime @default(now())
+}

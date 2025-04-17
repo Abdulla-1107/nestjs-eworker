@@ -26,6 +26,7 @@ export class OrderService {
             select: {
               fullName: true,
               phone: true,
+              Region: true,
             },
           },
         },
