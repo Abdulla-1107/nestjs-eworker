@@ -33,7 +33,7 @@ export class ProfessionController {
   @ApiQuery({ name: 'page', required: false, type: Number, description: 'Sahifa raqami' })
   @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Elementlar soni' })
   @ApiQuery({ name: 'search', required: false, type: String, description: 'Qidiruv so‘zi (nom bo‘yicha)' })
-  @ApiQuery({ name: 'sortBy', required: false, type: String, description: 'Saralash ustuni (masalan: name_uz)' })
+  @ApiQuery({ name: 'sortBy', required: false,enum: ['name_uz', 'name_ru', 'name_en', 'createdAt'], type: String, description: 'Saralash ustuni (masalan: name_uz)' })
   @ApiQuery({ name: 'sortOrder', required: false, enum: ['asc', 'desc'], description: 'Saralash tartibi' })
   @ApiQuery({ name: 'isActive', required: false, type: Boolean, description: 'Faollik holati bo‘yicha filter' })
   findAll(

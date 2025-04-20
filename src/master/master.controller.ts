@@ -35,9 +35,8 @@ export class MasterController {
     status: 400,
     description: 'Noto‘g‘ri maʼlumot kiritilgan',
   })
-  @ApiBody({ type: CreateMasterDto }) // request body tipi
   create(@Body() createMasterDto: CreateMasterDto) {
-    return this.masterService.create(createMasterDto);
+    return this.masterService.createMaster(createMasterDto);
   }
 
   @Get("/all")

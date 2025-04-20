@@ -5,8 +5,13 @@ import {
   IsBoolean,
   IsUUID,
   IsNotEmpty,
+  IsArray,
+  ValidateNested,
+  Min,
 } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import { MasterProfessionDto } from './masterProfession.dto';
 
 export class CreateMasterDto {
   @ApiProperty({ description: 'Master ismi', example: 'John' })
@@ -28,6 +33,7 @@ export class CreateMasterDto {
   phone: string;
 
   @ApiProperty({ description: 'Master tug‘ilgan yili', example: 1990 })
+  @Min(1970)
   @IsInt()
   birthYear: number;
 
@@ -58,4 +64,11 @@ export class CreateMasterDto {
 
   @IsOptional()
   createdAt?: Date;
+
+  @ApiPropertyOptional({ type: [MasterProfessionDto] })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => MasterProfessionDto)
+  MasterProfession?: MasterProfessionDto[];
 }

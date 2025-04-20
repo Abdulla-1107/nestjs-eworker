@@ -63,32 +63,26 @@ export class CreateToolDto {
   @Min(0)
   quantity: number;
 
-  //   @ApiProperty({ example: 123456, description: 'Maxsus kodi', required: false })
   @IsOptional()
   @IsInt()
   code?: number;
 
-  //   @ApiProperty({
-  //     example: true,
-  //     description: 'Faollik holati',
-  //     required: false,
-  //   })
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
 
   @ApiProperty({ example: 'brand-uuid', description: 'Brend ID (UUID)' })
-  //   @IsUUID()
+    @IsUUID()
   @IsNotEmpty()
   brandId: string;
 
   @ApiProperty({ example: 'capacity-uuid', description: 'Sig‘im ID (UUID)' })
-  //   @IsUUID()
+    @IsUUID()
   @IsNotEmpty()
   capacityId: string;
 
   @ApiProperty({ example: 'size-uuid', description: 'O‘lcham ID (UUID)' })
-  //   @IsUUID()
+    @IsUUID()
   @IsNotEmpty()
   sizeId: string;
 }

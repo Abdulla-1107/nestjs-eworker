@@ -15,20 +15,31 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   fullName  String
   phone     String
   password  String
-  inn       String?
+  role      UserRole  @default(USER_FIZ)
+  createdAt DateTime  @default(now())
+  regionId  String
+  Region    Region    @relation(fields: [regionId], references: [id])
+  Order     Order[]
+  Basket    Basket[]
+  Company   Company[]
+}
+
+model Company {
+  id        String   @id @default(uuid())
+  name      String
+  inn       String
+  account   String
+  address   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  salary    Float? // Salary maydoni qo'shildi
   bank      String?
   mfo       String?
-  salary    Float?
-  account   String?
-  address   String?
-  role      UserRole @default(USER_FIZ)
-  createdAt DateTime @default(now())
-  regionId  String
-  Region    Region   @relation(fields: [regionId], references: [id])
 }
 
 enum UserRole {
@@ -82,6 +93,9 @@ model Level {
   name_en          String
   createdAt        DateTime           @default(now())
   MasterProfession MasterProfession[]
+  professionLevel  professionLevel[]
+  Basket           Basket[]
+  orderProduct     orderProduct[]
 }
 
 model GeneralInfo {
@@ -96,25 +110,28 @@ model GeneralInfo {
 }
 
 model Tool {
-  id         String   @id @default(uuid())
-  name_uz    String
-  name_ru    String
-  name_en    String
-  desc_uz    String
-  desc_ru    String
-  desc_en    String
-  image      String
-  price      Int
-  quantity   Int
-  code       Int?
-  isActive   Boolean?
-  createdAt  DateTime @default(now())
-  brandId    String
-  Brand      Brand    @relation(fields: [brandId], references: [id])
-  capacityId String
-  Capacity   Capacity @relation(fields: [capacityId], references: [id])
-  sizeId     String
-  Size       Size     @relation(fields: [sizeId], references: [id])
+  id             String           @id @default(uuid())
+  name_uz        String
+  name_ru        String
+  name_en        String
+  desc_uz        String
+  desc_ru        String
+  desc_en        String
+  image          String
+  price          Int
+  quantity       Int
+  code           Int?
+  isActive       Boolean?
+  createdAt      DateTime         @default(now())
+  brandId        String
+  Brand          Brand            @relation(fields: [brandId], references: [id])
+  capacityId     String
+  Capacity       Capacity         @relation(fields: [capacityId], references: [id])
+  sizeId         String
+  Size           Size             @relation(fields: [sizeId], references: [id])
+  professionTool professionTool[]
+  Basket         Basket[]
+  orderProduct   orderProduct[]
 }
 
 model Master {
@@ -129,6 +146,7 @@ model Master {
   about            String
   createdAt        DateTime           @default(now())
   MasterProfession MasterProfession[]
+  OrderMaster      OrderMaster[]
 }
 
 model Profession {
@@ -139,6 +157,10 @@ model Profession {
   image            String
   isActive         Boolean
   MasterProfession MasterProfession[]
+  professionTool   professionTool[]
+  professionLevel  professionLevel[]
+  Basket           Basket[]
+  orderProduct     orderProduct[]
 }
 
 model MasterProfession {
@@ -153,4 +175,117 @@ model MasterProfession {
   priceHourly     Decimal
   priceDaily      Decimal
   experience      Decimal
+}
+
+model professionTool {
+  id           String     @id @default(uuid())
+  professionId String
+  Profession   Profession @relation(fields: [professionId], references: [id])
+  toolId       String
+  Tool         Tool       @relation(fields: [toolId], references: [id])
+}
+
+model professionLevel {
+  id              String     @id @default(uuid())
+  professionId    String
+  Profession      Profession @relation(fields: [professionId], references: [id])
+  levelId         String
+  Level           Level      @relation(fields: [levelId], references: [id])
+  minWorkingHours Int
+  priceHourly     Decimal
+  priceDaily      Decimal
+}
+
+model Order {
+  id              String         @id @default(uuid())
+  userId          String
+  User            User           @relation(fields: [userId], references: [id])
+  address         String
+  latitude        String
+  longitude       String
+  date            DateTime       @default(now())
+  totalPrice      Decimal
+  paymentType     String
+  withDelivery    Boolean
+  status          String
+  deliveryComment String?
+  createdAt       DateTime       @default(now())
+  OrderMaster     OrderMaster[]
+  orderProduct    orderProduct[]
+}
+
+model OrderMaster {
+  id       String @id @default(uuid())
+  orderId  String
+  Order    Order  @relation(fields: [orderId], references: [id])
+  masterId String
+  Master   Master @relation(fields: [masterId], references: [id])
+}
+
+model Basket {
+  id           String     @id @default(uuid())
+  userId       String
+  User         User       @relation(fields: [userId], references: [id])
+  professionId String
+  Profession   Profession @relation(fields: [professionId], references: [id])
+  toolId       String
+  Tool         Tool       @relation(fields: [toolId], references: [id])
+  levelId      String
+  Level        Level      @relation(fields: [levelId], references: [id])
+  count        Int
+  workingTime  Int
+  totalPrice   Decimal
+  timeUnit     String
+}
+
+model orderProduct {
+  id           String     @id @default(uuid())
+  orderId      String
+  Order        Order      @relation(fields: [orderId], references: [id])
+  professionId String
+  Profession   Profession @relation(fields: [professionId], references: [id])
+  toolId       String
+  Tool         Tool       @relation(fields: [toolId], references: [id])
+  levelId      String
+  Level        Level      @relation(fields: [levelId], references: [id])
+  workingTime  Int
+  price        Decimal
+  count        Int
+  timeUnit     String
+}
+
+model Contact {
+  id      String @id @default(uuid())
+  name    String
+  surName String
+  phone   String
+  address String
+  message String
+}
+
+model Showcase {
+  id      String @id @default(uuid())
+  name_uz String
+  name_ru String
+  name_en String
+  desc_uz String
+  desc_ru String
+  desc_en String
+  image   String
+  link    String
+}
+
+model Partners {
+  id      String @id @default(uuid())
+  name_uz String
+  name_ru String
+  name_en String
+  image   String
+}
+
+model faq {
+  id        String   @id @default(uuid())
+  question  String
+  answer    String
+  createdAt DateTime @default(now())
 }

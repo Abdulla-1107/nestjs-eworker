@@ -122,15 +122,33 @@ exports.Prisma.UserScalarFieldEnum = {
   fullName: 'fullName',
   phone: 'phone',
   password: 'password',
-  inn: 'inn',
-  bank: 'bank',
-  mfo: 'mfo',
-  salary: 'salary',
-  account: 'account',
-  address: 'address',
   role: 'role',
   createdAt: 'createdAt',
   regionId: 'regionId'
+};
+
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  refreshToken: 'refreshToken',
+  ip: 'ip',
+  device: 'device',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  expiresAt: 'expiresAt'
+};
+
+exports.Prisma.CompanyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  inn: 'inn',
+  account: 'account',
+  address: 'address',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  salary: 'salary',
+  bank: 'bank',
+  mfo: 'mfo'
 };
 
 exports.Prisma.RegionScalarFieldEnum = {
@@ -222,7 +240,8 @@ exports.Prisma.ProfessionScalarFieldEnum = {
   name_ru: 'name_ru',
   name_en: 'name_en',
   image: 'image',
-  isActive: 'isActive'
+  isActive: 'isActive',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.MasterProfessionScalarFieldEnum = {
@@ -296,6 +315,43 @@ exports.Prisma.OrderProductScalarFieldEnum = {
   timeUnit: 'timeUnit'
 };
 
+exports.Prisma.ContactScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  surName: 'surName',
+  phone: 'phone',
+  address: 'address',
+  message: 'message',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ShowcaseScalarFieldEnum = {
+  id: 'id',
+  name_uz: 'name_uz',
+  name_ru: 'name_ru',
+  name_en: 'name_en',
+  desc_uz: 'desc_uz',
+  desc_ru: 'desc_ru',
+  desc_en: 'desc_en',
+  image: 'image',
+  link: 'link'
+};
+
+exports.Prisma.PartnersScalarFieldEnum = {
+  id: 'id',
+  name_uz: 'name_uz',
+  name_ru: 'name_ru',
+  name_en: 'name_en',
+  image: 'image'
+};
+
+exports.Prisma.FaqScalarFieldEnum = {
+  id: 'id',
+  question: 'question',
+  answer: 'answer',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -320,6 +376,8 @@ exports.UserRole = exports.$Enums.UserRole = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Session: 'Session',
+  Company: 'Company',
   Region: 'Region',
   Capacity: 'Capacity',
   Brand: 'Brand',
@@ -335,7 +393,11 @@ exports.Prisma.ModelName = {
   Order: 'Order',
   OrderMaster: 'OrderMaster',
   Basket: 'Basket',
-  orderProduct: 'orderProduct'
+  orderProduct: 'orderProduct',
+  Contact: 'Contact',
+  Showcase: 'Showcase',
+  Partners: 'Partners',
+  faq: 'faq'
 };
 
 /**

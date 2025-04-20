@@ -38,7 +38,7 @@ export class OrderService {
     const order = await this.prisma.order.findFirst({
       where: { id },
       include: {
-        User: { select: { fullName: true, phone: true } },
+        User: { select: { fullName: true, phone: true, Region: true } },
       },
     });
     if (!order) {

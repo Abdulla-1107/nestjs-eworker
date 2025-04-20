@@ -18,10 +18,12 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { MasterModule } from './master/master.module';
 import { ProfessionModule } from './profession/profession.module';
-import { MasterProfessionModule } from './master-profession/master-profession.module';
-import { ProfessionLevelModule } from './profession-level/profession-level.module';
 import { OrderModule } from './order/order.module';
 import { OrderProductModule } from './order-product/order-product.module';
+import { ContactModule } from './contact/contact.module';
+import { GeneralInfoModule } from './general-info/general-info.module';
+import { PartnerModule } from './partner/partner.module';
+import { ShowcaseModule } from './showcase/showcase.module';
 
 @Module({
   imports: [
@@ -56,10 +58,12 @@ import { OrderProductModule } from './order-product/order-product.module';
     ToolModule,
     MasterModule,
     ProfessionModule,
-    MasterProfessionModule,
-    ProfessionLevelModule,
     OrderModule,
     OrderProductModule,
+    ContactModule,
+    GeneralInfoModule,
+    PartnerModule,
+    ShowcaseModule,
   ],
   controllers: [AppController, UploadController],
   providers: [AppService, PrismaService],

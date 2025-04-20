@@ -20,15 +20,14 @@ import {
   ApiBearerAuth,
   ApiQuery,
 } from '@nestjs/swagger';
-import { RegisterUserFiz } from './dto/register-user.fiz.dto';
-import { RegisterUserYur } from './dto/register-user.yur.dto';
 import { RegisterAdmin } from './dto/register-admin.dto';
 import { LoginUser } from './dto/login-user.dto';
 import { Role } from 'src/decorators/role.decorator';
 import { RolesGuard } from 'src/auth-guard/role.guard';
 import { AuthGuard } from 'src/auth-guard/auth.guard';
 import { Roles, UsersRole } from 'src/Enums/user.role';
-import { UpdateUserFizDto } from './dto/update-user.fiz.dto';
+import { RegisterDto } from './dto/register-user.dto';
+import { Request } from 'express';
 
 @ApiBearerAuth()
 @ApiTags('user')
@@ -71,27 +70,16 @@ export class UserController {
     return this.userService.verifyOtp(verifyOtpDto.phone, verifyOtpDto.code);
   }
 
-  @Post('register/fiz')
-  @ApiOperation({ summary: 'Jismoniy shaxsni ro‘yxatdan o‘tkazish' })
+  @Post('register')
+  @ApiOperation({ summary: 'Foydalanuvchini ro‘yxatdan o‘tkazish' })
   @ApiResponse({
     status: 201,
     description: 'Foydalanuvchi muvaffaqiyatli ro‘yxatdan o‘tdi',
   })
-  @ApiResponse({ status: 400, description: 'Noto‘g‘ri ma‘lumotlar' })
-  async registerFiz(@Body() createFizUserDto: RegisterUserFiz) {
-    return this.userService.createFizUser(createFizUserDto);
+  async register(@Body() registerDto: RegisterDto) {
+    return this.userService.register(registerDto);
   }
 
-  @Post('register/yur')
-  @ApiOperation({ summary: 'Yuridik shaxsni ro‘yxatdan o‘tkazish' })
-  @ApiResponse({
-    status: 201,
-    description: 'Foydalanuvchi muvaffaqiyatli ro‘yxatdan o‘tdi',
-  })
-  @ApiResponse({ status: 400, description: 'Noto‘g‘ri ma‘lumotlar' })
-  async registerYur(@Body() createYurUserDto: RegisterUserYur) {
-    return this.userService.createYurUser(createYurUserDto);
-  }
   @Role(UsersRole.ADMIN)
   @UseGuards(RolesGuard)
   @UseGuards(AuthGuard)
@@ -112,22 +100,16 @@ export class UserController {
     description: 'Foydalanuvchi muvaffaqiyatli tizimdan o‘tdi',
   })
   @ApiResponse({ status: 400, description: 'Noto‘g‘ri ma‘lumotlar' })
-  async loginUser(@Body() dto: LoginUser) {
-    return this.userService.login(dto);
+  async loginUser(@Body() dto: LoginUser, @Req() request: Request) {
+    return this.userService.login(dto, request);
   }
 
-  @Patch('update')
-  @ApiOperation({ summary: "User ma'lumotlarini yangilash" })
-  @ApiResponse({
-    status: 201,
-    description: 'Foydalanuvchi muvaffaqiyatli yangilandi',
-  })
-  @ApiResponse({ status: 400, description: 'Noto‘g‘ri ma‘lumotlar' })
+  @ApiOperation({ summary: 'Reset password' })
   @UseGuards(AuthGuard)
-  @ApiBearerAuth()
-  async updateProfileFiz(@Body() dto: UpdateUserFizDto, @Req() req: Request) {
+  @Post('/reset-password')
+  resetPassword(@Req() req: Request) {
     const userId = req['user'].id;
-    return this.userService.updateUserFiz(userId, dto);
+    return this.userService.me(userId);
   }
 
   @Role(UsersRole.ADMIN, UsersRole.SUPER_ADMIN)

@@ -15,22 +15,44 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   fullName  String
   phone     String
   password  String
-  inn       String?
-  bank      String?
-  mfo       String?
-  salary    Float?
-  account   String?
-  address   String?
-  role      UserRole @default(USER_FIZ)
-  createdAt DateTime @default(now())
+  role      UserRole  @default(USER_FIZ)
+  createdAt DateTime  @default(now())
   regionId  String
-  Region    Region   @relation(fields: [regionId], references: [id])
+  Region    Region    @relation(fields: [regionId], references: [id], onDelete: Cascade)
   Order     Order[]
   Basket    Basket[]
+  Company   Company[]
+  Session   Session[]
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+  refreshToken String
+  ip           String?
+  device       String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  expiresAt    DateTime
+}
+
+model Company {
+  id        String   @id @default(uuid())
+  name      String
+  inn       String
+  account   String
+  address   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  salary    Float?
+  bank      String?
+  mfo       String?
 }
 
 enum UserRole {
@@ -115,11 +137,11 @@ model Tool {
   isActive       Boolean?
   createdAt      DateTime         @default(now())
   brandId        String
-  Brand          Brand            @relation(fields: [brandId], references: [id])
+  Brand          Brand            @relation(fields: [brandId], references: [id], onDelete: Cascade)
   capacityId     String
-  Capacity       Capacity         @relation(fields: [capacityId], references: [id])
+  Capacity       Capacity         @relation(fields: [capacityId], references: [id], onDelete: Cascade)
   sizeId         String
-  Size           Size             @relation(fields: [sizeId], references: [id])
+  Size           Size             @relation(fields: [sizeId], references: [id], onDelete: Cascade)
   professionTool professionTool[]
   Basket         Basket[]
   orderProduct   orderProduct[]
@@ -152,16 +174,17 @@ model Profession {
   professionLevel  professionLevel[]
   Basket           Basket[]
   orderProduct     orderProduct[]
+  createdAt        DateTime           @default(now())
 }
 
 model MasterProfession {
   id              String     @id @default(uuid())
   professionId    String
-  Pofession       Profession @relation(fields: [professionId], references: [id])
+  Pofession       Profession @relation(fields: [professionId], references: [id], onDelete: Cascade)
   masterId        String
-  Master          Master     @relation(fields: [masterId], references: [id])
+  Master          Master     @relation(fields: [masterId], references: [id], onDelete: Cascade)
   levelId         String
-  Level           Level      @relation(fields: [levelId], references: [id])
+  Level           Level      @relation(fields: [levelId], references: [id], onDelete: Cascade)
   minWorkingHours Int
   priceHourly     Decimal
   priceDaily      Decimal
@@ -171,17 +194,17 @@ model MasterProfession {
 model professionTool {
   id           String     @id @default(uuid())
   professionId String
-  Profession   Profession @relation(fields: [professionId], references: [id])
+  Profession   Profession @relation(fields: [professionId], references: [id], onDelete: Cascade)
   toolId       String
-  Tool         Tool       @relation(fields: [toolId], references: [id])
+  Tool         Tool       @relation(fields: [toolId], references: [id], onDelete: Cascade)
 }
 
 model professionLevel {
   id              String     @id @default(uuid())
   professionId    String
-  Profession      Profession @relation(fields: [professionId], references: [id])
+  Profession      Profession @relation(fields: [professionId], references: [id], onDelete: Cascade)
   levelId         String
-  Level           Level      @relation(fields: [levelId], references: [id])
+  Level           Level      @relation(fields: [levelId], references: [id], onDelete: Cascade)
   minWorkingHours Int
   priceHourly     Decimal
   priceDaily      Decimal
@@ -190,7 +213,7 @@ model professionLevel {
 model Order {
   id              String         @id @default(uuid())
   userId          String
-  User            User           @relation(fields: [userId], references: [id])
+  User            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   address         String
   latitude        String
   longitude       String
@@ -208,9 +231,9 @@ model Order {
 model OrderMaster {
   id       String @id @default(uuid())
   orderId  String
-  Order    Order  @relation(fields: [orderId], references: [id])
+  Order    Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
   masterId String
-  Master   Master @relation(fields: [masterId], references: [id])
+  Master   Master @relation(fields: [masterId], references: [id], onDelete: Cascade)
 }
 
 model Basket {
@@ -218,11 +241,11 @@ model Basket {
   userId       String
   User         User       @relation(fields: [userId], references: [id])
   professionId String
-  Profession   Profession @relation(fields: [professionId], references: [id])
+  Profession   Profession @relation(fields: [professionId], references: [id], onDelete: Cascade)
   toolId       String
-  Tool         Tool       @relation(fields: [toolId], references: [id])
+  Tool         Tool       @relation(fields: [toolId], references: [id], onDelete: Cascade)
   levelId      String
-  Level        Level      @relation(fields: [levelId], references: [id])
+  Level        Level      @relation(fields: [levelId], references: [id], onDelete: Cascade)
   count        Int
   workingTime  Int
   totalPrice   Decimal
@@ -234,7 +257,7 @@ model orderProduct {
   orderId      String
   Order        Order      @relation(fields: [orderId], references: [id])
   professionId String
-  Profession   Profession @relation(fields: [professionId], references: [id])
+  Profession   Profession @relation(fields: [professionId], references: [id], onDelete: Cascade)
   toolId       String
   Tool         Tool       @relation(fields: [toolId], references: [id])
   levelId      String
@@ -246,12 +269,13 @@ model orderProduct {
 }
 
 model Contact {
-  id      String @id @default(uuid())
-  name    String
-  surName String
-  phone   String
-  address String
-  message String
+  id        String   @id @default(uuid())
+  name      String
+  surName   String
+  phone     String
+  address   String
+  message   String
+  createdAt DateTime @default(now())
 }
 
 model Showcase {

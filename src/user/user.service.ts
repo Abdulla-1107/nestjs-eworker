@@ -8,12 +8,12 @@ import {
 import { OtpService } from '../otp/otp.service';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { RegisterUserFiz } from './dto/register-user.fiz.dto';
-import { RegisterUserYur } from './dto/register-user.yur.dto';
 import { RegisterAdmin } from './dto/register-admin.dto';
 import { LoginUser } from './dto/login-user.dto';
 import { JwtService } from '@nestjs/jwt';
-import { UpdateUserFizDto } from './dto/update-user.fiz.dto';
+import { RegisterDto } from './dto/register-user.dto';
+import { ChangePasswordDto } from './dto/reset-password.dto';
+import { Request } from 'express';
 
 @Injectable()
 export class UserService {
@@ -33,11 +33,11 @@ export class UserService {
     const existingUser = await this.prisma.user.findFirst({
       where: { phone },
     });
-    // if (existingUser) {
-    //   throw new BadRequestException(
-    //     'Bu telefon raqami allaqachon ro‘yxatdan o‘tgan',
-    //   );
-    // }
+    if (existingUser) {
+      throw new BadRequestException(
+        'Bu telefon raqami allaqachon ro‘yxatdan o‘tgan',
+      );
+    }
 
     return this.otpService.sendOtp(phone);
   }
@@ -46,31 +46,17 @@ export class UserService {
     return this.otpService.verifyOtp(phone, code);
   }
 
-  async createFizUser(dto: RegisterUserFiz) {
-    // Telefon raqami tasdiqlanganligini tekshirish
-    const isVerified = await this.otpService.isPhoneVerified(dto.phone);
-    if (!isVerified) {
-      throw new BadRequestException('Telefon raqami OTP bilan tasdiqlanmagan');
-    }
-
-    // Mavjud foydalanuvchi tekshiruvi
-    const existingUser = await this.prisma.user.findFirst({
-      where: { phone: dto.phone },
-    });
-    // if (existingUser) {
-    //   throw new BadRequestException(
-    //     'Bu telefon raqami allaqachon ro‘yxatdan o‘tgan',
-    //   );
+  async register(dto: RegisterDto) {
+    // const isVerified = await this.otpService.isPhoneVerified(dto.phone);
+    // if (!isVerified) {
+    //   throw new BadRequestException('Telefon raqami OTP bilan tasdiqlanmagan');
     // }
-
-    // Region tekshiruvi
     const region = await this.prisma.region.findFirst({
       where: { id: dto.regionId },
     });
     if (!region) {
       throw new BadRequestException('Bunday region mavjud emas');
     }
-
     const hashedPassword = await bcrypt.hash(dto.password, 10);
 
     const user = await this.prisma.user.create({
@@ -78,69 +64,31 @@ export class UserService {
         fullName: dto.fullName,
         phone: dto.phone,
         password: hashedPassword,
+        role: dto.role,
         regionId: dto.regionId,
-        role: 'USER_FIZ',
+        Company:
+          dto.role === 'USER_YUR' && dto.company
+            ? {
+                create: dto.company.map((company) => ({
+                  name: company.name,
+                  inn: company.inn,
+                  account: company.account,
+                  address: company.address,
+                  salary: company.salary, // salary maydoni qo'shildi
+                  bank: company.bank,
+                  mfo: company.mfo,
+                })),
+              }
+            : undefined,
+      },
+      include: {
+        Company: true,
       },
     });
 
     this.otpService['otpStore'].delete(dto.phone);
 
-    const cleanUser = this.removeNullValues(user);
-    return { data: cleanUser };
-  }
-
-  async createYurUser(dto: RegisterUserYur) {
-    const existingUser = await this.prisma.user.findFirst({
-      where: { phone: dto.phone },
-    });
-    // if (existingUser) {
-    //   throw new BadRequestException(
-    //     'Bu telefon raqami allaqachon ro‘yxatdan o‘tgan',
-    //   );
-    // }
-
-    // Telefon raqami tasdiqlanganligini tekshirish
-    const isVerified = await this.otpService.isPhoneVerified(dto.phone);
-    if (!isVerified) {
-      throw new BadRequestException('Telefon raqami OTP bilan tasdiqlanmagan');
-    }
-
-    // Region tekshiruvi
-    const region = await this.prisma.region.findFirst({
-      where: { id: dto.regionId },
-    });
-    if (!region) {
-      throw new BadRequestException('Bunday region mavjud emas');
-    }
-
-    // Mavjud foydalanuvchi tekshiruvi
-
-    // Parolni shifrlash
-    const hashedPassword = await bcrypt.hash(dto.password, 10);
-
-    // Foydalanuvchi yaratish
-    const user = await this.prisma.user.create({
-      data: {
-        fullName: dto.fullName,
-        phone: dto.phone,
-        password: hashedPassword,
-        regionId: dto.regionId,
-        inn: dto.inn,
-        bank: dto.bank,
-        mfo: dto.mfo,
-        salary: dto.salary,
-        account: dto.account,
-        address: dto.address,
-        role: 'USER_YUR',
-      },
-    });
-
-    // Foydalanuvchi yaratilgandan so‘ng tasdiqlash holatini o‘chirish
-    this.otpService['otpStore'].delete(dto.phone); // To‘g‘ridan-to‘g‘ri o‘chirish (ideal emas, lekin soddalashtirish uchun)
-
-    const cleanUser = this.removeNullValues(user);
-
-    return { data: cleanUser };
+    return { data: user };
   }
 
   async createAdmin(dto: RegisterAdmin) {
@@ -174,26 +122,79 @@ export class UserService {
     return { data: cleanUser };
   }
 
-  async login(dto: LoginUser) {
-    let user = await this.prisma.user.findFirst({
+  async login(dto: LoginUser, request: Request) {
+    // Foydalanuvchini telefon raqamiga ko'ra qidiramiz
+    const user = await this.prisma.user.findFirst({
       where: { phone: dto.phone },
     });
+
+    // Agar foydalanuvchi topilmasa
     if (!user) {
       throw new NotFoundException('User topilmadi');
     }
-    console.log(user);
-    
-    let match = await bcrypt.compare(dto.password, user.password);
+
+    // Parolni tekshirish
+    const match = await bcrypt.compare(dto.password, user.password);
+
     if (!match) {
-      throw new NotFoundException('Xato parol');
+      throw new BadRequestException('Xato parol');
     }
-    let token = this.jwt.sign({
-      id: user.id,
-      phone: user.phone,
-      role: user.role,
+
+    // Access token yaratish
+    const accessToken = this.jwt.sign(
+      {
+        id: user.id,
+        phone: user.phone,
+        role: user.role,
+      },
+      { expiresIn: '1h' }, // Access tokenning muddati 1 soat
+    );
+
+    // Refresh token yaratish
+    const refreshToken = this.jwt.sign(
+      {
+        id: user.id,
+        phone: user.phone,
+        role: user.role,
+      },
+      { expiresIn: '7d' }, // Refresh tokenning muddati 7 kun
+    );
+
+    // Foydalanuvchi uchun IP va qurilma ma'lumotlarini olish
+    const ip = request.ip;
+    const device = request.headers['user-agent'];
+
+    // Sessiyani tekshirish va yangilash
+    let session = await this.prisma.session.findFirst({
+      where: { userId: user.id, ip, device },
     });
+
+    // Agar sessiya topilmasa, yangi sessiya yaratish
+    if (!session) {
+      session = await this.prisma.session.create({
+        data: {
+          userId: user.id,
+          refreshToken,
+          ip,
+          device,
+          expiresAt: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000), // 7 kun
+        },
+      });
+    } else {
+      // Agar sessiya mavjud bo'lsa, refresh tokenni yangilash
+      session = await this.prisma.session.update({
+        where: { id: session.id },
+        data: {
+          refreshToken,
+          updatedAt: new Date(),
+        },
+      });
+    }
+
+    // Tokenlarni qaytarish
     return {
-      token,
+      access_token: accessToken,
+      refresh_token: refreshToken,
     };
   }
 
@@ -213,11 +214,11 @@ export class UserService {
       order = 'desc',
       regionId,
     } = query;
-  
+
     const skip = (page - 1) * limit;
-  
+
     const where: any = {};
-  
+
     // 🔍 Search
     if (search) {
       where.OR = [
@@ -225,12 +226,12 @@ export class UserService {
         { phone: { contains: search, mode: 'insensitive' } },
       ];
     }
-  
+
     // 🧩 Filter by regionId
     if (regionId) {
       where.regionId = regionId;
     }
-  
+
     // 📦 Ma’lumotlarni olish
     const [users, total] = await this.prisma.$transaction([
       this.prisma.user.findMany({
@@ -242,7 +243,7 @@ export class UserService {
       }),
       this.prisma.user.count({ where }),
     ]);
-  
+
     // ❌ null qiymatlarni olib tashlash
     const cleanedUsers = users.map((user) => {
       const filteredUser: any = {};
@@ -253,7 +254,7 @@ export class UserService {
       });
       return filteredUser;
     });
-  
+
     return {
       data: cleanedUsers,
       pagination: {
@@ -263,6 +264,34 @@ export class UserService {
         totalPages: Math.ceil(total / limit),
       },
     };
+  }
+
+  // user.service.ts
+  async ResetPassword(dto: ChangePasswordDto, userId: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      throw new NotFoundException('Foydalanuvchi topilmadi');
+    }
+
+    const isOldPasswordValid = await bcrypt.compare(
+      dto.oldPassword,
+      user.password,
+    );
+    if (!isOldPasswordValid) {
+      throw new BadRequestException('Eski parol noto‘g‘ri');
+    }
+
+    const hashedPassword = await bcrypt.hash(dto.newPassword, 10);
+
+    await this.prisma.user.update({
+      where: { id: user.id },
+      data: { password: hashedPassword },
+    });
+
+    return { message: 'Parol muvaffaqiyatli yangilandi' };
   }
 
   async delete(id: string) {
@@ -275,43 +304,6 @@ export class UserService {
       return { data: deleteUser };
     } catch (error) {
       return { message: error.message };
-    }
-  }
-
-  async updateUserFiz(userId: string, dto: UpdateUserFizDto) {
-    try {
-      let user = await this.prisma.user.findFirst({ where: { id: userId } });
-      if (!user) {
-        throw new NotFoundException('Foydalanuvchi topilmadi');
-      }
-      const allowedRoles = ['USER_FIZ', 'ADMIN'];
-      if (!allowedRoles.includes(user.role)) {
-        throw new ForbiddenException('Sizga bu amalni bajarishga ruxsat yo‘q');
-      }
-      if (dto.regionId) {
-        const region = await this.prisma.region.findFirst({
-          where: { id: dto.regionId },
-        });
-        if (!region) {
-          throw new NotFoundException('Region topilmadi');
-        }
-      }
-
-      if (dto.password) {
-        dto.password = await bcrypt.hash(dto.password, 10);
-      }
-
-      const updatedUser = await this.prisma.user.update({
-        where: { id: userId },
-        data: dto,
-      });
-
-      const cleanUser = this.removeNullValues(updatedUser);
-
-      return { data: cleanUser };
-
-    } catch (error) {
-      throw new Error(`Foydalanuvchini yangilashda xatolik: ${error.message}`);
     }
   }
 

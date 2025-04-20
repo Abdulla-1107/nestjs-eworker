@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -12,12 +13,53 @@ export class ProfessionService {
   constructor(private readonly prisma: PrismaService) {}
   async create(createProfessionDto: CreateProfessionDto) {
     try {
+      // 1. Professionni yaratish
       const profession = await this.prisma.profession.create({
-        data: { ...createProfessionDto, isActive: true },
+        data: {
+          name_uz: createProfessionDto.name_uz,
+          name_ru: createProfessionDto.name_ru,
+          name_en: createProfessionDto.name_en,
+          image: createProfessionDto.image,
+          isActive: createProfessionDto.isActive || true, // default true if isActive is not provided
+        },
       });
-      return { data: profession };
+
+      // 2. professionLevel larni yaratish (professionId ni avtomatik olish)
+      if (
+        createProfessionDto.professionLevel &&
+        createProfessionDto.professionLevel.length > 0
+      ) {
+        // Har bir levelId ning mavjudligini tekshirish
+        for (const item of createProfessionDto.professionLevel) {
+          const levelExists = await this.prisma.level.findUnique({
+            where: { id: item.levelId },
+          });
+
+          if (!levelExists) {
+            throw new NotFoundException(`Level topilmadi`);
+          }
+        }
+
+        // professionLevel larni yaratish
+        await this.prisma.professionLevel.createMany({
+          data: createProfessionDto.professionLevel.map((item) => ({
+            professionId: profession.id, // Avtomatik professionId ni qo‘shish
+            levelId: item.levelId,
+            minWorkingHours: item.minWorkingHours,
+            priceHourly: item.priceHourly,
+            priceDaily: item.priceDaily,
+          })),
+        });
+      }
+
+      const result = await this.prisma.profession.findUnique({
+        where: { id: profession.id },
+        include: { professionLevel: true },
+      });
+
+      return { data: result };
     } catch (error) {
-      throw new InternalServerErrorException(`Erorr ${error.message}`);
+      throw new NotFoundException(`${error.message}`);
     }
   }
 
@@ -33,13 +75,13 @@ export class ProfessionService {
       page = 1,
       limit = 10,
       search,
-      sortBy = 'name_uz', // Agar bunday ustun bo‘lmasa, 'name_uz' qilib qo‘ying
+      sortBy = 'name_uz', // default 'name_uz'
       sortOrder = 'asc',
       isActive,
     } = query;
-
+  
     const where: any = {};
-
+  
     if (search) {
       where.OR = [
         { name_uz: { contains: search, mode: 'insensitive' } },
@@ -47,11 +89,21 @@ export class ProfessionService {
         { name_en: { contains: search, mode: 'insensitive' } },
       ];
     }
-
+  
     if (isActive !== undefined) {
       where.isActive = isActive;
     }
-
+  
+    // Validatsiya sortBy ustuni bo‘yicha
+    const validSortByFields = ['name_uz', 'name_ru', 'name_en', 'createdAt']; // Qo'llab-quvvatlanadigan ustunlar
+    if (sortBy && !validSortByFields.includes(sortBy)) {
+      throw new BadRequestException(`Invalid sortBy field: ${sortBy}`);
+    }
+  
+    // Sahifa va limitni tekshirish
+    const validPage = page > 0 ? page : 1;  // Sahifa 1 dan kichik bo‘lmasligi kerak
+    const validLimit = limit > 0 ? limit : 10; // Limit 1 dan kichik bo‘lmasligi kerak
+  
     const [data, total] = await this.prisma.$transaction([
       this.prisma.profession.findMany({
         include: {
@@ -59,23 +111,25 @@ export class ProfessionService {
           professionLevel: { include: { Level: true } },
         },
         where,
-        skip: (page - 1) * limit,
-        take: limit,
+        skip: (validPage - 1) * validLimit,
+        take: validLimit,
         orderBy: {
-          [sortBy || 'name_uz']: sortOrder, // fallback to name_uz
+          [sortBy]: sortOrder, // Saralash
         },
       }),
       this.prisma.profession.count({ where }),
     ]);
-
+  
     return {
       data,
       total,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
+      page: validPage,
+      limit: validLimit,
+      totalPages: Math.ceil(total / validLimit),
     };
   }
+  
+  
 
   async findOne(id: string) {
     const profession = await this.prisma.profession.findFirst({
@@ -91,20 +145,62 @@ export class ProfessionService {
     return { data: profession };
   }
 
-  async update(id: string, updateProfessionDto: UpdateProfessionDto) {
-    const profession = await this.prisma.profession.findFirst({
-      where: { id },
-    });
+  async update(id: string, dto: UpdateProfessionDto) {
+    // 1. Profession mavjudligini tekshirish
+    const profession = await this.prisma.profession.findUnique({ where: { id } });
     if (!profession) {
       throw new NotFoundException('Profession topilmadi');
     }
-    const Newprofession = await this.prisma.profession.update({
+  
+    // 2. professionni yangilash
+    await this.prisma.profession.update({
       where: { id },
-      data: updateProfessionDto,
+      data: {
+        name_uz: dto.name_uz ?? profession.name_uz,
+        name_ru: dto.name_ru ?? profession.name_ru,
+        name_en: dto.name_en ?? profession.name_en,
+        image: dto.image ?? profession.image,
+        isActive: dto.isActive ?? profession.isActive,
+      },
     });
-
-    return { data: Newprofession };
+  
+    // 3. agar professionLevel bo‘lsa:
+    if (dto.professionLevel?.length) {
+      // a. Eski professionLevel-larni o‘chirib yuboramiz
+      await this.prisma.professionLevel.deleteMany({ where: { professionId: id } });
+  
+      // b. levelId larni tekshiramiz
+      for (const item of dto.professionLevel) {
+        const levelExists = await this.prisma.level.findUnique({
+          where: { id: item.levelId },
+        });
+  
+        if (!levelExists) {
+          throw new NotFoundException(`Level topilmadi`);
+        }
+      }
+  
+      // c. Yangi professionLevel-larni create qilamiz
+      await this.prisma.professionLevel.createMany({
+        data: dto.professionLevel.map((item) => ({
+          professionId: id,
+          levelId: item.levelId,
+          minWorkingHours: item.minWorkingHours,
+          priceHourly: item.priceHourly,
+          priceDaily: item.priceDaily,
+        })),
+      });
+    }
+  
+    // 4. Yakuniy natijani qaytaramiz
+    const updated = await this.prisma.profession.findUnique({
+      where: { id },
+      include: { professionLevel: true },
+    });
+  
+    return { data: updated };
   }
+  
 
   async remove(id: string) {
     const profession = await this.prisma.profession.findFirst({

@@ -43,6 +43,6 @@ export class UploadController {
   uploadImage(@UploadedFile() file) {
     console.log(file);
 
-    return { image: file.filename };
+    return { image: `https://abdulla.uz/${file.filename} ` };
   }
 }

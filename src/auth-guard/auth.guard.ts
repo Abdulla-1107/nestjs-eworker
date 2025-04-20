@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
       return true;
     } catch (error) {
       // Agar token noto'g'ri bo'lsa
-      throw new UnauthorizedException('Xato token yoki muddati o‘tgach');
+      throw new UnauthorizedException('Xato token yoki muddati tugagan');
     }
   }
 }
