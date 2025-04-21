@@ -25,7 +25,7 @@ import { RolesGuard } from 'src/auth-guard/role.guard';
 import { Role } from 'src/decorators/role.decorator';
 import { UsersRole } from 'src/Enums/user.role';
 
-@ApiBearerAuth()
+@ApiBearerAuth() 
 @ApiTags('Region')
 @Controller('region')
 export class RegionController {

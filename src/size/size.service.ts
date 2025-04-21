@@ -14,6 +14,10 @@ export class SizeService {
 
   // Yangi hajm qo'shish
   async create(createSizeDto: CreateSizeDto) {
+    const regionname = await this.prisma.size.findFirst({where: {name_en: createSizeDto.name_en}})
+    if(regionname){
+      throw new BadRequestException("Size mavjud")
+    }
     try {
       const size = await this.prisma.size.create({
         data: {
@@ -98,7 +102,6 @@ export class SizeService {
   async findOne(id: string) {
     try {
       const size = await this.prisma.size.findUnique({
-        include: { Tool: { include: { Brand: true, Capacity: true } } },
         where: { id },
       });
       if (!size) {

@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean {
     const request: Request = context.switchToHttp().getRequest();
     const token = request.headers.authorization?.split(' ')[1]; // Authorization headerdan token olish
-
+    console.log(token)
     if (!token) {
       throw new UnauthorizedException('Token topilmadi'); // Agar token bo‘lmasa xato
     }

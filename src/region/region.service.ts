@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateRegionDto } from './dto/create-region.dto';
 import { UpdateRegionDto } from './dto/update-region.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -9,6 +9,10 @@ export class RegionService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createRegionDto: CreateRegionDto) {
+    const regionname = await this.prisma.region.findFirst({where: {name_en: createRegionDto.name_en}})
+    if(regionname){
+      throw new BadRequestException("Region mavjud")
+    }
     try {
       let region = await this.prisma.region.create({ data: createRegionDto });
       return { data: region };
@@ -53,15 +57,6 @@ export class RegionService {
     try {
       const [regions, total] = await Promise.all([
         this.prisma.region.findMany({
-          include: {
-            User: {
-              select: {
-                fullName: true,
-                phone: true,
-                role: true,
-              },
-            },
-          },
           where,
           skip,
           take: pageSize,
@@ -86,14 +81,6 @@ export class RegionService {
   async findOne(id: string) {
     const region = await this.prisma.region.findFirst({
       where: { id },
-      include: {
-        User: {
-          select: {
-            fullName: true,
-            phone: true,
-          },
-        },
-      },
     });
     if (!region) {
       throw new NotFoundException('Region Topilmadi');

@@ -4,6 +4,7 @@ import {
   ConflictException,
   NotFoundException,
   ForbiddenException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { OtpService } from '../otp/otp.service';
 import * as bcrypt from 'bcrypt';
@@ -30,14 +31,14 @@ export class UserService {
   }
 
   async requestOtp(phone: string) {
-    // const existingUser = await this.prisma.user.findFirst({
-    //   where: { phone },
-    // });
-    // if (existingUser) {
-    //   throw new BadRequestException(
-    //     'Bu telefon raqami allaqachon ro‘yxatdan o‘tgan',
-    //   );
-    // }
+    const existingUser = await this.prisma.user.findFirst({
+      where: { phone },
+    });
+    if (existingUser) {
+      throw new BadRequestException(
+        'Bu telefon raqami allaqachon ro‘yxatdan o‘tgan',
+      );
+    }
 
     return this.otpService.sendOtp(phone);
   }
@@ -51,7 +52,7 @@ export class UserService {
     if (!isVerified) {
       throw new BadRequestException('Telefon raqami OTP bilan tasdiqlanmagan');
     }
-    
+
     const region = await this.prisma.region.findFirst({
       where: { id: dto.regionId },
     });
@@ -197,7 +198,7 @@ export class UserService {
     regionId?: string;
   }) {
     const page = Number(query.page) || 1;
-    const limit = Number(query.limit) || 10;
+    const limit = Number(query.limit) || 5;
     const { search, sortBy = 'createdAt', order = 'desc', regionId } = query;
 
     const skip = (page - 1) * limit;
@@ -293,6 +294,9 @@ export class UserService {
         where: { id: userId },
         include: {
           Region: true,
+          Order: true,
+          Comment: true,
+          Company: true,
         },
       });
       if (!user) {
@@ -337,5 +341,51 @@ export class UserService {
     });
 
     return { message: "Sessiya o'chirildi" };
+  }
+
+  async refreshAccessToken(refreshToken: string) {
+    try {
+      // 1. Refresh tokenni tekshiramiz
+      const payload = this.jwt.verify(refreshToken) as {
+        id: number;
+        phone: string;
+        role: string;
+      };
+
+      // 2. Session mavjudligini tekshiramiz
+      const session = await this.prisma.session.findFirst({
+        where: {
+          userId: String(payload.id),
+          refreshToken,
+        },
+      });
+
+      if (!session) {
+        throw new UnauthorizedException(
+          'Sessiya topilmadi yoki refresh token noto‘g‘ri',
+        );
+      }
+
+      // 3. Session muddati tugamaganmi?
+      if (new Date() > session.expiresAt) {
+        throw new UnauthorizedException('Refresh token muddati tugagan');
+      }
+
+      // 4. Yangi access token yaratamiz
+      const newAccessToken = this.jwt.sign(
+        {
+          id: payload.id,
+          phone: payload.phone,
+          role: payload.role,
+        },
+        { expiresIn: '1h' },
+      );
+
+      return {
+        access_token: newAccessToken,
+      };
+    } catch (err) {
+      throw new UnauthorizedException('Refresh token noto‘g‘ri yoki eskirgan');
+    }
   }
 }

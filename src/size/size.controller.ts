@@ -7,18 +7,26 @@ import {
   Param,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { SizeService } from './size.service';
 import { CreateSizeDto } from './dto/create-size.dto';
 import { UpdateSizeDto } from './dto/update-size.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { SizeQueryDto } from './dto/size-query.dto';
+import { Role } from 'src/decorators/role.decorator';
+import { UsersRole } from 'src/Enums/user.role';
+import { RolesGuard } from 'src/auth-guard/role.guard';
+import { AuthGuard } from 'src/auth-guard/auth.guard';
 
 @ApiTags('Sizes') // Swaggerda 'Sizes' nomli guruh yaratadi
 @Controller('size')
 export class SizeController {
   constructor(private readonly sizeService: SizeService) {}
 
+  @Role(UsersRole.ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Post('/create')
   @ApiOperation({ summary: 'Yangi hajm yaratish' })
   @ApiResponse({
@@ -59,6 +67,9 @@ export class SizeController {
     return this.sizeService.findOne(id);
   }
 
+  @Role(UsersRole.ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Patch('/update/:id')
   @ApiOperation({ summary: 'ID bo‘yicha hajmni yangilash' })
   @ApiResponse({
@@ -77,6 +88,9 @@ export class SizeController {
     return this.sizeService.update(id, updateSizeDto);
   }
 
+  @Role(UsersRole.ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Delete('/delete/:id')
   @ApiOperation({ summary: 'ID bo‘yicha hajmni o‘chirish' })
   @ApiResponse({

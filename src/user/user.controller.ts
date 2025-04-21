@@ -19,6 +19,7 @@ import {
   ApiResponse,
   ApiBearerAuth,
   ApiQuery,
+  ApiBody,
 } from '@nestjs/swagger';
 import { RegisterAdmin } from './dto/register-admin.dto';
 import { LoginUser } from './dto/login-user.dto';
@@ -36,6 +37,9 @@ import { ChangePasswordDto } from './dto/reset-password.dto';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @Role(UsersRole.ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Get('/all')
   @ApiOperation({ summary: 'Barcha foydalanuvchilarni olish' })
   @ApiQuery({ name: 'page', required: false, type: Number })
@@ -94,6 +98,7 @@ export class UserController {
   async registerAdmin(@Body() dto: RegisterAdmin) {
     return this.userService.createAdmin(dto);
   }
+
   @Post('/login')
   @ApiOperation({ summary: 'User tizimga kirish' })
   @ApiResponse({
@@ -144,5 +149,30 @@ export class UserController {
   deleteSession(@Param('id') sessionId: string, @Req() req: Request) {
     const userId = req['user'].id;
     return this.userService.deleteSession(sessionId, userId);
+  }
+
+  @Post('refresh')
+  @ApiOperation({
+    summary: 'Access tokenni yangilash uchun refresh tokenni yuborish',
+  })
+  @ApiBody({
+    description: 'Foydalanuvchi tomonidan yuborilgan refresh token',
+    type: String,
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Yangi access token qaytariladi',
+    schema: {
+      example: {
+        access_token: 'your-new-access-token',
+      },
+    },
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Refresh token noto‘g‘ri yoki eskirgan',
+  })
+  refresh(@Body('refreshToken') refreshToken: string) {
+    return this.userService.refreshAccessToken(refreshToken);
   }
 }

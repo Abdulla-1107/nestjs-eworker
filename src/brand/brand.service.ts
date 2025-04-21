@@ -53,9 +53,6 @@ export class BrandService {
 
     const [data, total] = await this.prisma.$transaction([
       this.prisma.brand.findMany({
-        include: {
-          Tool: { include: { Capacity: true, Size: true } },
-        },
         where,
         skip,
         take: Number(limit),

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateLevelDto } from './dto/create-level.dto';
 import { UpdateLevelDto } from './dto/update-level.dto';
 import { PrismaService } from '../prisma/prisma.service'; // Prisma service
@@ -13,6 +13,12 @@ export class LevelService {
 
   // Yangi daraja yaratish
   async create(createLevelDto: CreateLevelDto) {
+    const regionname = await this.prisma.level.findFirst({
+      where: { name_en: createLevelDto.name_en },
+    });
+    if (regionname) {
+      throw new BadRequestException('Level mavjud');
+    }
     try {
       return await this.prisma.level.create({
         data: {
@@ -88,9 +94,6 @@ export class LevelService {
     try {
       const [data, total] = await this.prisma.$transaction([
         this.prisma.level.findMany({
-          include: {
-            MasterProfession: true,
-          },
           where,
           skip,
           take: limit,
@@ -111,7 +114,7 @@ export class LevelService {
         },
       };
     } catch (error) {
-      throw new InternalServerErrorException(
+      throw new BadRequestException(
         'Darajalarni olishda xatolik yuz berdi',
       );
     }

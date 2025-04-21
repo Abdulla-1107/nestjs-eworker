@@ -15,6 +15,7 @@ import {
   ApiParam,
   ApiTags,
   ApiQuery,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import { BrandService } from './brand.service';
 import { CreateBrandDto } from './dto/create-brand.dto';
@@ -24,7 +25,8 @@ import { UsersRole } from 'src/Enums/user.role';
 import { RolesGuard } from 'src/auth-guard/role.guard';
 import { AuthGuard } from 'src/auth-guard/auth.guard';
 
-@ApiTags('Brend ') // Swagger hujjatlarida bu controllerni "Brendlar" deb nomlaymiz
+@ApiBearerAuth()
+@ApiTags('Brend') // Swagger hujjatlarida bu controllerni "Brendlar" deb nomlaymiz
 @Controller('brand')
 export class BrandController {
   constructor(private readonly brandService: BrandService) {}
