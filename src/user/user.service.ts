@@ -53,6 +53,13 @@ export class UserService {
       throw new BadRequestException('Telefon raqami OTP bilan tasdiqlanmagan');
     }
 
+    const isVerifiedd = await this.prisma.user.findFirst({
+      where: { phone: dto.phone },
+    });
+    if (isVerifiedd) {
+      throw new BadRequestException('Telefon raqam foydalanilgan');
+    }
+
     const region = await this.prisma.region.findFirst({
       where: { id: dto.regionId },
     });
