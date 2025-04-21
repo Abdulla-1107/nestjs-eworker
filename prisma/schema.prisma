@@ -289,7 +289,7 @@ model Showcase {
   desc_ru String
   desc_en String
   image   String
-  link    String
+  link    String?
 }
 
 model Partners {

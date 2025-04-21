@@ -63,5 +63,5 @@ export class CreateShowcaseDto {
     example: 'https://www.example.com/product/phone',
   })
   @IsOptional()
-  link: string;
+  link?: string;
 }
