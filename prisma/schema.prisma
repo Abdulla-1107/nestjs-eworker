@@ -27,6 +27,7 @@ model User {
   Basket    Basket[]
   Company   Company[]
   Session   Session[]
+  Comment   Comment[]
 }
 
 model Session {
@@ -50,7 +51,6 @@ model Company {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
-  salary    Float?
   bank      String?
   mfo       String?
 }
@@ -136,12 +136,12 @@ model Tool {
   code           Int?
   isActive       Boolean?
   createdAt      DateTime         @default(now())
-  brandId        String
-  Brand          Brand            @relation(fields: [brandId], references: [id], onDelete: Cascade)
-  capacityId     String
-  Capacity       Capacity         @relation(fields: [capacityId], references: [id], onDelete: Cascade)
-  sizeId         String
-  Size           Size             @relation(fields: [sizeId], references: [id], onDelete: Cascade)
+  brandId        String?
+  Brand          Brand?           @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  capacityId     String?
+  Capacity       Capacity?        @relation(fields: [capacityId], references: [id], onDelete: Cascade)
+  sizeId         String?
+  Size           Size?            @relation(fields: [sizeId], references: [id], onDelete: Cascade)
   professionTool professionTool[]
   Basket         Basket[]
   orderProduct   orderProduct[]
@@ -160,6 +160,7 @@ model Master {
   createdAt        DateTime           @default(now())
   MasterProfession MasterProfession[]
   OrderMaster      OrderMaster[]
+  MasterRating     MasterRating[]
 }
 
 model Profession {
@@ -192,11 +193,11 @@ model MasterProfession {
 }
 
 model professionTool {
-  id           String     @id @default(uuid())
-  professionId String
-  Profession   Profession @relation(fields: [professionId], references: [id], onDelete: Cascade)
-  toolId       String
-  Tool         Tool       @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  id           String      @id @default(uuid())
+  professionId String?
+  Profession   Profession? @relation(fields: [professionId], references: [id], onDelete: Cascade)
+  toolId       String?
+  Tool         Tool?       @relation(fields: [toolId], references: [id], onDelete: Cascade)
 }
 
 model professionLevel {
@@ -226,6 +227,7 @@ model Order {
   createdAt       DateTime       @default(now())
   OrderMaster     OrderMaster[]
   orderProduct    orderProduct[]
+  Comment         Comment[]
 }
 
 model OrderMaster {
@@ -237,35 +239,35 @@ model OrderMaster {
 }
 
 model Basket {
-  id           String     @id @default(uuid())
-  userId       String
-  User         User       @relation(fields: [userId], references: [id])
-  professionId String
-  Profession   Profession @relation(fields: [professionId], references: [id], onDelete: Cascade)
-  toolId       String
-  Tool         Tool       @relation(fields: [toolId], references: [id], onDelete: Cascade)
-  levelId      String
-  Level        Level      @relation(fields: [levelId], references: [id], onDelete: Cascade)
+  id           String      @id @default(uuid())
+  userId       String?
+  User         User?       @relation(fields: [userId], references: [id])
+  professionId String?
+  Profession   Profession? @relation(fields: [professionId], references: [id], onDelete: Cascade)
+  toolId       String?
+  Tool         Tool?       @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  levelId      String?
+  Level        Level?      @relation(fields: [levelId], references: [id], onDelete: Cascade)
   count        Int
-  workingTime  Int
+  workingTime  Int?
   totalPrice   Decimal
   timeUnit     String
 }
 
 model orderProduct {
-  id           String     @id @default(uuid())
+  id           String      @id @default(uuid())
   orderId      String
-  Order        Order      @relation(fields: [orderId], references: [id])
-  professionId String
-  Profession   Profession @relation(fields: [professionId], references: [id], onDelete: Cascade)
-  toolId       String
-  Tool         Tool       @relation(fields: [toolId], references: [id])
-  levelId      String
-  Level        Level      @relation(fields: [levelId], references: [id])
-  workingTime  Int
+  Order        Order       @relation(fields: [orderId], references: [id])
+  professionId String?
+  Profession   Profession? @relation(fields: [professionId], references: [id], onDelete: Cascade)
+  toolId       String?
+  Tool         Tool?       @relation(fields: [toolId], references: [id])
+  levelId      String?
+  Level        Level?      @relation(fields: [levelId], references: [id])
+  workingTime  Int?
   price        Decimal
   count        Int
-  timeUnit     String
+  timeUnit     String?
 }
 
 model Contact {
@@ -303,4 +305,24 @@ model faq {
   question  String
   answer    String
   createdAt DateTime @default(now())
+}
+
+model Comment {
+  id        String         @id @default(uuid())
+  message   String
+  order     Order?         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId   String?
+  ratings   MasterRating[]
+  userId    String
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime       @default(now())
+}
+
+model MasterRating {
+  id        String  @id @default(uuid())
+  master    Master? @relation(fields: [masterId], references: [id], onDelete: Cascade)
+  masterId  String?
+  comment   Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId String
+  star      Float
 }

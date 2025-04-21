@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateSizeDto } from './dto/create-size.dto';
 import { UpdateSizeDto } from './dto/update-size.dto';
 import {
@@ -6,6 +6,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service'; // Prisma servisini import qilish
+import { SizeQueryDto } from './dto/size-query.dto';
 
 @Injectable()
 export class SizeService {
@@ -29,16 +30,69 @@ export class SizeService {
     }
   }
 
-  // Barcha hajmlarni olish
-  async findAll() {
-    try {
-      const sizes = await this.prisma.size.findMany();
-      return { data: sizes }; // Barcha hajmlarni qaytarish
-    } catch (error) {
-      throw new InternalServerErrorException(
-        'Hajmlarni olishda xatolik yuz berdi',
-      );
+  async findAll(query: SizeQueryDto): Promise<{ data: any[]; total: number }> {
+    const {
+      search,
+      page = 1,
+      limit = 10,
+      sortBy = 'name_uz',
+      sortOrder = 'asc',
+      name_uz,
+      name_ru,
+      name_en,
+    } = query;
+
+    // page ni number ga aylantirish va tekshirish
+    const pageNumber = typeof page === 'string' ? parseInt(page, 10) : page;
+    if (isNaN(pageNumber) || pageNumber < 1) {
+      throw new BadRequestException('page must be a valid positive integer');
     }
+
+    // limit ni number ga aylantirish va tekshirish
+    const limitNumber = typeof limit === 'string' ? parseInt(limit, 10) : limit;
+    if (isNaN(limitNumber) || limitNumber < 1) {
+      throw new BadRequestException('limit must be a valid positive integer');
+    }
+
+    // Pagination
+    const take = limitNumber;
+    const skip = (pageNumber - 1) * take;
+
+    // Where shartlari
+    const where: any = {};
+
+    // Search
+    if (search) {
+      where.OR = [
+        { name_uz: { contains: search, mode: 'insensitive' } },
+        { name_ru: { contains: search, mode: 'insensitive' } },
+        { name_en: { contains: search, mode: 'insensitive' } },
+      ];
+    }
+
+    // Filter
+    if (name_uz) {
+      where.name_uz = { contains: name_uz, mode: 'insensitive' };
+    }
+    if (name_ru) {
+      where.name_ru = { contains: name_ru, mode: 'insensitive' };
+    }
+    if (name_en) {
+      where.name_en = { contains: name_en, mode: 'insensitive' };
+    }
+
+    // Ma'lumotlarni olish
+    const data = await this.prisma.size.findMany({
+      where,
+      orderBy: { [sortBy]: sortOrder },
+      take,
+      skip,
+    });
+
+    // Umumiy sonni olish
+    const total = await this.prisma.size.count({ where });
+
+    return { data, total };
   }
 
   async findOne(id: string) {

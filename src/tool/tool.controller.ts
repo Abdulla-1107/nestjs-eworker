@@ -7,17 +7,26 @@ import {
   Param,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ToolService } from './tool.service';
 import { CreateToolDto } from './dto/create-tool.dto';
 import { UpdateToolDto } from './dto/update-tool.dto';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiParam,
+  ApiQuery,
+} from '@nestjs/swagger';
+import { AuthGuard } from 'src/auth-guard/auth.guard';
 
 @ApiTags('Tool') // Swagger'da bo'lim nomi
 @Controller('tool')
 export class ToolController {
   constructor(private readonly toolService: ToolService) {}
 
+  @UseGuards(AuthGuard)
   @Post('/create')
   @ApiOperation({ summary: 'Yangi asbob (tool) yaratish' })
   @ApiResponse({ status: 201, description: 'Asbob muvaffaqiyatli yaratildi' })
@@ -26,18 +35,57 @@ export class ToolController {
     return this.toolService.create(createToolDto);
   }
 
-
   @Get('/all')
   @ApiOperation({ summary: 'Barcha asboblarni olish' })
   @ApiResponse({ status: 200, description: 'Asboblar ro‘yxati' })
-  @ApiQuery({ name: 'page', required: false, type: Number, description: 'Sahifa raqami' })
-  @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Har bir sahifadagi elementlar soni' })
-  @ApiQuery({ name: 'search', required: false, type: String, description: 'Qidiruv so‘zi (nom yoki tavsif)' })
-  @ApiQuery({ name: 'sortBy', required: false, type: String, description: 'Saralash ustuni (masalan: price, name_uz)' })
-  @ApiQuery({ name: 'sortOrder', required: false, enum: ['asc', 'desc'], description: 'Saralash tartibi' })
-  @ApiQuery({ name: 'brandId', required: false, type: String, description: 'Brend ID (UUID)' })
-  @ApiQuery({ name: 'capacityId', required: false, type: String, description: 'Sig‘im ID (UUID)' })
-  @ApiQuery({ name: 'sizeId', required: false, type: String, description: 'O‘lcham ID (UUID)' })
+  @ApiQuery({
+    name: 'page',
+    required: false,
+    type: Number,
+    description: 'Sahifa raqami',
+  })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    type: Number,
+    description: 'Har bir sahifadagi elementlar soni',
+  })
+  @ApiQuery({
+    name: 'search',
+    required: false,
+    type: String,
+    description: 'Qidiruv so‘zi (nom yoki tavsif)',
+  })
+  @ApiQuery({
+    name: 'sortBy',
+    required: false,
+    type: String,
+    description: 'Saralash ustuni (masalan: price, name_uz)',
+  })
+  @ApiQuery({
+    name: 'sortOrder',
+    required: false,
+    enum: ['asc', 'desc'],
+    description: 'Saralash tartibi',
+  })
+  @ApiQuery({
+    name: 'brandId',
+    required: false,
+    type: String,
+    description: 'Brend ID (UUID)',
+  })
+  @ApiQuery({
+    name: 'capacityId',
+    required: false,
+    type: String,
+    description: 'Sig‘im ID (UUID)',
+  })
+  @ApiQuery({
+    name: 'sizeId',
+    required: false,
+    type: String,
+    description: 'O‘lcham ID (UUID)',
+  })
   findAll(
     @Query('page') page?: number,
     @Query('limit') limit?: number,
@@ -48,10 +96,17 @@ export class ToolController {
     @Query('capacityId') capacityId?: string,
     @Query('sizeId') sizeId?: string,
   ) {
-    return this.toolService.findAll({ page, limit, search, sortBy, sortOrder, brandId, capacityId, sizeId });
+    return this.toolService.findAll({
+      page,
+      limit,
+      search,
+      sortBy,
+      sortOrder,
+      brandId,
+      capacityId,
+      sizeId,
+    });
   }
-  
-  
 
   @Get(':id')
   @ApiOperation({ summary: 'Bitta asbobni ID orqali olish' })

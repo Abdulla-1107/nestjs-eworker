@@ -128,6 +128,16 @@ export type Partners = $Result.DefaultSelection<Prisma.$PartnersPayload>
  * 
  */
 export type faq = $Result.DefaultSelection<Prisma.$faqPayload>
+/**
+ * Model Comment
+ * 
+ */
+export type Comment = $Result.DefaultSelection<Prisma.$CommentPayload>
+/**
+ * Model MasterRating
+ * 
+ */
+export type MasterRating = $Result.DefaultSelection<Prisma.$MasterRatingPayload>
 
 /**
  * Enums
@@ -503,6 +513,26 @@ export class PrismaClient<
     * ```
     */
   get faq(): Prisma.faqDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.comment`: Exposes CRUD operations for the **Comment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Comments
+    * const comments = await prisma.comment.findMany()
+    * ```
+    */
+  get comment(): Prisma.CommentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.masterRating`: Exposes CRUD operations for the **MasterRating** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MasterRatings
+    * const masterRatings = await prisma.masterRating.findMany()
+    * ```
+    */
+  get masterRating(): Prisma.MasterRatingDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -965,7 +995,9 @@ export namespace Prisma {
     Contact: 'Contact',
     Showcase: 'Showcase',
     Partners: 'Partners',
-    faq: 'faq'
+    faq: 'faq',
+    Comment: 'Comment',
+    MasterRating: 'MasterRating'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -984,7 +1016,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "company" | "region" | "capacity" | "brand" | "size" | "level" | "generalInfo" | "tool" | "master" | "profession" | "masterProfession" | "professionTool" | "professionLevel" | "order" | "orderMaster" | "basket" | "orderProduct" | "contact" | "showcase" | "partners" | "faq"
+      modelProps: "user" | "session" | "company" | "region" | "capacity" | "brand" | "size" | "level" | "generalInfo" | "tool" | "master" | "profession" | "masterProfession" | "professionTool" | "professionLevel" | "order" | "orderMaster" | "basket" | "orderProduct" | "contact" | "showcase" | "partners" | "faq" | "comment" | "masterRating"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2690,6 +2722,154 @@ export namespace Prisma {
           }
         }
       }
+      Comment: {
+        payload: Prisma.$CommentPayload<ExtArgs>
+        fields: Prisma.CommentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CommentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CommentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          findFirst: {
+            args: Prisma.CommentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CommentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          findMany: {
+            args: Prisma.CommentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>[]
+          }
+          create: {
+            args: Prisma.CommentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          createMany: {
+            args: Prisma.CommentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CommentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>[]
+          }
+          delete: {
+            args: Prisma.CommentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          update: {
+            args: Prisma.CommentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          deleteMany: {
+            args: Prisma.CommentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CommentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CommentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>[]
+          }
+          upsert: {
+            args: Prisma.CommentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          aggregate: {
+            args: Prisma.CommentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateComment>
+          }
+          groupBy: {
+            args: Prisma.CommentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CommentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CommentCountArgs<ExtArgs>
+            result: $Utils.Optional<CommentCountAggregateOutputType> | number
+          }
+        }
+      }
+      MasterRating: {
+        payload: Prisma.$MasterRatingPayload<ExtArgs>
+        fields: Prisma.MasterRatingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MasterRatingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MasterRatingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MasterRatingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MasterRatingPayload>
+          }
+          findFirst: {
+            args: Prisma.MasterRatingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MasterRatingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MasterRatingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MasterRatingPayload>
+          }
+          findMany: {
+            args: Prisma.MasterRatingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MasterRatingPayload>[]
+          }
+          create: {
+            args: Prisma.MasterRatingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MasterRatingPayload>
+          }
+          createMany: {
+            args: Prisma.MasterRatingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MasterRatingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MasterRatingPayload>[]
+          }
+          delete: {
+            args: Prisma.MasterRatingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MasterRatingPayload>
+          }
+          update: {
+            args: Prisma.MasterRatingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MasterRatingPayload>
+          }
+          deleteMany: {
+            args: Prisma.MasterRatingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MasterRatingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MasterRatingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MasterRatingPayload>[]
+          }
+          upsert: {
+            args: Prisma.MasterRatingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MasterRatingPayload>
+          }
+          aggregate: {
+            args: Prisma.MasterRatingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMasterRating>
+          }
+          groupBy: {
+            args: Prisma.MasterRatingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MasterRatingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MasterRatingCountArgs<ExtArgs>
+            result: $Utils.Optional<MasterRatingCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2797,6 +2977,8 @@ export namespace Prisma {
     showcase?: ShowcaseOmit
     partners?: PartnersOmit
     faq?: faqOmit
+    comment?: CommentOmit
+    masterRating?: MasterRatingOmit
   }
 
   /* Types for Logging */
@@ -2895,6 +3077,7 @@ export namespace Prisma {
     Basket: number
     Company: number
     Session: number
+    Comment: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2902,6 +3085,7 @@ export namespace Prisma {
     Basket?: boolean | UserCountOutputTypeCountBasketArgs
     Company?: boolean | UserCountOutputTypeCountCompanyArgs
     Session?: boolean | UserCountOutputTypeCountSessionArgs
+    Comment?: boolean | UserCountOutputTypeCountCommentArgs
   }
 
   // Custom InputTypes
@@ -2941,6 +3125,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountSessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SessionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCommentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentWhereInput
   }
 
 
@@ -3182,11 +3373,13 @@ export namespace Prisma {
   export type MasterCountOutputType = {
     MasterProfession: number
     OrderMaster: number
+    MasterRating: number
   }
 
   export type MasterCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     MasterProfession?: boolean | MasterCountOutputTypeCountMasterProfessionArgs
     OrderMaster?: boolean | MasterCountOutputTypeCountOrderMasterArgs
+    MasterRating?: boolean | MasterCountOutputTypeCountMasterRatingArgs
   }
 
   // Custom InputTypes
@@ -3212,6 +3405,13 @@ export namespace Prisma {
    */
   export type MasterCountOutputTypeCountOrderMasterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderMasterWhereInput
+  }
+
+  /**
+   * MasterCountOutputType without action
+   */
+  export type MasterCountOutputTypeCountMasterRatingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MasterRatingWhereInput
   }
 
 
@@ -3289,11 +3489,13 @@ export namespace Prisma {
   export type OrderCountOutputType = {
     OrderMaster: number
     orderProduct: number
+    Comment: number
   }
 
   export type OrderCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     OrderMaster?: boolean | OrderCountOutputTypeCountOrderMasterArgs
     orderProduct?: boolean | OrderCountOutputTypeCountOrderProductArgs
+    Comment?: boolean | OrderCountOutputTypeCountCommentArgs
   }
 
   // Custom InputTypes
@@ -3319,6 +3521,44 @@ export namespace Prisma {
    */
   export type OrderCountOutputTypeCountOrderProductArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: orderProductWhereInput
+  }
+
+  /**
+   * OrderCountOutputType without action
+   */
+  export type OrderCountOutputTypeCountCommentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentWhereInput
+  }
+
+
+  /**
+   * Count Type CommentCountOutputType
+   */
+
+  export type CommentCountOutputType = {
+    ratings: number
+  }
+
+  export type CommentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ratings?: boolean | CommentCountOutputTypeCountRatingsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CommentCountOutputType without action
+   */
+  export type CommentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentCountOutputType
+     */
+    select?: CommentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CommentCountOutputType without action
+   */
+  export type CommentCountOutputTypeCountRatingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MasterRatingWhereInput
   }
 
 
@@ -3511,6 +3751,7 @@ export namespace Prisma {
     Basket?: boolean | User$BasketArgs<ExtArgs>
     Company?: boolean | User$CompanyArgs<ExtArgs>
     Session?: boolean | User$SessionArgs<ExtArgs>
+    Comment?: boolean | User$CommentArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3553,6 +3794,7 @@ export namespace Prisma {
     Basket?: boolean | User$BasketArgs<ExtArgs>
     Company?: boolean | User$CompanyArgs<ExtArgs>
     Session?: boolean | User$SessionArgs<ExtArgs>
+    Comment?: boolean | User$CommentArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3570,6 +3812,7 @@ export namespace Prisma {
       Basket: Prisma.$BasketPayload<ExtArgs>[]
       Company: Prisma.$CompanyPayload<ExtArgs>[]
       Session: Prisma.$SessionPayload<ExtArgs>[]
+      Comment: Prisma.$CommentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3978,6 +4221,7 @@ export namespace Prisma {
     Basket<T extends User$BasketArgs<ExtArgs> = {}>(args?: Subset<T, User$BasketArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BasketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Company<T extends User$CompanyArgs<ExtArgs> = {}>(args?: Subset<T, User$CompanyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Session<T extends User$SessionArgs<ExtArgs> = {}>(args?: Subset<T, User$SessionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Comment<T extends User$CommentArgs<ExtArgs> = {}>(args?: Subset<T, User$CommentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4503,6 +4747,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * User.Comment
+   */
+  export type User$CommentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    where?: CommentWhereInput
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    cursor?: CommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
   }
 
   /**
@@ -5627,18 +5895,8 @@ export namespace Prisma {
 
   export type AggregateCompany = {
     _count: CompanyCountAggregateOutputType | null
-    _avg: CompanyAvgAggregateOutputType | null
-    _sum: CompanySumAggregateOutputType | null
     _min: CompanyMinAggregateOutputType | null
     _max: CompanyMaxAggregateOutputType | null
-  }
-
-  export type CompanyAvgAggregateOutputType = {
-    salary: number | null
-  }
-
-  export type CompanySumAggregateOutputType = {
-    salary: number | null
   }
 
   export type CompanyMinAggregateOutputType = {
@@ -5649,7 +5907,6 @@ export namespace Prisma {
     address: string | null
     userId: string | null
     createdAt: Date | null
-    salary: number | null
     bank: string | null
     mfo: string | null
   }
@@ -5662,7 +5919,6 @@ export namespace Prisma {
     address: string | null
     userId: string | null
     createdAt: Date | null
-    salary: number | null
     bank: string | null
     mfo: string | null
   }
@@ -5675,20 +5931,11 @@ export namespace Prisma {
     address: number
     userId: number
     createdAt: number
-    salary: number
     bank: number
     mfo: number
     _all: number
   }
 
-
-  export type CompanyAvgAggregateInputType = {
-    salary?: true
-  }
-
-  export type CompanySumAggregateInputType = {
-    salary?: true
-  }
 
   export type CompanyMinAggregateInputType = {
     id?: true
@@ -5698,7 +5945,6 @@ export namespace Prisma {
     address?: true
     userId?: true
     createdAt?: true
-    salary?: true
     bank?: true
     mfo?: true
   }
@@ -5711,7 +5957,6 @@ export namespace Prisma {
     address?: true
     userId?: true
     createdAt?: true
-    salary?: true
     bank?: true
     mfo?: true
   }
@@ -5724,7 +5969,6 @@ export namespace Prisma {
     address?: true
     userId?: true
     createdAt?: true
-    salary?: true
     bank?: true
     mfo?: true
     _all?: true
@@ -5768,18 +6012,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: CompanyAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: CompanySumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: CompanyMinAggregateInputType
@@ -5810,8 +6042,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: CompanyCountAggregateInputType | true
-    _avg?: CompanyAvgAggregateInputType
-    _sum?: CompanySumAggregateInputType
     _min?: CompanyMinAggregateInputType
     _max?: CompanyMaxAggregateInputType
   }
@@ -5824,12 +6054,9 @@ export namespace Prisma {
     address: string
     userId: string
     createdAt: Date
-    salary: number | null
     bank: string | null
     mfo: string | null
     _count: CompanyCountAggregateOutputType | null
-    _avg: CompanyAvgAggregateOutputType | null
-    _sum: CompanySumAggregateOutputType | null
     _min: CompanyMinAggregateOutputType | null
     _max: CompanyMaxAggregateOutputType | null
   }
@@ -5856,7 +6083,6 @@ export namespace Prisma {
     address?: boolean
     userId?: boolean
     createdAt?: boolean
-    salary?: boolean
     bank?: boolean
     mfo?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5870,7 +6096,6 @@ export namespace Prisma {
     address?: boolean
     userId?: boolean
     createdAt?: boolean
-    salary?: boolean
     bank?: boolean
     mfo?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5884,7 +6109,6 @@ export namespace Prisma {
     address?: boolean
     userId?: boolean
     createdAt?: boolean
-    salary?: boolean
     bank?: boolean
     mfo?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5898,12 +6122,11 @@ export namespace Prisma {
     address?: boolean
     userId?: boolean
     createdAt?: boolean
-    salary?: boolean
     bank?: boolean
     mfo?: boolean
   }
 
-  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "inn" | "account" | "address" | "userId" | "createdAt" | "salary" | "bank" | "mfo", ExtArgs["result"]["company"]>
+  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "inn" | "account" | "address" | "userId" | "createdAt" | "bank" | "mfo", ExtArgs["result"]["company"]>
   export type CompanyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -5927,7 +6150,6 @@ export namespace Prisma {
       address: string
       userId: string
       createdAt: Date
-      salary: number | null
       bank: string | null
       mfo: string | null
     }, ExtArgs["result"]["company"]>
@@ -6361,7 +6583,6 @@ export namespace Prisma {
     readonly address: FieldRef<"Company", 'String'>
     readonly userId: FieldRef<"Company", 'String'>
     readonly createdAt: FieldRef<"Company", 'DateTime'>
-    readonly salary: FieldRef<"Company", 'Float'>
     readonly bank: FieldRef<"Company", 'String'>
     readonly mfo: FieldRef<"Company", 'String'>
   }
@@ -13499,9 +13720,9 @@ export namespace Prisma {
     code: number | null
     isActive: boolean | null
     createdAt: Date
-    brandId: string
-    capacityId: string
-    sizeId: string
+    brandId: string | null
+    capacityId: string | null
+    sizeId: string | null
     _count: ToolCountAggregateOutputType | null
     _avg: ToolAvgAggregateOutputType | null
     _sum: ToolSumAggregateOutputType | null
@@ -13540,9 +13761,9 @@ export namespace Prisma {
     brandId?: boolean
     capacityId?: boolean
     sizeId?: boolean
-    Brand?: boolean | BrandDefaultArgs<ExtArgs>
-    Capacity?: boolean | CapacityDefaultArgs<ExtArgs>
-    Size?: boolean | SizeDefaultArgs<ExtArgs>
+    Brand?: boolean | Tool$BrandArgs<ExtArgs>
+    Capacity?: boolean | Tool$CapacityArgs<ExtArgs>
+    Size?: boolean | Tool$SizeArgs<ExtArgs>
     professionTool?: boolean | Tool$professionToolArgs<ExtArgs>
     Basket?: boolean | Tool$BasketArgs<ExtArgs>
     orderProduct?: boolean | Tool$orderProductArgs<ExtArgs>
@@ -13566,9 +13787,9 @@ export namespace Prisma {
     brandId?: boolean
     capacityId?: boolean
     sizeId?: boolean
-    Brand?: boolean | BrandDefaultArgs<ExtArgs>
-    Capacity?: boolean | CapacityDefaultArgs<ExtArgs>
-    Size?: boolean | SizeDefaultArgs<ExtArgs>
+    Brand?: boolean | Tool$BrandArgs<ExtArgs>
+    Capacity?: boolean | Tool$CapacityArgs<ExtArgs>
+    Size?: boolean | Tool$SizeArgs<ExtArgs>
   }, ExtArgs["result"]["tool"]>
 
   export type ToolSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -13588,9 +13809,9 @@ export namespace Prisma {
     brandId?: boolean
     capacityId?: boolean
     sizeId?: boolean
-    Brand?: boolean | BrandDefaultArgs<ExtArgs>
-    Capacity?: boolean | CapacityDefaultArgs<ExtArgs>
-    Size?: boolean | SizeDefaultArgs<ExtArgs>
+    Brand?: boolean | Tool$BrandArgs<ExtArgs>
+    Capacity?: boolean | Tool$CapacityArgs<ExtArgs>
+    Size?: boolean | Tool$SizeArgs<ExtArgs>
   }, ExtArgs["result"]["tool"]>
 
   export type ToolSelectScalar = {
@@ -13614,31 +13835,31 @@ export namespace Prisma {
 
   export type ToolOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name_uz" | "name_ru" | "name_en" | "desc_uz" | "desc_ru" | "desc_en" | "image" | "price" | "quantity" | "code" | "isActive" | "createdAt" | "brandId" | "capacityId" | "sizeId", ExtArgs["result"]["tool"]>
   export type ToolInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Brand?: boolean | BrandDefaultArgs<ExtArgs>
-    Capacity?: boolean | CapacityDefaultArgs<ExtArgs>
-    Size?: boolean | SizeDefaultArgs<ExtArgs>
+    Brand?: boolean | Tool$BrandArgs<ExtArgs>
+    Capacity?: boolean | Tool$CapacityArgs<ExtArgs>
+    Size?: boolean | Tool$SizeArgs<ExtArgs>
     professionTool?: boolean | Tool$professionToolArgs<ExtArgs>
     Basket?: boolean | Tool$BasketArgs<ExtArgs>
     orderProduct?: boolean | Tool$orderProductArgs<ExtArgs>
     _count?: boolean | ToolCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ToolIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Brand?: boolean | BrandDefaultArgs<ExtArgs>
-    Capacity?: boolean | CapacityDefaultArgs<ExtArgs>
-    Size?: boolean | SizeDefaultArgs<ExtArgs>
+    Brand?: boolean | Tool$BrandArgs<ExtArgs>
+    Capacity?: boolean | Tool$CapacityArgs<ExtArgs>
+    Size?: boolean | Tool$SizeArgs<ExtArgs>
   }
   export type ToolIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Brand?: boolean | BrandDefaultArgs<ExtArgs>
-    Capacity?: boolean | CapacityDefaultArgs<ExtArgs>
-    Size?: boolean | SizeDefaultArgs<ExtArgs>
+    Brand?: boolean | Tool$BrandArgs<ExtArgs>
+    Capacity?: boolean | Tool$CapacityArgs<ExtArgs>
+    Size?: boolean | Tool$SizeArgs<ExtArgs>
   }
 
   export type $ToolPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Tool"
     objects: {
-      Brand: Prisma.$BrandPayload<ExtArgs>
-      Capacity: Prisma.$CapacityPayload<ExtArgs>
-      Size: Prisma.$SizePayload<ExtArgs>
+      Brand: Prisma.$BrandPayload<ExtArgs> | null
+      Capacity: Prisma.$CapacityPayload<ExtArgs> | null
+      Size: Prisma.$SizePayload<ExtArgs> | null
       professionTool: Prisma.$professionToolPayload<ExtArgs>[]
       Basket: Prisma.$BasketPayload<ExtArgs>[]
       orderProduct: Prisma.$orderProductPayload<ExtArgs>[]
@@ -13657,9 +13878,9 @@ export namespace Prisma {
       code: number | null
       isActive: boolean | null
       createdAt: Date
-      brandId: string
-      capacityId: string
-      sizeId: string
+      brandId: string | null
+      capacityId: string | null
+      sizeId: string | null
     }, ExtArgs["result"]["tool"]>
     composites: {}
   }
@@ -14054,9 +14275,9 @@ export namespace Prisma {
    */
   export interface Prisma__ToolClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Brand<T extends BrandDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BrandDefaultArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Capacity<T extends CapacityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CapacityDefaultArgs<ExtArgs>>): Prisma__CapacityClient<$Result.GetResult<Prisma.$CapacityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Size<T extends SizeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SizeDefaultArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Brand<T extends Tool$BrandArgs<ExtArgs> = {}>(args?: Subset<T, Tool$BrandArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Capacity<T extends Tool$CapacityArgs<ExtArgs> = {}>(args?: Subset<T, Tool$CapacityArgs<ExtArgs>>): Prisma__CapacityClient<$Result.GetResult<Prisma.$CapacityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Size<T extends Tool$SizeArgs<ExtArgs> = {}>(args?: Subset<T, Tool$SizeArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     professionTool<T extends Tool$professionToolArgs<ExtArgs> = {}>(args?: Subset<T, Tool$professionToolArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$professionToolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Basket<T extends Tool$BasketArgs<ExtArgs> = {}>(args?: Subset<T, Tool$BasketArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BasketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     orderProduct<T extends Tool$orderProductArgs<ExtArgs> = {}>(args?: Subset<T, Tool$orderProductArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$orderProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -14501,6 +14722,63 @@ export namespace Prisma {
   }
 
   /**
+   * Tool.Brand
+   */
+  export type Tool$BrandArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Brand
+     */
+    select?: BrandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Brand
+     */
+    omit?: BrandOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandInclude<ExtArgs> | null
+    where?: BrandWhereInput
+  }
+
+  /**
+   * Tool.Capacity
+   */
+  export type Tool$CapacityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Capacity
+     */
+    select?: CapacitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Capacity
+     */
+    omit?: CapacityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CapacityInclude<ExtArgs> | null
+    where?: CapacityWhereInput
+  }
+
+  /**
+   * Tool.Size
+   */
+  export type Tool$SizeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Size
+     */
+    select?: SizeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Size
+     */
+    omit?: SizeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SizeInclude<ExtArgs> | null
+    where?: SizeWhereInput
+  }
+
+  /**
    * Tool.professionTool
    */
   export type Tool$professionToolArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14831,6 +15109,7 @@ export namespace Prisma {
     createdAt?: boolean
     MasterProfession?: boolean | Master$MasterProfessionArgs<ExtArgs>
     OrderMaster?: boolean | Master$OrderMasterArgs<ExtArgs>
+    MasterRating?: boolean | Master$MasterRatingArgs<ExtArgs>
     _count?: boolean | MasterCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["master"]>
 
@@ -14877,6 +15156,7 @@ export namespace Prisma {
   export type MasterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     MasterProfession?: boolean | Master$MasterProfessionArgs<ExtArgs>
     OrderMaster?: boolean | Master$OrderMasterArgs<ExtArgs>
+    MasterRating?: boolean | Master$MasterRatingArgs<ExtArgs>
     _count?: boolean | MasterCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MasterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -14887,6 +15167,7 @@ export namespace Prisma {
     objects: {
       MasterProfession: Prisma.$MasterProfessionPayload<ExtArgs>[]
       OrderMaster: Prisma.$OrderMasterPayload<ExtArgs>[]
+      MasterRating: Prisma.$MasterRatingPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -15295,6 +15576,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     MasterProfession<T extends Master$MasterProfessionArgs<ExtArgs> = {}>(args?: Subset<T, Master$MasterProfessionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MasterProfessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     OrderMaster<T extends Master$OrderMasterArgs<ExtArgs> = {}>(args?: Subset<T, Master$OrderMasterArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    MasterRating<T extends Master$MasterRatingArgs<ExtArgs> = {}>(args?: Subset<T, Master$MasterRatingArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MasterRatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15767,6 +16049,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: OrderMasterScalarFieldEnum | OrderMasterScalarFieldEnum[]
+  }
+
+  /**
+   * Master.MasterRating
+   */
+  export type Master$MasterRatingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MasterRating
+     */
+    select?: MasterRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MasterRating
+     */
+    omit?: MasterRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MasterRatingInclude<ExtArgs> | null
+    where?: MasterRatingWhereInput
+    orderBy?: MasterRatingOrderByWithRelationInput | MasterRatingOrderByWithRelationInput[]
+    cursor?: MasterRatingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MasterRatingScalarFieldEnum | MasterRatingScalarFieldEnum[]
   }
 
   /**
@@ -18278,8 +18584,8 @@ export namespace Prisma {
 
   export type ProfessionToolGroupByOutputType = {
     id: string
-    professionId: string
-    toolId: string
+    professionId: string | null
+    toolId: string | null
     _count: ProfessionToolCountAggregateOutputType | null
     _min: ProfessionToolMinAggregateOutputType | null
     _max: ProfessionToolMaxAggregateOutputType | null
@@ -18303,24 +18609,24 @@ export namespace Prisma {
     id?: boolean
     professionId?: boolean
     toolId?: boolean
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
+    Profession?: boolean | professionTool$ProfessionArgs<ExtArgs>
+    Tool?: boolean | professionTool$ToolArgs<ExtArgs>
   }, ExtArgs["result"]["professionTool"]>
 
   export type professionToolSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     professionId?: boolean
     toolId?: boolean
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
+    Profession?: boolean | professionTool$ProfessionArgs<ExtArgs>
+    Tool?: boolean | professionTool$ToolArgs<ExtArgs>
   }, ExtArgs["result"]["professionTool"]>
 
   export type professionToolSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     professionId?: boolean
     toolId?: boolean
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
+    Profession?: boolean | professionTool$ProfessionArgs<ExtArgs>
+    Tool?: boolean | professionTool$ToolArgs<ExtArgs>
   }, ExtArgs["result"]["professionTool"]>
 
   export type professionToolSelectScalar = {
@@ -18331,28 +18637,28 @@ export namespace Prisma {
 
   export type professionToolOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "professionId" | "toolId", ExtArgs["result"]["professionTool"]>
   export type professionToolInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
+    Profession?: boolean | professionTool$ProfessionArgs<ExtArgs>
+    Tool?: boolean | professionTool$ToolArgs<ExtArgs>
   }
   export type professionToolIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
+    Profession?: boolean | professionTool$ProfessionArgs<ExtArgs>
+    Tool?: boolean | professionTool$ToolArgs<ExtArgs>
   }
   export type professionToolIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
+    Profession?: boolean | professionTool$ProfessionArgs<ExtArgs>
+    Tool?: boolean | professionTool$ToolArgs<ExtArgs>
   }
 
   export type $professionToolPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "professionTool"
     objects: {
-      Profession: Prisma.$ProfessionPayload<ExtArgs>
-      Tool: Prisma.$ToolPayload<ExtArgs>
+      Profession: Prisma.$ProfessionPayload<ExtArgs> | null
+      Tool: Prisma.$ToolPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      professionId: string
-      toolId: string
+      professionId: string | null
+      toolId: string | null
     }, ExtArgs["result"]["professionTool"]>
     composites: {}
   }
@@ -18747,8 +19053,8 @@ export namespace Prisma {
    */
   export interface Prisma__professionToolClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Profession<T extends ProfessionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProfessionDefaultArgs<ExtArgs>>): Prisma__ProfessionClient<$Result.GetResult<Prisma.$ProfessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Tool<T extends ToolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ToolDefaultArgs<ExtArgs>>): Prisma__ToolClient<$Result.GetResult<Prisma.$ToolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Profession<T extends professionTool$ProfessionArgs<ExtArgs> = {}>(args?: Subset<T, professionTool$ProfessionArgs<ExtArgs>>): Prisma__ProfessionClient<$Result.GetResult<Prisma.$ProfessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Tool<T extends professionTool$ToolArgs<ExtArgs> = {}>(args?: Subset<T, professionTool$ToolArgs<ExtArgs>>): Prisma__ToolClient<$Result.GetResult<Prisma.$ToolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -18999,7 +19305,7 @@ export namespace Prisma {
     /**
      * The data needed to create a professionTool.
      */
-    data: XOR<professionToolCreateInput, professionToolUncheckedCreateInput>
+    data?: XOR<professionToolCreateInput, professionToolUncheckedCreateInput>
   }
 
   /**
@@ -19174,6 +19480,44 @@ export namespace Prisma {
      * Limit how many professionTools to delete.
      */
     limit?: number
+  }
+
+  /**
+   * professionTool.Profession
+   */
+  export type professionTool$ProfessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Profession
+     */
+    select?: ProfessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Profession
+     */
+    omit?: ProfessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProfessionInclude<ExtArgs> | null
+    where?: ProfessionWhereInput
+  }
+
+  /**
+   * professionTool.Tool
+   */
+  export type professionTool$ToolArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tool
+     */
+    select?: ToolSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tool
+     */
+    omit?: ToolOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ToolInclude<ExtArgs> | null
+    where?: ToolWhereInput
   }
 
   /**
@@ -20573,6 +20917,7 @@ export namespace Prisma {
     User?: boolean | UserDefaultArgs<ExtArgs>
     OrderMaster?: boolean | Order$OrderMasterArgs<ExtArgs>
     orderProduct?: boolean | Order$orderProductArgs<ExtArgs>
+    Comment?: boolean | Order$CommentArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
 
@@ -20628,6 +20973,7 @@ export namespace Prisma {
     User?: boolean | UserDefaultArgs<ExtArgs>
     OrderMaster?: boolean | Order$OrderMasterArgs<ExtArgs>
     orderProduct?: boolean | Order$orderProductArgs<ExtArgs>
+    Comment?: boolean | Order$CommentArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type OrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -20643,6 +20989,7 @@ export namespace Prisma {
       User: Prisma.$UserPayload<ExtArgs>
       OrderMaster: Prisma.$OrderMasterPayload<ExtArgs>[]
       orderProduct: Prisma.$orderProductPayload<ExtArgs>[]
+      Comment: Prisma.$CommentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -21054,6 +21401,7 @@ export namespace Prisma {
     User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     OrderMaster<T extends Order$OrderMasterArgs<ExtArgs> = {}>(args?: Subset<T, Order$OrderMasterArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     orderProduct<T extends Order$orderProductArgs<ExtArgs> = {}>(args?: Subset<T, Order$orderProductArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$orderProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Comment<T extends Order$CommentArgs<ExtArgs> = {}>(args?: Subset<T, Order$CommentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21536,6 +21884,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: OrderProductScalarFieldEnum | OrderProductScalarFieldEnum[]
+  }
+
+  /**
+   * Order.Comment
+   */
+  export type Order$CommentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    where?: CommentWhereInput
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    cursor?: CommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
   }
 
   /**
@@ -22796,12 +23168,12 @@ export namespace Prisma {
 
   export type BasketGroupByOutputType = {
     id: string
-    userId: string
-    professionId: string
-    toolId: string
-    levelId: string
+    userId: string | null
+    professionId: string | null
+    toolId: string | null
+    levelId: string | null
     count: number
-    workingTime: number
+    workingTime: number | null
     totalPrice: Decimal
     timeUnit: string
     _count: BasketCountAggregateOutputType | null
@@ -22835,10 +23207,10 @@ export namespace Prisma {
     workingTime?: boolean
     totalPrice?: boolean
     timeUnit?: boolean
-    User?: boolean | UserDefaultArgs<ExtArgs>
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
-    Level?: boolean | LevelDefaultArgs<ExtArgs>
+    User?: boolean | Basket$UserArgs<ExtArgs>
+    Profession?: boolean | Basket$ProfessionArgs<ExtArgs>
+    Tool?: boolean | Basket$ToolArgs<ExtArgs>
+    Level?: boolean | Basket$LevelArgs<ExtArgs>
   }, ExtArgs["result"]["basket"]>
 
   export type BasketSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -22851,10 +23223,10 @@ export namespace Prisma {
     workingTime?: boolean
     totalPrice?: boolean
     timeUnit?: boolean
-    User?: boolean | UserDefaultArgs<ExtArgs>
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
-    Level?: boolean | LevelDefaultArgs<ExtArgs>
+    User?: boolean | Basket$UserArgs<ExtArgs>
+    Profession?: boolean | Basket$ProfessionArgs<ExtArgs>
+    Tool?: boolean | Basket$ToolArgs<ExtArgs>
+    Level?: boolean | Basket$LevelArgs<ExtArgs>
   }, ExtArgs["result"]["basket"]>
 
   export type BasketSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -22867,10 +23239,10 @@ export namespace Prisma {
     workingTime?: boolean
     totalPrice?: boolean
     timeUnit?: boolean
-    User?: boolean | UserDefaultArgs<ExtArgs>
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
-    Level?: boolean | LevelDefaultArgs<ExtArgs>
+    User?: boolean | Basket$UserArgs<ExtArgs>
+    Profession?: boolean | Basket$ProfessionArgs<ExtArgs>
+    Tool?: boolean | Basket$ToolArgs<ExtArgs>
+    Level?: boolean | Basket$LevelArgs<ExtArgs>
   }, ExtArgs["result"]["basket"]>
 
   export type BasketSelectScalar = {
@@ -22887,40 +23259,40 @@ export namespace Prisma {
 
   export type BasketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "professionId" | "toolId" | "levelId" | "count" | "workingTime" | "totalPrice" | "timeUnit", ExtArgs["result"]["basket"]>
   export type BasketInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    User?: boolean | UserDefaultArgs<ExtArgs>
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
-    Level?: boolean | LevelDefaultArgs<ExtArgs>
+    User?: boolean | Basket$UserArgs<ExtArgs>
+    Profession?: boolean | Basket$ProfessionArgs<ExtArgs>
+    Tool?: boolean | Basket$ToolArgs<ExtArgs>
+    Level?: boolean | Basket$LevelArgs<ExtArgs>
   }
   export type BasketIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    User?: boolean | UserDefaultArgs<ExtArgs>
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
-    Level?: boolean | LevelDefaultArgs<ExtArgs>
+    User?: boolean | Basket$UserArgs<ExtArgs>
+    Profession?: boolean | Basket$ProfessionArgs<ExtArgs>
+    Tool?: boolean | Basket$ToolArgs<ExtArgs>
+    Level?: boolean | Basket$LevelArgs<ExtArgs>
   }
   export type BasketIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    User?: boolean | UserDefaultArgs<ExtArgs>
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
-    Level?: boolean | LevelDefaultArgs<ExtArgs>
+    User?: boolean | Basket$UserArgs<ExtArgs>
+    Profession?: boolean | Basket$ProfessionArgs<ExtArgs>
+    Tool?: boolean | Basket$ToolArgs<ExtArgs>
+    Level?: boolean | Basket$LevelArgs<ExtArgs>
   }
 
   export type $BasketPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Basket"
     objects: {
-      User: Prisma.$UserPayload<ExtArgs>
-      Profession: Prisma.$ProfessionPayload<ExtArgs>
-      Tool: Prisma.$ToolPayload<ExtArgs>
-      Level: Prisma.$LevelPayload<ExtArgs>
+      User: Prisma.$UserPayload<ExtArgs> | null
+      Profession: Prisma.$ProfessionPayload<ExtArgs> | null
+      Tool: Prisma.$ToolPayload<ExtArgs> | null
+      Level: Prisma.$LevelPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      userId: string
-      professionId: string
-      toolId: string
-      levelId: string
+      userId: string | null
+      professionId: string | null
+      toolId: string | null
+      levelId: string | null
       count: number
-      workingTime: number
+      workingTime: number | null
       totalPrice: Prisma.Decimal
       timeUnit: string
     }, ExtArgs["result"]["basket"]>
@@ -23317,10 +23689,10 @@ export namespace Prisma {
    */
   export interface Prisma__BasketClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Profession<T extends ProfessionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProfessionDefaultArgs<ExtArgs>>): Prisma__ProfessionClient<$Result.GetResult<Prisma.$ProfessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Tool<T extends ToolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ToolDefaultArgs<ExtArgs>>): Prisma__ToolClient<$Result.GetResult<Prisma.$ToolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Level<T extends LevelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LevelDefaultArgs<ExtArgs>>): Prisma__LevelClient<$Result.GetResult<Prisma.$LevelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    User<T extends Basket$UserArgs<ExtArgs> = {}>(args?: Subset<T, Basket$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Profession<T extends Basket$ProfessionArgs<ExtArgs> = {}>(args?: Subset<T, Basket$ProfessionArgs<ExtArgs>>): Prisma__ProfessionClient<$Result.GetResult<Prisma.$ProfessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Tool<T extends Basket$ToolArgs<ExtArgs> = {}>(args?: Subset<T, Basket$ToolArgs<ExtArgs>>): Prisma__ToolClient<$Result.GetResult<Prisma.$ToolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Level<T extends Basket$LevelArgs<ExtArgs> = {}>(args?: Subset<T, Basket$LevelArgs<ExtArgs>>): Prisma__LevelClient<$Result.GetResult<Prisma.$LevelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -23755,6 +24127,82 @@ export namespace Prisma {
   }
 
   /**
+   * Basket.User
+   */
+  export type Basket$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Basket.Profession
+   */
+  export type Basket$ProfessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Profession
+     */
+    select?: ProfessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Profession
+     */
+    omit?: ProfessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProfessionInclude<ExtArgs> | null
+    where?: ProfessionWhereInput
+  }
+
+  /**
+   * Basket.Tool
+   */
+  export type Basket$ToolArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tool
+     */
+    select?: ToolSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tool
+     */
+    omit?: ToolOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ToolInclude<ExtArgs> | null
+    where?: ToolWhereInput
+  }
+
+  /**
+   * Basket.Level
+   */
+  export type Basket$LevelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Level
+     */
+    select?: LevelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Level
+     */
+    omit?: LevelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LevelInclude<ExtArgs> | null
+    where?: LevelWhereInput
+  }
+
+  /**
    * Basket without action
    */
   export type BasketDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -23973,13 +24421,13 @@ export namespace Prisma {
   export type OrderProductGroupByOutputType = {
     id: string
     orderId: string
-    professionId: string
-    toolId: string
-    levelId: string
-    workingTime: number
+    professionId: string | null
+    toolId: string | null
+    levelId: string | null
+    workingTime: number | null
     price: Decimal
     count: number
-    timeUnit: string
+    timeUnit: string | null
     _count: OrderProductCountAggregateOutputType | null
     _avg: OrderProductAvgAggregateOutputType | null
     _sum: OrderProductSumAggregateOutputType | null
@@ -24012,9 +24460,9 @@ export namespace Prisma {
     count?: boolean
     timeUnit?: boolean
     Order?: boolean | OrderDefaultArgs<ExtArgs>
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
-    Level?: boolean | LevelDefaultArgs<ExtArgs>
+    Profession?: boolean | orderProduct$ProfessionArgs<ExtArgs>
+    Tool?: boolean | orderProduct$ToolArgs<ExtArgs>
+    Level?: boolean | orderProduct$LevelArgs<ExtArgs>
   }, ExtArgs["result"]["orderProduct"]>
 
   export type orderProductSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -24028,9 +24476,9 @@ export namespace Prisma {
     count?: boolean
     timeUnit?: boolean
     Order?: boolean | OrderDefaultArgs<ExtArgs>
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
-    Level?: boolean | LevelDefaultArgs<ExtArgs>
+    Profession?: boolean | orderProduct$ProfessionArgs<ExtArgs>
+    Tool?: boolean | orderProduct$ToolArgs<ExtArgs>
+    Level?: boolean | orderProduct$LevelArgs<ExtArgs>
   }, ExtArgs["result"]["orderProduct"]>
 
   export type orderProductSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -24044,9 +24492,9 @@ export namespace Prisma {
     count?: boolean
     timeUnit?: boolean
     Order?: boolean | OrderDefaultArgs<ExtArgs>
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
-    Level?: boolean | LevelDefaultArgs<ExtArgs>
+    Profession?: boolean | orderProduct$ProfessionArgs<ExtArgs>
+    Tool?: boolean | orderProduct$ToolArgs<ExtArgs>
+    Level?: boolean | orderProduct$LevelArgs<ExtArgs>
   }, ExtArgs["result"]["orderProduct"]>
 
   export type orderProductSelectScalar = {
@@ -24064,41 +24512,41 @@ export namespace Prisma {
   export type orderProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "professionId" | "toolId" | "levelId" | "workingTime" | "price" | "count" | "timeUnit", ExtArgs["result"]["orderProduct"]>
   export type orderProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Order?: boolean | OrderDefaultArgs<ExtArgs>
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
-    Level?: boolean | LevelDefaultArgs<ExtArgs>
+    Profession?: boolean | orderProduct$ProfessionArgs<ExtArgs>
+    Tool?: boolean | orderProduct$ToolArgs<ExtArgs>
+    Level?: boolean | orderProduct$LevelArgs<ExtArgs>
   }
   export type orderProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Order?: boolean | OrderDefaultArgs<ExtArgs>
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
-    Level?: boolean | LevelDefaultArgs<ExtArgs>
+    Profession?: boolean | orderProduct$ProfessionArgs<ExtArgs>
+    Tool?: boolean | orderProduct$ToolArgs<ExtArgs>
+    Level?: boolean | orderProduct$LevelArgs<ExtArgs>
   }
   export type orderProductIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Order?: boolean | OrderDefaultArgs<ExtArgs>
-    Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
-    Tool?: boolean | ToolDefaultArgs<ExtArgs>
-    Level?: boolean | LevelDefaultArgs<ExtArgs>
+    Profession?: boolean | orderProduct$ProfessionArgs<ExtArgs>
+    Tool?: boolean | orderProduct$ToolArgs<ExtArgs>
+    Level?: boolean | orderProduct$LevelArgs<ExtArgs>
   }
 
   export type $orderProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "orderProduct"
     objects: {
       Order: Prisma.$OrderPayload<ExtArgs>
-      Profession: Prisma.$ProfessionPayload<ExtArgs>
-      Tool: Prisma.$ToolPayload<ExtArgs>
-      Level: Prisma.$LevelPayload<ExtArgs>
+      Profession: Prisma.$ProfessionPayload<ExtArgs> | null
+      Tool: Prisma.$ToolPayload<ExtArgs> | null
+      Level: Prisma.$LevelPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       orderId: string
-      professionId: string
-      toolId: string
-      levelId: string
-      workingTime: number
+      professionId: string | null
+      toolId: string | null
+      levelId: string | null
+      workingTime: number | null
       price: Prisma.Decimal
       count: number
-      timeUnit: string
+      timeUnit: string | null
     }, ExtArgs["result"]["orderProduct"]>
     composites: {}
   }
@@ -24494,9 +24942,9 @@ export namespace Prisma {
   export interface Prisma__orderProductClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Order<T extends OrderDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrderDefaultArgs<ExtArgs>>): Prisma__OrderClient<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Profession<T extends ProfessionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProfessionDefaultArgs<ExtArgs>>): Prisma__ProfessionClient<$Result.GetResult<Prisma.$ProfessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Tool<T extends ToolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ToolDefaultArgs<ExtArgs>>): Prisma__ToolClient<$Result.GetResult<Prisma.$ToolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Level<T extends LevelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LevelDefaultArgs<ExtArgs>>): Prisma__LevelClient<$Result.GetResult<Prisma.$LevelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Profession<T extends orderProduct$ProfessionArgs<ExtArgs> = {}>(args?: Subset<T, orderProduct$ProfessionArgs<ExtArgs>>): Prisma__ProfessionClient<$Result.GetResult<Prisma.$ProfessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Tool<T extends orderProduct$ToolArgs<ExtArgs> = {}>(args?: Subset<T, orderProduct$ToolArgs<ExtArgs>>): Prisma__ToolClient<$Result.GetResult<Prisma.$ToolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Level<T extends orderProduct$LevelArgs<ExtArgs> = {}>(args?: Subset<T, orderProduct$LevelArgs<ExtArgs>>): Prisma__LevelClient<$Result.GetResult<Prisma.$LevelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -24928,6 +25376,63 @@ export namespace Prisma {
      * Limit how many orderProducts to delete.
      */
     limit?: number
+  }
+
+  /**
+   * orderProduct.Profession
+   */
+  export type orderProduct$ProfessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Profession
+     */
+    select?: ProfessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Profession
+     */
+    omit?: ProfessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProfessionInclude<ExtArgs> | null
+    where?: ProfessionWhereInput
+  }
+
+  /**
+   * orderProduct.Tool
+   */
+  export type orderProduct$ToolArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tool
+     */
+    select?: ToolSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tool
+     */
+    omit?: ToolOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ToolInclude<ExtArgs> | null
+    where?: ToolWhereInput
+  }
+
+  /**
+   * orderProduct.Level
+   */
+  export type orderProduct$LevelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Level
+     */
+    select?: LevelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Level
+     */
+    omit?: LevelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LevelInclude<ExtArgs> | null
+    where?: LevelWhereInput
   }
 
   /**
@@ -28995,6 +29500,2227 @@ export namespace Prisma {
 
 
   /**
+   * Model Comment
+   */
+
+  export type AggregateComment = {
+    _count: CommentCountAggregateOutputType | null
+    _min: CommentMinAggregateOutputType | null
+    _max: CommentMaxAggregateOutputType | null
+  }
+
+  export type CommentMinAggregateOutputType = {
+    id: string | null
+    message: string | null
+    orderId: string | null
+    userId: string | null
+    createdAt: Date | null
+  }
+
+  export type CommentMaxAggregateOutputType = {
+    id: string | null
+    message: string | null
+    orderId: string | null
+    userId: string | null
+    createdAt: Date | null
+  }
+
+  export type CommentCountAggregateOutputType = {
+    id: number
+    message: number
+    orderId: number
+    userId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type CommentMinAggregateInputType = {
+    id?: true
+    message?: true
+    orderId?: true
+    userId?: true
+    createdAt?: true
+  }
+
+  export type CommentMaxAggregateInputType = {
+    id?: true
+    message?: true
+    orderId?: true
+    userId?: true
+    createdAt?: true
+  }
+
+  export type CommentCountAggregateInputType = {
+    id?: true
+    message?: true
+    orderId?: true
+    userId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type CommentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Comment to aggregate.
+     */
+    where?: CommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Comments to fetch.
+     */
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Comments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Comments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Comments
+    **/
+    _count?: true | CommentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CommentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CommentMaxAggregateInputType
+  }
+
+  export type GetCommentAggregateType<T extends CommentAggregateArgs> = {
+        [P in keyof T & keyof AggregateComment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateComment[P]>
+      : GetScalarType<T[P], AggregateComment[P]>
+  }
+
+
+
+
+  export type CommentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentWhereInput
+    orderBy?: CommentOrderByWithAggregationInput | CommentOrderByWithAggregationInput[]
+    by: CommentScalarFieldEnum[] | CommentScalarFieldEnum
+    having?: CommentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CommentCountAggregateInputType | true
+    _min?: CommentMinAggregateInputType
+    _max?: CommentMaxAggregateInputType
+  }
+
+  export type CommentGroupByOutputType = {
+    id: string
+    message: string
+    orderId: string | null
+    userId: string
+    createdAt: Date
+    _count: CommentCountAggregateOutputType | null
+    _min: CommentMinAggregateOutputType | null
+    _max: CommentMaxAggregateOutputType | null
+  }
+
+  type GetCommentGroupByPayload<T extends CommentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CommentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CommentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CommentGroupByOutputType[P]>
+            : GetScalarType<T[P], CommentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CommentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    message?: boolean
+    orderId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    order?: boolean | Comment$orderArgs<ExtArgs>
+    ratings?: boolean | Comment$ratingsArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    _count?: boolean | CommentCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["comment"]>
+
+  export type CommentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    message?: boolean
+    orderId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    order?: boolean | Comment$orderArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["comment"]>
+
+  export type CommentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    message?: boolean
+    orderId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    order?: boolean | Comment$orderArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["comment"]>
+
+  export type CommentSelectScalar = {
+    id?: boolean
+    message?: boolean
+    orderId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+  }
+
+  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "message" | "orderId" | "userId" | "createdAt", ExtArgs["result"]["comment"]>
+  export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    order?: boolean | Comment$orderArgs<ExtArgs>
+    ratings?: boolean | Comment$ratingsArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    _count?: boolean | CommentCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CommentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    order?: boolean | Comment$orderArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CommentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    order?: boolean | Comment$orderArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $CommentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Comment"
+    objects: {
+      order: Prisma.$OrderPayload<ExtArgs> | null
+      ratings: Prisma.$MasterRatingPayload<ExtArgs>[]
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      message: string
+      orderId: string | null
+      userId: string
+      createdAt: Date
+    }, ExtArgs["result"]["comment"]>
+    composites: {}
+  }
+
+  type CommentGetPayload<S extends boolean | null | undefined | CommentDefaultArgs> = $Result.GetResult<Prisma.$CommentPayload, S>
+
+  type CommentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CommentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CommentCountAggregateInputType | true
+    }
+
+  export interface CommentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Comment'], meta: { name: 'Comment' } }
+    /**
+     * Find zero or one Comment that matches the filter.
+     * @param {CommentFindUniqueArgs} args - Arguments to find a Comment
+     * @example
+     * // Get one Comment
+     * const comment = await prisma.comment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CommentFindUniqueArgs>(args: SelectSubset<T, CommentFindUniqueArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Comment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CommentFindUniqueOrThrowArgs} args - Arguments to find a Comment
+     * @example
+     * // Get one Comment
+     * const comment = await prisma.comment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CommentFindUniqueOrThrowArgs>(args: SelectSubset<T, CommentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Comment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentFindFirstArgs} args - Arguments to find a Comment
+     * @example
+     * // Get one Comment
+     * const comment = await prisma.comment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CommentFindFirstArgs>(args?: SelectSubset<T, CommentFindFirstArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Comment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentFindFirstOrThrowArgs} args - Arguments to find a Comment
+     * @example
+     * // Get one Comment
+     * const comment = await prisma.comment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CommentFindFirstOrThrowArgs>(args?: SelectSubset<T, CommentFindFirstOrThrowArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Comments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Comments
+     * const comments = await prisma.comment.findMany()
+     * 
+     * // Get first 10 Comments
+     * const comments = await prisma.comment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const commentWithIdOnly = await prisma.comment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CommentFindManyArgs>(args?: SelectSubset<T, CommentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Comment.
+     * @param {CommentCreateArgs} args - Arguments to create a Comment.
+     * @example
+     * // Create one Comment
+     * const Comment = await prisma.comment.create({
+     *   data: {
+     *     // ... data to create a Comment
+     *   }
+     * })
+     * 
+     */
+    create<T extends CommentCreateArgs>(args: SelectSubset<T, CommentCreateArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Comments.
+     * @param {CommentCreateManyArgs} args - Arguments to create many Comments.
+     * @example
+     * // Create many Comments
+     * const comment = await prisma.comment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CommentCreateManyArgs>(args?: SelectSubset<T, CommentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Comments and returns the data saved in the database.
+     * @param {CommentCreateManyAndReturnArgs} args - Arguments to create many Comments.
+     * @example
+     * // Create many Comments
+     * const comment = await prisma.comment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Comments and only return the `id`
+     * const commentWithIdOnly = await prisma.comment.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CommentCreateManyAndReturnArgs>(args?: SelectSubset<T, CommentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Comment.
+     * @param {CommentDeleteArgs} args - Arguments to delete one Comment.
+     * @example
+     * // Delete one Comment
+     * const Comment = await prisma.comment.delete({
+     *   where: {
+     *     // ... filter to delete one Comment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CommentDeleteArgs>(args: SelectSubset<T, CommentDeleteArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Comment.
+     * @param {CommentUpdateArgs} args - Arguments to update one Comment.
+     * @example
+     * // Update one Comment
+     * const comment = await prisma.comment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CommentUpdateArgs>(args: SelectSubset<T, CommentUpdateArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Comments.
+     * @param {CommentDeleteManyArgs} args - Arguments to filter Comments to delete.
+     * @example
+     * // Delete a few Comments
+     * const { count } = await prisma.comment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CommentDeleteManyArgs>(args?: SelectSubset<T, CommentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Comments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Comments
+     * const comment = await prisma.comment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CommentUpdateManyArgs>(args: SelectSubset<T, CommentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Comments and returns the data updated in the database.
+     * @param {CommentUpdateManyAndReturnArgs} args - Arguments to update many Comments.
+     * @example
+     * // Update many Comments
+     * const comment = await prisma.comment.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Comments and only return the `id`
+     * const commentWithIdOnly = await prisma.comment.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CommentUpdateManyAndReturnArgs>(args: SelectSubset<T, CommentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Comment.
+     * @param {CommentUpsertArgs} args - Arguments to update or create a Comment.
+     * @example
+     * // Update or create a Comment
+     * const comment = await prisma.comment.upsert({
+     *   create: {
+     *     // ... data to create a Comment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Comment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CommentUpsertArgs>(args: SelectSubset<T, CommentUpsertArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Comments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentCountArgs} args - Arguments to filter Comments to count.
+     * @example
+     * // Count the number of Comments
+     * const count = await prisma.comment.count({
+     *   where: {
+     *     // ... the filter for the Comments we want to count
+     *   }
+     * })
+    **/
+    count<T extends CommentCountArgs>(
+      args?: Subset<T, CommentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CommentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Comment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CommentAggregateArgs>(args: Subset<T, CommentAggregateArgs>): Prisma.PrismaPromise<GetCommentAggregateType<T>>
+
+    /**
+     * Group by Comment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CommentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CommentGroupByArgs['orderBy'] }
+        : { orderBy?: CommentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CommentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCommentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Comment model
+   */
+  readonly fields: CommentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Comment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CommentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    order<T extends Comment$orderArgs<ExtArgs> = {}>(args?: Subset<T, Comment$orderArgs<ExtArgs>>): Prisma__OrderClient<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    ratings<T extends Comment$ratingsArgs<ExtArgs> = {}>(args?: Subset<T, Comment$ratingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MasterRatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Comment model
+   */
+  interface CommentFieldRefs {
+    readonly id: FieldRef<"Comment", 'String'>
+    readonly message: FieldRef<"Comment", 'String'>
+    readonly orderId: FieldRef<"Comment", 'String'>
+    readonly userId: FieldRef<"Comment", 'String'>
+    readonly createdAt: FieldRef<"Comment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Comment findUnique
+   */
+  export type CommentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter, which Comment to fetch.
+     */
+    where: CommentWhereUniqueInput
+  }
+
+  /**
+   * Comment findUniqueOrThrow
+   */
+  export type CommentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter, which Comment to fetch.
+     */
+    where: CommentWhereUniqueInput
+  }
+
+  /**
+   * Comment findFirst
+   */
+  export type CommentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter, which Comment to fetch.
+     */
+    where?: CommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Comments to fetch.
+     */
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Comments.
+     */
+    cursor?: CommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Comments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Comments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Comments.
+     */
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
+   * Comment findFirstOrThrow
+   */
+  export type CommentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter, which Comment to fetch.
+     */
+    where?: CommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Comments to fetch.
+     */
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Comments.
+     */
+    cursor?: CommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Comments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Comments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Comments.
+     */
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
+   * Comment findMany
+   */
+  export type CommentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter, which Comments to fetch.
+     */
+    where?: CommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Comments to fetch.
+     */
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Comments.
+     */
+    cursor?: CommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Comments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Comments.
+     */
+    skip?: number
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
+   * Comment create
+   */
+  export type CommentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Comment.
+     */
+    data: XOR<CommentCreateInput, CommentUncheckedCreateInput>
+  }
+
+  /**
+   * Comment createMany
+   */
+  export type CommentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Comments.
+     */
+    data: CommentCreateManyInput | CommentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Comment createManyAndReturn
+   */
+  export type CommentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * The data used to create many Comments.
+     */
+    data: CommentCreateManyInput | CommentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Comment update
+   */
+  export type CommentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Comment.
+     */
+    data: XOR<CommentUpdateInput, CommentUncheckedUpdateInput>
+    /**
+     * Choose, which Comment to update.
+     */
+    where: CommentWhereUniqueInput
+  }
+
+  /**
+   * Comment updateMany
+   */
+  export type CommentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Comments.
+     */
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyInput>
+    /**
+     * Filter which Comments to update
+     */
+    where?: CommentWhereInput
+    /**
+     * Limit how many Comments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Comment updateManyAndReturn
+   */
+  export type CommentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * The data used to update Comments.
+     */
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyInput>
+    /**
+     * Filter which Comments to update
+     */
+    where?: CommentWhereInput
+    /**
+     * Limit how many Comments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Comment upsert
+   */
+  export type CommentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Comment to update in case it exists.
+     */
+    where: CommentWhereUniqueInput
+    /**
+     * In case the Comment found by the `where` argument doesn't exist, create a new Comment with this data.
+     */
+    create: XOR<CommentCreateInput, CommentUncheckedCreateInput>
+    /**
+     * In case the Comment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CommentUpdateInput, CommentUncheckedUpdateInput>
+  }
+
+  /**
+   * Comment delete
+   */
+  export type CommentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter which Comment to delete.
+     */
+    where: CommentWhereUniqueInput
+  }
+
+  /**
+   * Comment deleteMany
+   */
+  export type CommentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Comments to delete
+     */
+    where?: CommentWhereInput
+    /**
+     * Limit how many Comments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Comment.order
+   */
+  export type Comment$orderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Order
+     */
+    select?: OrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Order
+     */
+    omit?: OrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderInclude<ExtArgs> | null
+    where?: OrderWhereInput
+  }
+
+  /**
+   * Comment.ratings
+   */
+  export type Comment$ratingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MasterRating
+     */
+    select?: MasterRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MasterRating
+     */
+    omit?: MasterRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MasterRatingInclude<ExtArgs> | null
+    where?: MasterRatingWhereInput
+    orderBy?: MasterRatingOrderByWithRelationInput | MasterRatingOrderByWithRelationInput[]
+    cursor?: MasterRatingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MasterRatingScalarFieldEnum | MasterRatingScalarFieldEnum[]
+  }
+
+  /**
+   * Comment without action
+   */
+  export type CommentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MasterRating
+   */
+
+  export type AggregateMasterRating = {
+    _count: MasterRatingCountAggregateOutputType | null
+    _avg: MasterRatingAvgAggregateOutputType | null
+    _sum: MasterRatingSumAggregateOutputType | null
+    _min: MasterRatingMinAggregateOutputType | null
+    _max: MasterRatingMaxAggregateOutputType | null
+  }
+
+  export type MasterRatingAvgAggregateOutputType = {
+    star: number | null
+  }
+
+  export type MasterRatingSumAggregateOutputType = {
+    star: number | null
+  }
+
+  export type MasterRatingMinAggregateOutputType = {
+    id: string | null
+    masterId: string | null
+    commentId: string | null
+    star: number | null
+  }
+
+  export type MasterRatingMaxAggregateOutputType = {
+    id: string | null
+    masterId: string | null
+    commentId: string | null
+    star: number | null
+  }
+
+  export type MasterRatingCountAggregateOutputType = {
+    id: number
+    masterId: number
+    commentId: number
+    star: number
+    _all: number
+  }
+
+
+  export type MasterRatingAvgAggregateInputType = {
+    star?: true
+  }
+
+  export type MasterRatingSumAggregateInputType = {
+    star?: true
+  }
+
+  export type MasterRatingMinAggregateInputType = {
+    id?: true
+    masterId?: true
+    commentId?: true
+    star?: true
+  }
+
+  export type MasterRatingMaxAggregateInputType = {
+    id?: true
+    masterId?: true
+    commentId?: true
+    star?: true
+  }
+
+  export type MasterRatingCountAggregateInputType = {
+    id?: true
+    masterId?: true
+    commentId?: true
+    star?: true
+    _all?: true
+  }
+
+  export type MasterRatingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MasterRating to aggregate.
+     */
+    where?: MasterRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MasterRatings to fetch.
+     */
+    orderBy?: MasterRatingOrderByWithRelationInput | MasterRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MasterRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MasterRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MasterRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MasterRatings
+    **/
+    _count?: true | MasterRatingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MasterRatingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MasterRatingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MasterRatingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MasterRatingMaxAggregateInputType
+  }
+
+  export type GetMasterRatingAggregateType<T extends MasterRatingAggregateArgs> = {
+        [P in keyof T & keyof AggregateMasterRating]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMasterRating[P]>
+      : GetScalarType<T[P], AggregateMasterRating[P]>
+  }
+
+
+
+
+  export type MasterRatingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MasterRatingWhereInput
+    orderBy?: MasterRatingOrderByWithAggregationInput | MasterRatingOrderByWithAggregationInput[]
+    by: MasterRatingScalarFieldEnum[] | MasterRatingScalarFieldEnum
+    having?: MasterRatingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MasterRatingCountAggregateInputType | true
+    _avg?: MasterRatingAvgAggregateInputType
+    _sum?: MasterRatingSumAggregateInputType
+    _min?: MasterRatingMinAggregateInputType
+    _max?: MasterRatingMaxAggregateInputType
+  }
+
+  export type MasterRatingGroupByOutputType = {
+    id: string
+    masterId: string | null
+    commentId: string
+    star: number
+    _count: MasterRatingCountAggregateOutputType | null
+    _avg: MasterRatingAvgAggregateOutputType | null
+    _sum: MasterRatingSumAggregateOutputType | null
+    _min: MasterRatingMinAggregateOutputType | null
+    _max: MasterRatingMaxAggregateOutputType | null
+  }
+
+  type GetMasterRatingGroupByPayload<T extends MasterRatingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MasterRatingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MasterRatingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MasterRatingGroupByOutputType[P]>
+            : GetScalarType<T[P], MasterRatingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MasterRatingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    masterId?: boolean
+    commentId?: boolean
+    star?: boolean
+    master?: boolean | MasterRating$masterArgs<ExtArgs>
+    comment?: boolean | CommentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["masterRating"]>
+
+  export type MasterRatingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    masterId?: boolean
+    commentId?: boolean
+    star?: boolean
+    master?: boolean | MasterRating$masterArgs<ExtArgs>
+    comment?: boolean | CommentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["masterRating"]>
+
+  export type MasterRatingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    masterId?: boolean
+    commentId?: boolean
+    star?: boolean
+    master?: boolean | MasterRating$masterArgs<ExtArgs>
+    comment?: boolean | CommentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["masterRating"]>
+
+  export type MasterRatingSelectScalar = {
+    id?: boolean
+    masterId?: boolean
+    commentId?: boolean
+    star?: boolean
+  }
+
+  export type MasterRatingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "masterId" | "commentId" | "star", ExtArgs["result"]["masterRating"]>
+  export type MasterRatingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    master?: boolean | MasterRating$masterArgs<ExtArgs>
+    comment?: boolean | CommentDefaultArgs<ExtArgs>
+  }
+  export type MasterRatingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    master?: boolean | MasterRating$masterArgs<ExtArgs>
+    comment?: boolean | CommentDefaultArgs<ExtArgs>
+  }
+  export type MasterRatingIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    master?: boolean | MasterRating$masterArgs<ExtArgs>
+    comment?: boolean | CommentDefaultArgs<ExtArgs>
+  }
+
+  export type $MasterRatingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MasterRating"
+    objects: {
+      master: Prisma.$MasterPayload<ExtArgs> | null
+      comment: Prisma.$CommentPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      masterId: string | null
+      commentId: string
+      star: number
+    }, ExtArgs["result"]["masterRating"]>
+    composites: {}
+  }
+
+  type MasterRatingGetPayload<S extends boolean | null | undefined | MasterRatingDefaultArgs> = $Result.GetResult<Prisma.$MasterRatingPayload, S>
+
+  type MasterRatingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MasterRatingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MasterRatingCountAggregateInputType | true
+    }
+
+  export interface MasterRatingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MasterRating'], meta: { name: 'MasterRating' } }
+    /**
+     * Find zero or one MasterRating that matches the filter.
+     * @param {MasterRatingFindUniqueArgs} args - Arguments to find a MasterRating
+     * @example
+     * // Get one MasterRating
+     * const masterRating = await prisma.masterRating.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MasterRatingFindUniqueArgs>(args: SelectSubset<T, MasterRatingFindUniqueArgs<ExtArgs>>): Prisma__MasterRatingClient<$Result.GetResult<Prisma.$MasterRatingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MasterRating that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MasterRatingFindUniqueOrThrowArgs} args - Arguments to find a MasterRating
+     * @example
+     * // Get one MasterRating
+     * const masterRating = await prisma.masterRating.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MasterRatingFindUniqueOrThrowArgs>(args: SelectSubset<T, MasterRatingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MasterRatingClient<$Result.GetResult<Prisma.$MasterRatingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MasterRating that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MasterRatingFindFirstArgs} args - Arguments to find a MasterRating
+     * @example
+     * // Get one MasterRating
+     * const masterRating = await prisma.masterRating.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MasterRatingFindFirstArgs>(args?: SelectSubset<T, MasterRatingFindFirstArgs<ExtArgs>>): Prisma__MasterRatingClient<$Result.GetResult<Prisma.$MasterRatingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MasterRating that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MasterRatingFindFirstOrThrowArgs} args - Arguments to find a MasterRating
+     * @example
+     * // Get one MasterRating
+     * const masterRating = await prisma.masterRating.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MasterRatingFindFirstOrThrowArgs>(args?: SelectSubset<T, MasterRatingFindFirstOrThrowArgs<ExtArgs>>): Prisma__MasterRatingClient<$Result.GetResult<Prisma.$MasterRatingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MasterRatings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MasterRatingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MasterRatings
+     * const masterRatings = await prisma.masterRating.findMany()
+     * 
+     * // Get first 10 MasterRatings
+     * const masterRatings = await prisma.masterRating.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const masterRatingWithIdOnly = await prisma.masterRating.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MasterRatingFindManyArgs>(args?: SelectSubset<T, MasterRatingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MasterRatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MasterRating.
+     * @param {MasterRatingCreateArgs} args - Arguments to create a MasterRating.
+     * @example
+     * // Create one MasterRating
+     * const MasterRating = await prisma.masterRating.create({
+     *   data: {
+     *     // ... data to create a MasterRating
+     *   }
+     * })
+     * 
+     */
+    create<T extends MasterRatingCreateArgs>(args: SelectSubset<T, MasterRatingCreateArgs<ExtArgs>>): Prisma__MasterRatingClient<$Result.GetResult<Prisma.$MasterRatingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MasterRatings.
+     * @param {MasterRatingCreateManyArgs} args - Arguments to create many MasterRatings.
+     * @example
+     * // Create many MasterRatings
+     * const masterRating = await prisma.masterRating.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MasterRatingCreateManyArgs>(args?: SelectSubset<T, MasterRatingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MasterRatings and returns the data saved in the database.
+     * @param {MasterRatingCreateManyAndReturnArgs} args - Arguments to create many MasterRatings.
+     * @example
+     * // Create many MasterRatings
+     * const masterRating = await prisma.masterRating.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MasterRatings and only return the `id`
+     * const masterRatingWithIdOnly = await prisma.masterRating.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MasterRatingCreateManyAndReturnArgs>(args?: SelectSubset<T, MasterRatingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MasterRatingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MasterRating.
+     * @param {MasterRatingDeleteArgs} args - Arguments to delete one MasterRating.
+     * @example
+     * // Delete one MasterRating
+     * const MasterRating = await prisma.masterRating.delete({
+     *   where: {
+     *     // ... filter to delete one MasterRating
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MasterRatingDeleteArgs>(args: SelectSubset<T, MasterRatingDeleteArgs<ExtArgs>>): Prisma__MasterRatingClient<$Result.GetResult<Prisma.$MasterRatingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MasterRating.
+     * @param {MasterRatingUpdateArgs} args - Arguments to update one MasterRating.
+     * @example
+     * // Update one MasterRating
+     * const masterRating = await prisma.masterRating.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MasterRatingUpdateArgs>(args: SelectSubset<T, MasterRatingUpdateArgs<ExtArgs>>): Prisma__MasterRatingClient<$Result.GetResult<Prisma.$MasterRatingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MasterRatings.
+     * @param {MasterRatingDeleteManyArgs} args - Arguments to filter MasterRatings to delete.
+     * @example
+     * // Delete a few MasterRatings
+     * const { count } = await prisma.masterRating.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MasterRatingDeleteManyArgs>(args?: SelectSubset<T, MasterRatingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MasterRatings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MasterRatingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MasterRatings
+     * const masterRating = await prisma.masterRating.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MasterRatingUpdateManyArgs>(args: SelectSubset<T, MasterRatingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MasterRatings and returns the data updated in the database.
+     * @param {MasterRatingUpdateManyAndReturnArgs} args - Arguments to update many MasterRatings.
+     * @example
+     * // Update many MasterRatings
+     * const masterRating = await prisma.masterRating.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MasterRatings and only return the `id`
+     * const masterRatingWithIdOnly = await prisma.masterRating.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MasterRatingUpdateManyAndReturnArgs>(args: SelectSubset<T, MasterRatingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MasterRatingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MasterRating.
+     * @param {MasterRatingUpsertArgs} args - Arguments to update or create a MasterRating.
+     * @example
+     * // Update or create a MasterRating
+     * const masterRating = await prisma.masterRating.upsert({
+     *   create: {
+     *     // ... data to create a MasterRating
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MasterRating we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MasterRatingUpsertArgs>(args: SelectSubset<T, MasterRatingUpsertArgs<ExtArgs>>): Prisma__MasterRatingClient<$Result.GetResult<Prisma.$MasterRatingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MasterRatings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MasterRatingCountArgs} args - Arguments to filter MasterRatings to count.
+     * @example
+     * // Count the number of MasterRatings
+     * const count = await prisma.masterRating.count({
+     *   where: {
+     *     // ... the filter for the MasterRatings we want to count
+     *   }
+     * })
+    **/
+    count<T extends MasterRatingCountArgs>(
+      args?: Subset<T, MasterRatingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MasterRatingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MasterRating.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MasterRatingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MasterRatingAggregateArgs>(args: Subset<T, MasterRatingAggregateArgs>): Prisma.PrismaPromise<GetMasterRatingAggregateType<T>>
+
+    /**
+     * Group by MasterRating.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MasterRatingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MasterRatingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MasterRatingGroupByArgs['orderBy'] }
+        : { orderBy?: MasterRatingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MasterRatingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMasterRatingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MasterRating model
+   */
+  readonly fields: MasterRatingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MasterRating.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MasterRatingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    master<T extends MasterRating$masterArgs<ExtArgs> = {}>(args?: Subset<T, MasterRating$masterArgs<ExtArgs>>): Prisma__MasterClient<$Result.GetResult<Prisma.$MasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    comment<T extends CommentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CommentDefaultArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MasterRating model
+   */
+  interface MasterRatingFieldRefs {
+    readonly id: FieldRef<"MasterRating", 'String'>
+    readonly masterId: FieldRef<"MasterRating", 'String'>
+    readonly commentId: FieldRef<"MasterRating", 'String'>
+    readonly star: FieldRef<"MasterRating", 'Float'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MasterRating findUnique
+   */
+  export type MasterRatingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MasterRating
+     */
+    select?: MasterRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MasterRating
+     */
+    omit?: MasterRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MasterRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which MasterRating to fetch.
+     */
+    where: MasterRatingWhereUniqueInput
+  }
+
+  /**
+   * MasterRating findUniqueOrThrow
+   */
+  export type MasterRatingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MasterRating
+     */
+    select?: MasterRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MasterRating
+     */
+    omit?: MasterRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MasterRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which MasterRating to fetch.
+     */
+    where: MasterRatingWhereUniqueInput
+  }
+
+  /**
+   * MasterRating findFirst
+   */
+  export type MasterRatingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MasterRating
+     */
+    select?: MasterRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MasterRating
+     */
+    omit?: MasterRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MasterRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which MasterRating to fetch.
+     */
+    where?: MasterRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MasterRatings to fetch.
+     */
+    orderBy?: MasterRatingOrderByWithRelationInput | MasterRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MasterRatings.
+     */
+    cursor?: MasterRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MasterRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MasterRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MasterRatings.
+     */
+    distinct?: MasterRatingScalarFieldEnum | MasterRatingScalarFieldEnum[]
+  }
+
+  /**
+   * MasterRating findFirstOrThrow
+   */
+  export type MasterRatingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MasterRating
+     */
+    select?: MasterRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MasterRating
+     */
+    omit?: MasterRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MasterRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which MasterRating to fetch.
+     */
+    where?: MasterRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MasterRatings to fetch.
+     */
+    orderBy?: MasterRatingOrderByWithRelationInput | MasterRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MasterRatings.
+     */
+    cursor?: MasterRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MasterRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MasterRatings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MasterRatings.
+     */
+    distinct?: MasterRatingScalarFieldEnum | MasterRatingScalarFieldEnum[]
+  }
+
+  /**
+   * MasterRating findMany
+   */
+  export type MasterRatingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MasterRating
+     */
+    select?: MasterRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MasterRating
+     */
+    omit?: MasterRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MasterRatingInclude<ExtArgs> | null
+    /**
+     * Filter, which MasterRatings to fetch.
+     */
+    where?: MasterRatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MasterRatings to fetch.
+     */
+    orderBy?: MasterRatingOrderByWithRelationInput | MasterRatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MasterRatings.
+     */
+    cursor?: MasterRatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MasterRatings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MasterRatings.
+     */
+    skip?: number
+    distinct?: MasterRatingScalarFieldEnum | MasterRatingScalarFieldEnum[]
+  }
+
+  /**
+   * MasterRating create
+   */
+  export type MasterRatingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MasterRating
+     */
+    select?: MasterRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MasterRating
+     */
+    omit?: MasterRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MasterRatingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MasterRating.
+     */
+    data: XOR<MasterRatingCreateInput, MasterRatingUncheckedCreateInput>
+  }
+
+  /**
+   * MasterRating createMany
+   */
+  export type MasterRatingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MasterRatings.
+     */
+    data: MasterRatingCreateManyInput | MasterRatingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MasterRating createManyAndReturn
+   */
+  export type MasterRatingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MasterRating
+     */
+    select?: MasterRatingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MasterRating
+     */
+    omit?: MasterRatingOmit<ExtArgs> | null
+    /**
+     * The data used to create many MasterRatings.
+     */
+    data: MasterRatingCreateManyInput | MasterRatingCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MasterRatingIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MasterRating update
+   */
+  export type MasterRatingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MasterRating
+     */
+    select?: MasterRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MasterRating
+     */
+    omit?: MasterRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MasterRatingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MasterRating.
+     */
+    data: XOR<MasterRatingUpdateInput, MasterRatingUncheckedUpdateInput>
+    /**
+     * Choose, which MasterRating to update.
+     */
+    where: MasterRatingWhereUniqueInput
+  }
+
+  /**
+   * MasterRating updateMany
+   */
+  export type MasterRatingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MasterRatings.
+     */
+    data: XOR<MasterRatingUpdateManyMutationInput, MasterRatingUncheckedUpdateManyInput>
+    /**
+     * Filter which MasterRatings to update
+     */
+    where?: MasterRatingWhereInput
+    /**
+     * Limit how many MasterRatings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MasterRating updateManyAndReturn
+   */
+  export type MasterRatingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MasterRating
+     */
+    select?: MasterRatingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MasterRating
+     */
+    omit?: MasterRatingOmit<ExtArgs> | null
+    /**
+     * The data used to update MasterRatings.
+     */
+    data: XOR<MasterRatingUpdateManyMutationInput, MasterRatingUncheckedUpdateManyInput>
+    /**
+     * Filter which MasterRatings to update
+     */
+    where?: MasterRatingWhereInput
+    /**
+     * Limit how many MasterRatings to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MasterRatingIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MasterRating upsert
+   */
+  export type MasterRatingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MasterRating
+     */
+    select?: MasterRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MasterRating
+     */
+    omit?: MasterRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MasterRatingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MasterRating to update in case it exists.
+     */
+    where: MasterRatingWhereUniqueInput
+    /**
+     * In case the MasterRating found by the `where` argument doesn't exist, create a new MasterRating with this data.
+     */
+    create: XOR<MasterRatingCreateInput, MasterRatingUncheckedCreateInput>
+    /**
+     * In case the MasterRating was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MasterRatingUpdateInput, MasterRatingUncheckedUpdateInput>
+  }
+
+  /**
+   * MasterRating delete
+   */
+  export type MasterRatingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MasterRating
+     */
+    select?: MasterRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MasterRating
+     */
+    omit?: MasterRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MasterRatingInclude<ExtArgs> | null
+    /**
+     * Filter which MasterRating to delete.
+     */
+    where: MasterRatingWhereUniqueInput
+  }
+
+  /**
+   * MasterRating deleteMany
+   */
+  export type MasterRatingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MasterRatings to delete
+     */
+    where?: MasterRatingWhereInput
+    /**
+     * Limit how many MasterRatings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MasterRating.master
+   */
+  export type MasterRating$masterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Master
+     */
+    select?: MasterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Master
+     */
+    omit?: MasterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MasterInclude<ExtArgs> | null
+    where?: MasterWhereInput
+  }
+
+  /**
+   * MasterRating without action
+   */
+  export type MasterRatingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MasterRating
+     */
+    select?: MasterRatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MasterRating
+     */
+    omit?: MasterRatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MasterRatingInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -29043,7 +31769,6 @@ export namespace Prisma {
     address: 'address',
     userId: 'userId',
     createdAt: 'createdAt',
-    salary: 'salary',
     bank: 'bank',
     mfo: 'mfo'
   };
@@ -29312,6 +32037,27 @@ export namespace Prisma {
   export type FaqScalarFieldEnum = (typeof FaqScalarFieldEnum)[keyof typeof FaqScalarFieldEnum]
 
 
+  export const CommentScalarFieldEnum: {
+    id: 'id',
+    message: 'message',
+    orderId: 'orderId',
+    userId: 'userId',
+    createdAt: 'createdAt'
+  };
+
+  export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
+
+
+  export const MasterRatingScalarFieldEnum: {
+    id: 'id',
+    masterId: 'masterId',
+    commentId: 'commentId',
+    star: 'star'
+  };
+
+  export type MasterRatingScalarFieldEnum = (typeof MasterRatingScalarFieldEnum)[keyof typeof MasterRatingScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -29384,20 +32130,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -29430,6 +32162,20 @@ export namespace Prisma {
    */
   export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
   /**
    * Deep Input Types
    */
@@ -29451,6 +32197,7 @@ export namespace Prisma {
     Basket?: BasketListRelationFilter
     Company?: CompanyListRelationFilter
     Session?: SessionListRelationFilter
+    Comment?: CommentListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -29466,6 +32213,7 @@ export namespace Prisma {
     Basket?: BasketOrderByRelationAggregateInput
     Company?: CompanyOrderByRelationAggregateInput
     Session?: SessionOrderByRelationAggregateInput
+    Comment?: CommentOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -29484,6 +32232,7 @@ export namespace Prisma {
     Basket?: BasketListRelationFilter
     Company?: CompanyListRelationFilter
     Session?: SessionListRelationFilter
+    Comment?: CommentListRelationFilter
   }, "id">
 
   export type UserOrderByWithAggregationInput = {
@@ -29593,7 +32342,6 @@ export namespace Prisma {
     address?: StringFilter<"Company"> | string
     userId?: StringFilter<"Company"> | string
     createdAt?: DateTimeFilter<"Company"> | Date | string
-    salary?: FloatNullableFilter<"Company"> | number | null
     bank?: StringNullableFilter<"Company"> | string | null
     mfo?: StringNullableFilter<"Company"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -29607,7 +32355,6 @@ export namespace Prisma {
     address?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
-    salary?: SortOrderInput | SortOrder
     bank?: SortOrderInput | SortOrder
     mfo?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
@@ -29624,7 +32371,6 @@ export namespace Prisma {
     address?: StringFilter<"Company"> | string
     userId?: StringFilter<"Company"> | string
     createdAt?: DateTimeFilter<"Company"> | Date | string
-    salary?: FloatNullableFilter<"Company"> | number | null
     bank?: StringNullableFilter<"Company"> | string | null
     mfo?: StringNullableFilter<"Company"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -29638,14 +32384,11 @@ export namespace Prisma {
     address?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
-    salary?: SortOrderInput | SortOrder
     bank?: SortOrderInput | SortOrder
     mfo?: SortOrderInput | SortOrder
     _count?: CompanyCountOrderByAggregateInput
-    _avg?: CompanyAvgOrderByAggregateInput
     _max?: CompanyMaxOrderByAggregateInput
     _min?: CompanyMinOrderByAggregateInput
-    _sum?: CompanySumOrderByAggregateInput
   }
 
   export type CompanyScalarWhereWithAggregatesInput = {
@@ -29659,7 +32402,6 @@ export namespace Prisma {
     address?: StringWithAggregatesFilter<"Company"> | string
     userId?: StringWithAggregatesFilter<"Company"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Company"> | Date | string
-    salary?: FloatNullableWithAggregatesFilter<"Company"> | number | null
     bank?: StringNullableWithAggregatesFilter<"Company"> | string | null
     mfo?: StringNullableWithAggregatesFilter<"Company"> | string | null
   }
@@ -30032,12 +32774,12 @@ export namespace Prisma {
     code?: IntNullableFilter<"Tool"> | number | null
     isActive?: BoolNullableFilter<"Tool"> | boolean | null
     createdAt?: DateTimeFilter<"Tool"> | Date | string
-    brandId?: StringFilter<"Tool"> | string
-    capacityId?: StringFilter<"Tool"> | string
-    sizeId?: StringFilter<"Tool"> | string
-    Brand?: XOR<BrandScalarRelationFilter, BrandWhereInput>
-    Capacity?: XOR<CapacityScalarRelationFilter, CapacityWhereInput>
-    Size?: XOR<SizeScalarRelationFilter, SizeWhereInput>
+    brandId?: StringNullableFilter<"Tool"> | string | null
+    capacityId?: StringNullableFilter<"Tool"> | string | null
+    sizeId?: StringNullableFilter<"Tool"> | string | null
+    Brand?: XOR<BrandNullableScalarRelationFilter, BrandWhereInput> | null
+    Capacity?: XOR<CapacityNullableScalarRelationFilter, CapacityWhereInput> | null
+    Size?: XOR<SizeNullableScalarRelationFilter, SizeWhereInput> | null
     professionTool?: ProfessionToolListRelationFilter
     Basket?: BasketListRelationFilter
     orderProduct?: OrderProductListRelationFilter
@@ -30057,9 +32799,9 @@ export namespace Prisma {
     code?: SortOrderInput | SortOrder
     isActive?: SortOrderInput | SortOrder
     createdAt?: SortOrder
-    brandId?: SortOrder
-    capacityId?: SortOrder
-    sizeId?: SortOrder
+    brandId?: SortOrderInput | SortOrder
+    capacityId?: SortOrderInput | SortOrder
+    sizeId?: SortOrderInput | SortOrder
     Brand?: BrandOrderByWithRelationInput
     Capacity?: CapacityOrderByWithRelationInput
     Size?: SizeOrderByWithRelationInput
@@ -30085,12 +32827,12 @@ export namespace Prisma {
     code?: IntNullableFilter<"Tool"> | number | null
     isActive?: BoolNullableFilter<"Tool"> | boolean | null
     createdAt?: DateTimeFilter<"Tool"> | Date | string
-    brandId?: StringFilter<"Tool"> | string
-    capacityId?: StringFilter<"Tool"> | string
-    sizeId?: StringFilter<"Tool"> | string
-    Brand?: XOR<BrandScalarRelationFilter, BrandWhereInput>
-    Capacity?: XOR<CapacityScalarRelationFilter, CapacityWhereInput>
-    Size?: XOR<SizeScalarRelationFilter, SizeWhereInput>
+    brandId?: StringNullableFilter<"Tool"> | string | null
+    capacityId?: StringNullableFilter<"Tool"> | string | null
+    sizeId?: StringNullableFilter<"Tool"> | string | null
+    Brand?: XOR<BrandNullableScalarRelationFilter, BrandWhereInput> | null
+    Capacity?: XOR<CapacityNullableScalarRelationFilter, CapacityWhereInput> | null
+    Size?: XOR<SizeNullableScalarRelationFilter, SizeWhereInput> | null
     professionTool?: ProfessionToolListRelationFilter
     Basket?: BasketListRelationFilter
     orderProduct?: OrderProductListRelationFilter
@@ -30110,9 +32852,9 @@ export namespace Prisma {
     code?: SortOrderInput | SortOrder
     isActive?: SortOrderInput | SortOrder
     createdAt?: SortOrder
-    brandId?: SortOrder
-    capacityId?: SortOrder
-    sizeId?: SortOrder
+    brandId?: SortOrderInput | SortOrder
+    capacityId?: SortOrderInput | SortOrder
+    sizeId?: SortOrderInput | SortOrder
     _count?: ToolCountOrderByAggregateInput
     _avg?: ToolAvgOrderByAggregateInput
     _max?: ToolMaxOrderByAggregateInput
@@ -30137,9 +32879,9 @@ export namespace Prisma {
     code?: IntNullableWithAggregatesFilter<"Tool"> | number | null
     isActive?: BoolNullableWithAggregatesFilter<"Tool"> | boolean | null
     createdAt?: DateTimeWithAggregatesFilter<"Tool"> | Date | string
-    brandId?: StringWithAggregatesFilter<"Tool"> | string
-    capacityId?: StringWithAggregatesFilter<"Tool"> | string
-    sizeId?: StringWithAggregatesFilter<"Tool"> | string
+    brandId?: StringNullableWithAggregatesFilter<"Tool"> | string | null
+    capacityId?: StringNullableWithAggregatesFilter<"Tool"> | string | null
+    sizeId?: StringNullableWithAggregatesFilter<"Tool"> | string | null
   }
 
   export type MasterWhereInput = {
@@ -30158,6 +32900,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Master"> | Date | string
     MasterProfession?: MasterProfessionListRelationFilter
     OrderMaster?: OrderMasterListRelationFilter
+    MasterRating?: MasterRatingListRelationFilter
   }
 
   export type MasterOrderByWithRelationInput = {
@@ -30173,6 +32916,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     MasterProfession?: MasterProfessionOrderByRelationAggregateInput
     OrderMaster?: OrderMasterOrderByRelationAggregateInput
+    MasterRating?: MasterRatingOrderByRelationAggregateInput
   }
 
   export type MasterWhereUniqueInput = Prisma.AtLeast<{
@@ -30191,6 +32935,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Master"> | Date | string
     MasterProfession?: MasterProfessionListRelationFilter
     OrderMaster?: OrderMasterListRelationFilter
+    MasterRating?: MasterRatingListRelationFilter
   }, "id">
 
   export type MasterOrderByWithAggregationInput = {
@@ -30387,16 +33132,16 @@ export namespace Prisma {
     OR?: professionToolWhereInput[]
     NOT?: professionToolWhereInput | professionToolWhereInput[]
     id?: StringFilter<"professionTool"> | string
-    professionId?: StringFilter<"professionTool"> | string
-    toolId?: StringFilter<"professionTool"> | string
-    Profession?: XOR<ProfessionScalarRelationFilter, ProfessionWhereInput>
-    Tool?: XOR<ToolScalarRelationFilter, ToolWhereInput>
+    professionId?: StringNullableFilter<"professionTool"> | string | null
+    toolId?: StringNullableFilter<"professionTool"> | string | null
+    Profession?: XOR<ProfessionNullableScalarRelationFilter, ProfessionWhereInput> | null
+    Tool?: XOR<ToolNullableScalarRelationFilter, ToolWhereInput> | null
   }
 
   export type professionToolOrderByWithRelationInput = {
     id?: SortOrder
-    professionId?: SortOrder
-    toolId?: SortOrder
+    professionId?: SortOrderInput | SortOrder
+    toolId?: SortOrderInput | SortOrder
     Profession?: ProfessionOrderByWithRelationInput
     Tool?: ToolOrderByWithRelationInput
   }
@@ -30406,16 +33151,16 @@ export namespace Prisma {
     AND?: professionToolWhereInput | professionToolWhereInput[]
     OR?: professionToolWhereInput[]
     NOT?: professionToolWhereInput | professionToolWhereInput[]
-    professionId?: StringFilter<"professionTool"> | string
-    toolId?: StringFilter<"professionTool"> | string
-    Profession?: XOR<ProfessionScalarRelationFilter, ProfessionWhereInput>
-    Tool?: XOR<ToolScalarRelationFilter, ToolWhereInput>
+    professionId?: StringNullableFilter<"professionTool"> | string | null
+    toolId?: StringNullableFilter<"professionTool"> | string | null
+    Profession?: XOR<ProfessionNullableScalarRelationFilter, ProfessionWhereInput> | null
+    Tool?: XOR<ToolNullableScalarRelationFilter, ToolWhereInput> | null
   }, "id">
 
   export type professionToolOrderByWithAggregationInput = {
     id?: SortOrder
-    professionId?: SortOrder
-    toolId?: SortOrder
+    professionId?: SortOrderInput | SortOrder
+    toolId?: SortOrderInput | SortOrder
     _count?: professionToolCountOrderByAggregateInput
     _max?: professionToolMaxOrderByAggregateInput
     _min?: professionToolMinOrderByAggregateInput
@@ -30426,8 +33171,8 @@ export namespace Prisma {
     OR?: professionToolScalarWhereWithAggregatesInput[]
     NOT?: professionToolScalarWhereWithAggregatesInput | professionToolScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"professionTool"> | string
-    professionId?: StringWithAggregatesFilter<"professionTool"> | string
-    toolId?: StringWithAggregatesFilter<"professionTool"> | string
+    professionId?: StringNullableWithAggregatesFilter<"professionTool"> | string | null
+    toolId?: StringNullableWithAggregatesFilter<"professionTool"> | string | null
   }
 
   export type professionLevelWhereInput = {
@@ -30514,6 +33259,7 @@ export namespace Prisma {
     User?: XOR<UserScalarRelationFilter, UserWhereInput>
     OrderMaster?: OrderMasterListRelationFilter
     orderProduct?: OrderProductListRelationFilter
+    Comment?: CommentListRelationFilter
   }
 
   export type OrderOrderByWithRelationInput = {
@@ -30532,6 +33278,7 @@ export namespace Prisma {
     User?: UserOrderByWithRelationInput
     OrderMaster?: OrderMasterOrderByRelationAggregateInput
     orderProduct?: orderProductOrderByRelationAggregateInput
+    Comment?: CommentOrderByRelationAggregateInput
   }
 
   export type OrderWhereUniqueInput = Prisma.AtLeast<{
@@ -30553,6 +33300,7 @@ export namespace Prisma {
     User?: XOR<UserScalarRelationFilter, UserWhereInput>
     OrderMaster?: OrderMasterListRelationFilter
     orderProduct?: OrderProductListRelationFilter
+    Comment?: CommentListRelationFilter
   }, "id">
 
   export type OrderOrderByWithAggregationInput = {
@@ -30646,28 +33394,28 @@ export namespace Prisma {
     OR?: BasketWhereInput[]
     NOT?: BasketWhereInput | BasketWhereInput[]
     id?: StringFilter<"Basket"> | string
-    userId?: StringFilter<"Basket"> | string
-    professionId?: StringFilter<"Basket"> | string
-    toolId?: StringFilter<"Basket"> | string
-    levelId?: StringFilter<"Basket"> | string
+    userId?: StringNullableFilter<"Basket"> | string | null
+    professionId?: StringNullableFilter<"Basket"> | string | null
+    toolId?: StringNullableFilter<"Basket"> | string | null
+    levelId?: StringNullableFilter<"Basket"> | string | null
     count?: IntFilter<"Basket"> | number
-    workingTime?: IntFilter<"Basket"> | number
+    workingTime?: IntNullableFilter<"Basket"> | number | null
     totalPrice?: DecimalFilter<"Basket"> | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFilter<"Basket"> | string
-    User?: XOR<UserScalarRelationFilter, UserWhereInput>
-    Profession?: XOR<ProfessionScalarRelationFilter, ProfessionWhereInput>
-    Tool?: XOR<ToolScalarRelationFilter, ToolWhereInput>
-    Level?: XOR<LevelScalarRelationFilter, LevelWhereInput>
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    Profession?: XOR<ProfessionNullableScalarRelationFilter, ProfessionWhereInput> | null
+    Tool?: XOR<ToolNullableScalarRelationFilter, ToolWhereInput> | null
+    Level?: XOR<LevelNullableScalarRelationFilter, LevelWhereInput> | null
   }
 
   export type BasketOrderByWithRelationInput = {
     id?: SortOrder
-    userId?: SortOrder
-    professionId?: SortOrder
-    toolId?: SortOrder
-    levelId?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    professionId?: SortOrderInput | SortOrder
+    toolId?: SortOrderInput | SortOrder
+    levelId?: SortOrderInput | SortOrder
     count?: SortOrder
-    workingTime?: SortOrder
+    workingTime?: SortOrderInput | SortOrder
     totalPrice?: SortOrder
     timeUnit?: SortOrder
     User?: UserOrderByWithRelationInput
@@ -30681,28 +33429,28 @@ export namespace Prisma {
     AND?: BasketWhereInput | BasketWhereInput[]
     OR?: BasketWhereInput[]
     NOT?: BasketWhereInput | BasketWhereInput[]
-    userId?: StringFilter<"Basket"> | string
-    professionId?: StringFilter<"Basket"> | string
-    toolId?: StringFilter<"Basket"> | string
-    levelId?: StringFilter<"Basket"> | string
+    userId?: StringNullableFilter<"Basket"> | string | null
+    professionId?: StringNullableFilter<"Basket"> | string | null
+    toolId?: StringNullableFilter<"Basket"> | string | null
+    levelId?: StringNullableFilter<"Basket"> | string | null
     count?: IntFilter<"Basket"> | number
-    workingTime?: IntFilter<"Basket"> | number
+    workingTime?: IntNullableFilter<"Basket"> | number | null
     totalPrice?: DecimalFilter<"Basket"> | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFilter<"Basket"> | string
-    User?: XOR<UserScalarRelationFilter, UserWhereInput>
-    Profession?: XOR<ProfessionScalarRelationFilter, ProfessionWhereInput>
-    Tool?: XOR<ToolScalarRelationFilter, ToolWhereInput>
-    Level?: XOR<LevelScalarRelationFilter, LevelWhereInput>
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    Profession?: XOR<ProfessionNullableScalarRelationFilter, ProfessionWhereInput> | null
+    Tool?: XOR<ToolNullableScalarRelationFilter, ToolWhereInput> | null
+    Level?: XOR<LevelNullableScalarRelationFilter, LevelWhereInput> | null
   }, "id">
 
   export type BasketOrderByWithAggregationInput = {
     id?: SortOrder
-    userId?: SortOrder
-    professionId?: SortOrder
-    toolId?: SortOrder
-    levelId?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    professionId?: SortOrderInput | SortOrder
+    toolId?: SortOrderInput | SortOrder
+    levelId?: SortOrderInput | SortOrder
     count?: SortOrder
-    workingTime?: SortOrder
+    workingTime?: SortOrderInput | SortOrder
     totalPrice?: SortOrder
     timeUnit?: SortOrder
     _count?: BasketCountOrderByAggregateInput
@@ -30717,12 +33465,12 @@ export namespace Prisma {
     OR?: BasketScalarWhereWithAggregatesInput[]
     NOT?: BasketScalarWhereWithAggregatesInput | BasketScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Basket"> | string
-    userId?: StringWithAggregatesFilter<"Basket"> | string
-    professionId?: StringWithAggregatesFilter<"Basket"> | string
-    toolId?: StringWithAggregatesFilter<"Basket"> | string
-    levelId?: StringWithAggregatesFilter<"Basket"> | string
+    userId?: StringNullableWithAggregatesFilter<"Basket"> | string | null
+    professionId?: StringNullableWithAggregatesFilter<"Basket"> | string | null
+    toolId?: StringNullableWithAggregatesFilter<"Basket"> | string | null
+    levelId?: StringNullableWithAggregatesFilter<"Basket"> | string | null
     count?: IntWithAggregatesFilter<"Basket"> | number
-    workingTime?: IntWithAggregatesFilter<"Basket"> | number
+    workingTime?: IntNullableWithAggregatesFilter<"Basket"> | number | null
     totalPrice?: DecimalWithAggregatesFilter<"Basket"> | Decimal | DecimalJsLike | number | string
     timeUnit?: StringWithAggregatesFilter<"Basket"> | string
   }
@@ -30733,29 +33481,29 @@ export namespace Prisma {
     NOT?: orderProductWhereInput | orderProductWhereInput[]
     id?: StringFilter<"orderProduct"> | string
     orderId?: StringFilter<"orderProduct"> | string
-    professionId?: StringFilter<"orderProduct"> | string
-    toolId?: StringFilter<"orderProduct"> | string
-    levelId?: StringFilter<"orderProduct"> | string
-    workingTime?: IntFilter<"orderProduct"> | number
+    professionId?: StringNullableFilter<"orderProduct"> | string | null
+    toolId?: StringNullableFilter<"orderProduct"> | string | null
+    levelId?: StringNullableFilter<"orderProduct"> | string | null
+    workingTime?: IntNullableFilter<"orderProduct"> | number | null
     price?: DecimalFilter<"orderProduct"> | Decimal | DecimalJsLike | number | string
     count?: IntFilter<"orderProduct"> | number
-    timeUnit?: StringFilter<"orderProduct"> | string
+    timeUnit?: StringNullableFilter<"orderProduct"> | string | null
     Order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
-    Profession?: XOR<ProfessionScalarRelationFilter, ProfessionWhereInput>
-    Tool?: XOR<ToolScalarRelationFilter, ToolWhereInput>
-    Level?: XOR<LevelScalarRelationFilter, LevelWhereInput>
+    Profession?: XOR<ProfessionNullableScalarRelationFilter, ProfessionWhereInput> | null
+    Tool?: XOR<ToolNullableScalarRelationFilter, ToolWhereInput> | null
+    Level?: XOR<LevelNullableScalarRelationFilter, LevelWhereInput> | null
   }
 
   export type orderProductOrderByWithRelationInput = {
     id?: SortOrder
     orderId?: SortOrder
-    professionId?: SortOrder
-    toolId?: SortOrder
-    levelId?: SortOrder
-    workingTime?: SortOrder
+    professionId?: SortOrderInput | SortOrder
+    toolId?: SortOrderInput | SortOrder
+    levelId?: SortOrderInput | SortOrder
+    workingTime?: SortOrderInput | SortOrder
     price?: SortOrder
     count?: SortOrder
-    timeUnit?: SortOrder
+    timeUnit?: SortOrderInput | SortOrder
     Order?: OrderOrderByWithRelationInput
     Profession?: ProfessionOrderByWithRelationInput
     Tool?: ToolOrderByWithRelationInput
@@ -30768,29 +33516,29 @@ export namespace Prisma {
     OR?: orderProductWhereInput[]
     NOT?: orderProductWhereInput | orderProductWhereInput[]
     orderId?: StringFilter<"orderProduct"> | string
-    professionId?: StringFilter<"orderProduct"> | string
-    toolId?: StringFilter<"orderProduct"> | string
-    levelId?: StringFilter<"orderProduct"> | string
-    workingTime?: IntFilter<"orderProduct"> | number
+    professionId?: StringNullableFilter<"orderProduct"> | string | null
+    toolId?: StringNullableFilter<"orderProduct"> | string | null
+    levelId?: StringNullableFilter<"orderProduct"> | string | null
+    workingTime?: IntNullableFilter<"orderProduct"> | number | null
     price?: DecimalFilter<"orderProduct"> | Decimal | DecimalJsLike | number | string
     count?: IntFilter<"orderProduct"> | number
-    timeUnit?: StringFilter<"orderProduct"> | string
+    timeUnit?: StringNullableFilter<"orderProduct"> | string | null
     Order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
-    Profession?: XOR<ProfessionScalarRelationFilter, ProfessionWhereInput>
-    Tool?: XOR<ToolScalarRelationFilter, ToolWhereInput>
-    Level?: XOR<LevelScalarRelationFilter, LevelWhereInput>
+    Profession?: XOR<ProfessionNullableScalarRelationFilter, ProfessionWhereInput> | null
+    Tool?: XOR<ToolNullableScalarRelationFilter, ToolWhereInput> | null
+    Level?: XOR<LevelNullableScalarRelationFilter, LevelWhereInput> | null
   }, "id">
 
   export type orderProductOrderByWithAggregationInput = {
     id?: SortOrder
     orderId?: SortOrder
-    professionId?: SortOrder
-    toolId?: SortOrder
-    levelId?: SortOrder
-    workingTime?: SortOrder
+    professionId?: SortOrderInput | SortOrder
+    toolId?: SortOrderInput | SortOrder
+    levelId?: SortOrderInput | SortOrder
+    workingTime?: SortOrderInput | SortOrder
     price?: SortOrder
     count?: SortOrder
-    timeUnit?: SortOrder
+    timeUnit?: SortOrderInput | SortOrder
     _count?: orderProductCountOrderByAggregateInput
     _avg?: orderProductAvgOrderByAggregateInput
     _max?: orderProductMaxOrderByAggregateInput
@@ -30804,13 +33552,13 @@ export namespace Prisma {
     NOT?: orderProductScalarWhereWithAggregatesInput | orderProductScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"orderProduct"> | string
     orderId?: StringWithAggregatesFilter<"orderProduct"> | string
-    professionId?: StringWithAggregatesFilter<"orderProduct"> | string
-    toolId?: StringWithAggregatesFilter<"orderProduct"> | string
-    levelId?: StringWithAggregatesFilter<"orderProduct"> | string
-    workingTime?: IntWithAggregatesFilter<"orderProduct"> | number
+    professionId?: StringNullableWithAggregatesFilter<"orderProduct"> | string | null
+    toolId?: StringNullableWithAggregatesFilter<"orderProduct"> | string | null
+    levelId?: StringNullableWithAggregatesFilter<"orderProduct"> | string | null
+    workingTime?: IntNullableWithAggregatesFilter<"orderProduct"> | number | null
     price?: DecimalWithAggregatesFilter<"orderProduct"> | Decimal | DecimalJsLike | number | string
     count?: IntWithAggregatesFilter<"orderProduct"> | number
-    timeUnit?: StringWithAggregatesFilter<"orderProduct"> | string
+    timeUnit?: StringNullableWithAggregatesFilter<"orderProduct"> | string | null
   }
 
   export type ContactWhereInput = {
@@ -31046,6 +33794,122 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"faq"> | Date | string
   }
 
+  export type CommentWhereInput = {
+    AND?: CommentWhereInput | CommentWhereInput[]
+    OR?: CommentWhereInput[]
+    NOT?: CommentWhereInput | CommentWhereInput[]
+    id?: StringFilter<"Comment"> | string
+    message?: StringFilter<"Comment"> | string
+    orderId?: StringNullableFilter<"Comment"> | string | null
+    userId?: StringFilter<"Comment"> | string
+    createdAt?: DateTimeFilter<"Comment"> | Date | string
+    order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
+    ratings?: MasterRatingListRelationFilter
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type CommentOrderByWithRelationInput = {
+    id?: SortOrder
+    message?: SortOrder
+    orderId?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    order?: OrderOrderByWithRelationInput
+    ratings?: MasterRatingOrderByRelationAggregateInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type CommentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CommentWhereInput | CommentWhereInput[]
+    OR?: CommentWhereInput[]
+    NOT?: CommentWhereInput | CommentWhereInput[]
+    message?: StringFilter<"Comment"> | string
+    orderId?: StringNullableFilter<"Comment"> | string | null
+    userId?: StringFilter<"Comment"> | string
+    createdAt?: DateTimeFilter<"Comment"> | Date | string
+    order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
+    ratings?: MasterRatingListRelationFilter
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type CommentOrderByWithAggregationInput = {
+    id?: SortOrder
+    message?: SortOrder
+    orderId?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    _count?: CommentCountOrderByAggregateInput
+    _max?: CommentMaxOrderByAggregateInput
+    _min?: CommentMinOrderByAggregateInput
+  }
+
+  export type CommentScalarWhereWithAggregatesInput = {
+    AND?: CommentScalarWhereWithAggregatesInput | CommentScalarWhereWithAggregatesInput[]
+    OR?: CommentScalarWhereWithAggregatesInput[]
+    NOT?: CommentScalarWhereWithAggregatesInput | CommentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Comment"> | string
+    message?: StringWithAggregatesFilter<"Comment"> | string
+    orderId?: StringNullableWithAggregatesFilter<"Comment"> | string | null
+    userId?: StringWithAggregatesFilter<"Comment"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
+  }
+
+  export type MasterRatingWhereInput = {
+    AND?: MasterRatingWhereInput | MasterRatingWhereInput[]
+    OR?: MasterRatingWhereInput[]
+    NOT?: MasterRatingWhereInput | MasterRatingWhereInput[]
+    id?: StringFilter<"MasterRating"> | string
+    masterId?: StringNullableFilter<"MasterRating"> | string | null
+    commentId?: StringFilter<"MasterRating"> | string
+    star?: FloatFilter<"MasterRating"> | number
+    master?: XOR<MasterNullableScalarRelationFilter, MasterWhereInput> | null
+    comment?: XOR<CommentScalarRelationFilter, CommentWhereInput>
+  }
+
+  export type MasterRatingOrderByWithRelationInput = {
+    id?: SortOrder
+    masterId?: SortOrderInput | SortOrder
+    commentId?: SortOrder
+    star?: SortOrder
+    master?: MasterOrderByWithRelationInput
+    comment?: CommentOrderByWithRelationInput
+  }
+
+  export type MasterRatingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MasterRatingWhereInput | MasterRatingWhereInput[]
+    OR?: MasterRatingWhereInput[]
+    NOT?: MasterRatingWhereInput | MasterRatingWhereInput[]
+    masterId?: StringNullableFilter<"MasterRating"> | string | null
+    commentId?: StringFilter<"MasterRating"> | string
+    star?: FloatFilter<"MasterRating"> | number
+    master?: XOR<MasterNullableScalarRelationFilter, MasterWhereInput> | null
+    comment?: XOR<CommentScalarRelationFilter, CommentWhereInput>
+  }, "id">
+
+  export type MasterRatingOrderByWithAggregationInput = {
+    id?: SortOrder
+    masterId?: SortOrderInput | SortOrder
+    commentId?: SortOrder
+    star?: SortOrder
+    _count?: MasterRatingCountOrderByAggregateInput
+    _avg?: MasterRatingAvgOrderByAggregateInput
+    _max?: MasterRatingMaxOrderByAggregateInput
+    _min?: MasterRatingMinOrderByAggregateInput
+    _sum?: MasterRatingSumOrderByAggregateInput
+  }
+
+  export type MasterRatingScalarWhereWithAggregatesInput = {
+    AND?: MasterRatingScalarWhereWithAggregatesInput | MasterRatingScalarWhereWithAggregatesInput[]
+    OR?: MasterRatingScalarWhereWithAggregatesInput[]
+    NOT?: MasterRatingScalarWhereWithAggregatesInput | MasterRatingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MasterRating"> | string
+    masterId?: StringNullableWithAggregatesFilter<"MasterRating"> | string | null
+    commentId?: StringWithAggregatesFilter<"MasterRating"> | string
+    star?: FloatWithAggregatesFilter<"MasterRating"> | number
+  }
+
   export type UserCreateInput = {
     id?: string
     fullName: string
@@ -31058,6 +33922,7 @@ export namespace Prisma {
     Basket?: BasketCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedManyWithoutUserInput
     Session?: SessionCreateNestedManyWithoutUserInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -31072,6 +33937,7 @@ export namespace Prisma {
     Basket?: BasketUncheckedCreateNestedManyWithoutUserInput
     Company?: CompanyUncheckedCreateNestedManyWithoutUserInput
     Session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -31086,6 +33952,7 @@ export namespace Prisma {
     Basket?: BasketUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateManyWithoutUserNestedInput
     Session?: SessionUpdateManyWithoutUserNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -31100,6 +33967,7 @@ export namespace Prisma {
     Basket?: BasketUncheckedUpdateManyWithoutUserNestedInput
     Company?: CompanyUncheckedUpdateManyWithoutUserNestedInput
     Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -31214,7 +34082,6 @@ export namespace Prisma {
     account: string
     address: string
     createdAt?: Date | string
-    salary?: number | null
     bank?: string | null
     mfo?: string | null
     user: UserCreateNestedOneWithoutCompanyInput
@@ -31228,7 +34095,6 @@ export namespace Prisma {
     address: string
     userId: string
     createdAt?: Date | string
-    salary?: number | null
     bank?: string | null
     mfo?: string | null
   }
@@ -31240,7 +34106,6 @@ export namespace Prisma {
     account?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    salary?: NullableFloatFieldUpdateOperationsInput | number | null
     bank?: NullableStringFieldUpdateOperationsInput | string | null
     mfo?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutCompanyNestedInput
@@ -31254,7 +34119,6 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    salary?: NullableFloatFieldUpdateOperationsInput | number | null
     bank?: NullableStringFieldUpdateOperationsInput | string | null
     mfo?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -31267,7 +34131,6 @@ export namespace Prisma {
     address: string
     userId: string
     createdAt?: Date | string
-    salary?: number | null
     bank?: string | null
     mfo?: string | null
   }
@@ -31279,7 +34142,6 @@ export namespace Prisma {
     account?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    salary?: NullableFloatFieldUpdateOperationsInput | number | null
     bank?: NullableStringFieldUpdateOperationsInput | string | null
     mfo?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -31292,7 +34154,6 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    salary?: NullableFloatFieldUpdateOperationsInput | number | null
     bank?: NullableStringFieldUpdateOperationsInput | string | null
     mfo?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -31700,9 +34561,9 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    Brand: BrandCreateNestedOneWithoutToolInput
-    Capacity: CapacityCreateNestedOneWithoutToolInput
-    Size: SizeCreateNestedOneWithoutToolInput
+    Brand?: BrandCreateNestedOneWithoutToolInput
+    Capacity?: CapacityCreateNestedOneWithoutToolInput
+    Size?: SizeCreateNestedOneWithoutToolInput
     professionTool?: professionToolCreateNestedManyWithoutToolInput
     Basket?: BasketCreateNestedManyWithoutToolInput
     orderProduct?: orderProductCreateNestedManyWithoutToolInput
@@ -31722,9 +34583,9 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    brandId: string
-    capacityId: string
-    sizeId: string
+    brandId?: string | null
+    capacityId?: string | null
+    sizeId?: string | null
     professionTool?: professionToolUncheckedCreateNestedManyWithoutToolInput
     Basket?: BasketUncheckedCreateNestedManyWithoutToolInput
     orderProduct?: orderProductUncheckedCreateNestedManyWithoutToolInput
@@ -31744,9 +34605,9 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Brand?: BrandUpdateOneRequiredWithoutToolNestedInput
-    Capacity?: CapacityUpdateOneRequiredWithoutToolNestedInput
-    Size?: SizeUpdateOneRequiredWithoutToolNestedInput
+    Brand?: BrandUpdateOneWithoutToolNestedInput
+    Capacity?: CapacityUpdateOneWithoutToolNestedInput
+    Size?: SizeUpdateOneWithoutToolNestedInput
     professionTool?: professionToolUpdateManyWithoutToolNestedInput
     Basket?: BasketUpdateManyWithoutToolNestedInput
     orderProduct?: orderProductUpdateManyWithoutToolNestedInput
@@ -31766,9 +34627,9 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    brandId?: StringFieldUpdateOperationsInput | string
-    capacityId?: StringFieldUpdateOperationsInput | string
-    sizeId?: StringFieldUpdateOperationsInput | string
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    capacityId?: NullableStringFieldUpdateOperationsInput | string | null
+    sizeId?: NullableStringFieldUpdateOperationsInput | string | null
     professionTool?: professionToolUncheckedUpdateManyWithoutToolNestedInput
     Basket?: BasketUncheckedUpdateManyWithoutToolNestedInput
     orderProduct?: orderProductUncheckedUpdateManyWithoutToolNestedInput
@@ -31788,9 +34649,9 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    brandId: string
-    capacityId: string
-    sizeId: string
+    brandId?: string | null
+    capacityId?: string | null
+    sizeId?: string | null
   }
 
   export type ToolUpdateManyMutationInput = {
@@ -31823,9 +34684,9 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    brandId?: StringFieldUpdateOperationsInput | string
-    capacityId?: StringFieldUpdateOperationsInput | string
-    sizeId?: StringFieldUpdateOperationsInput | string
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    capacityId?: NullableStringFieldUpdateOperationsInput | string | null
+    sizeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MasterCreateInput = {
@@ -31841,6 +34702,7 @@ export namespace Prisma {
     createdAt?: Date | string
     MasterProfession?: MasterProfessionCreateNestedManyWithoutMasterInput
     OrderMaster?: OrderMasterCreateNestedManyWithoutMasterInput
+    MasterRating?: MasterRatingCreateNestedManyWithoutMasterInput
   }
 
   export type MasterUncheckedCreateInput = {
@@ -31856,6 +34718,7 @@ export namespace Prisma {
     createdAt?: Date | string
     MasterProfession?: MasterProfessionUncheckedCreateNestedManyWithoutMasterInput
     OrderMaster?: OrderMasterUncheckedCreateNestedManyWithoutMasterInput
+    MasterRating?: MasterRatingUncheckedCreateNestedManyWithoutMasterInput
   }
 
   export type MasterUpdateInput = {
@@ -31871,6 +34734,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     MasterProfession?: MasterProfessionUpdateManyWithoutMasterNestedInput
     OrderMaster?: OrderMasterUpdateManyWithoutMasterNestedInput
+    MasterRating?: MasterRatingUpdateManyWithoutMasterNestedInput
   }
 
   export type MasterUncheckedUpdateInput = {
@@ -31886,6 +34750,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     MasterProfession?: MasterProfessionUncheckedUpdateManyWithoutMasterNestedInput
     OrderMaster?: OrderMasterUncheckedUpdateManyWithoutMasterNestedInput
+    MasterRating?: MasterRatingUncheckedUpdateManyWithoutMasterNestedInput
   }
 
   export type MasterCreateManyInput = {
@@ -32093,32 +34958,32 @@ export namespace Prisma {
 
   export type professionToolCreateInput = {
     id?: string
-    Profession: ProfessionCreateNestedOneWithoutProfessionToolInput
-    Tool: ToolCreateNestedOneWithoutProfessionToolInput
+    Profession?: ProfessionCreateNestedOneWithoutProfessionToolInput
+    Tool?: ToolCreateNestedOneWithoutProfessionToolInput
   }
 
   export type professionToolUncheckedCreateInput = {
     id?: string
-    professionId: string
-    toolId: string
+    professionId?: string | null
+    toolId?: string | null
   }
 
   export type professionToolUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    Profession?: ProfessionUpdateOneRequiredWithoutProfessionToolNestedInput
-    Tool?: ToolUpdateOneRequiredWithoutProfessionToolNestedInput
+    Profession?: ProfessionUpdateOneWithoutProfessionToolNestedInput
+    Tool?: ToolUpdateOneWithoutProfessionToolNestedInput
   }
 
   export type professionToolUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type professionToolCreateManyInput = {
     id?: string
-    professionId: string
-    toolId: string
+    professionId?: string | null
+    toolId?: string | null
   }
 
   export type professionToolUpdateManyMutationInput = {
@@ -32127,8 +34992,8 @@ export namespace Prisma {
 
   export type professionToolUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type professionLevelCreateInput = {
@@ -32207,6 +35072,7 @@ export namespace Prisma {
     User: UserCreateNestedOneWithoutOrderInput
     OrderMaster?: OrderMasterCreateNestedManyWithoutOrderInput
     orderProduct?: orderProductCreateNestedManyWithoutOrderInput
+    Comment?: CommentCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUncheckedCreateInput = {
@@ -32224,6 +35090,7 @@ export namespace Prisma {
     createdAt?: Date | string
     OrderMaster?: OrderMasterUncheckedCreateNestedManyWithoutOrderInput
     orderProduct?: orderProductUncheckedCreateNestedManyWithoutOrderInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUpdateInput = {
@@ -32241,6 +35108,7 @@ export namespace Prisma {
     User?: UserUpdateOneRequiredWithoutOrderNestedInput
     OrderMaster?: OrderMasterUpdateManyWithoutOrderNestedInput
     orderProduct?: orderProductUpdateManyWithoutOrderNestedInput
+    Comment?: CommentUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateInput = {
@@ -32258,6 +35126,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OrderMaster?: OrderMasterUncheckedUpdateManyWithoutOrderNestedInput
     orderProduct?: orderProductUncheckedUpdateManyWithoutOrderNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderCreateManyInput = {
@@ -32347,23 +35216,23 @@ export namespace Prisma {
   export type BasketCreateInput = {
     id?: string
     count: number
-    workingTime: number
+    workingTime?: number | null
     totalPrice: Decimal | DecimalJsLike | number | string
     timeUnit: string
-    User: UserCreateNestedOneWithoutBasketInput
-    Profession: ProfessionCreateNestedOneWithoutBasketInput
-    Tool: ToolCreateNestedOneWithoutBasketInput
-    Level: LevelCreateNestedOneWithoutBasketInput
+    User?: UserCreateNestedOneWithoutBasketInput
+    Profession?: ProfessionCreateNestedOneWithoutBasketInput
+    Tool?: ToolCreateNestedOneWithoutBasketInput
+    Level?: LevelCreateNestedOneWithoutBasketInput
   }
 
   export type BasketUncheckedCreateInput = {
     id?: string
-    userId: string
-    professionId: string
-    toolId: string
-    levelId: string
+    userId?: string | null
+    professionId?: string | null
+    toolId?: string | null
+    levelId?: string | null
     count: number
-    workingTime: number
+    workingTime?: number | null
     totalPrice: Decimal | DecimalJsLike | number | string
     timeUnit: string
   }
@@ -32371,35 +35240,35 @@ export namespace Prisma {
   export type BasketUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     count?: IntFieldUpdateOperationsInput | number
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFieldUpdateOperationsInput | string
-    User?: UserUpdateOneRequiredWithoutBasketNestedInput
-    Profession?: ProfessionUpdateOneRequiredWithoutBasketNestedInput
-    Tool?: ToolUpdateOneRequiredWithoutBasketNestedInput
-    Level?: LevelUpdateOneRequiredWithoutBasketNestedInput
+    User?: UserUpdateOneWithoutBasketNestedInput
+    Profession?: ProfessionUpdateOneWithoutBasketNestedInput
+    Tool?: ToolUpdateOneWithoutBasketNestedInput
+    Level?: LevelUpdateOneWithoutBasketNestedInput
   }
 
   export type BasketUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
-    levelId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
+    levelId?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFieldUpdateOperationsInput | string
   }
 
   export type BasketCreateManyInput = {
     id?: string
-    userId: string
-    professionId: string
-    toolId: string
-    levelId: string
+    userId?: string | null
+    professionId?: string | null
+    toolId?: string | null
+    levelId?: string | null
     count: number
-    workingTime: number
+    workingTime?: number | null
     totalPrice: Decimal | DecimalJsLike | number | string
     timeUnit: string
   }
@@ -32407,101 +35276,101 @@ export namespace Prisma {
   export type BasketUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     count?: IntFieldUpdateOperationsInput | number
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFieldUpdateOperationsInput | string
   }
 
   export type BasketUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
-    levelId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
+    levelId?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFieldUpdateOperationsInput | string
   }
 
   export type orderProductCreateInput = {
     id?: string
-    workingTime: number
+    workingTime?: number | null
     price: Decimal | DecimalJsLike | number | string
     count: number
-    timeUnit: string
+    timeUnit?: string | null
     Order: OrderCreateNestedOneWithoutOrderProductInput
-    Profession: ProfessionCreateNestedOneWithoutOrderProductInput
-    Tool: ToolCreateNestedOneWithoutOrderProductInput
-    Level: LevelCreateNestedOneWithoutOrderProductInput
+    Profession?: ProfessionCreateNestedOneWithoutOrderProductInput
+    Tool?: ToolCreateNestedOneWithoutOrderProductInput
+    Level?: LevelCreateNestedOneWithoutOrderProductInput
   }
 
   export type orderProductUncheckedCreateInput = {
     id?: string
     orderId: string
-    professionId: string
-    toolId: string
-    levelId: string
-    workingTime: number
+    professionId?: string | null
+    toolId?: string | null
+    levelId?: string | null
+    workingTime?: number | null
     price: Decimal | DecimalJsLike | number | string
     count: number
-    timeUnit: string
+    timeUnit?: string | null
   }
 
   export type orderProductUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     count?: IntFieldUpdateOperationsInput | number
-    timeUnit?: StringFieldUpdateOperationsInput | string
+    timeUnit?: NullableStringFieldUpdateOperationsInput | string | null
     Order?: OrderUpdateOneRequiredWithoutOrderProductNestedInput
-    Profession?: ProfessionUpdateOneRequiredWithoutOrderProductNestedInput
-    Tool?: ToolUpdateOneRequiredWithoutOrderProductNestedInput
-    Level?: LevelUpdateOneRequiredWithoutOrderProductNestedInput
+    Profession?: ProfessionUpdateOneWithoutOrderProductNestedInput
+    Tool?: ToolUpdateOneWithoutOrderProductNestedInput
+    Level?: LevelUpdateOneWithoutOrderProductNestedInput
   }
 
   export type orderProductUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     orderId?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
-    levelId?: StringFieldUpdateOperationsInput | string
-    workingTime?: IntFieldUpdateOperationsInput | number
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
+    levelId?: NullableStringFieldUpdateOperationsInput | string | null
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     count?: IntFieldUpdateOperationsInput | number
-    timeUnit?: StringFieldUpdateOperationsInput | string
+    timeUnit?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type orderProductCreateManyInput = {
     id?: string
     orderId: string
-    professionId: string
-    toolId: string
-    levelId: string
-    workingTime: number
+    professionId?: string | null
+    toolId?: string | null
+    levelId?: string | null
+    workingTime?: number | null
     price: Decimal | DecimalJsLike | number | string
     count: number
-    timeUnit: string
+    timeUnit?: string | null
   }
 
   export type orderProductUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     count?: IntFieldUpdateOperationsInput | number
-    timeUnit?: StringFieldUpdateOperationsInput | string
+    timeUnit?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type orderProductUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     orderId?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
-    levelId?: StringFieldUpdateOperationsInput | string
-    workingTime?: IntFieldUpdateOperationsInput | number
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
+    levelId?: NullableStringFieldUpdateOperationsInput | string | null
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     count?: IntFieldUpdateOperationsInput | number
-    timeUnit?: StringFieldUpdateOperationsInput | string
+    timeUnit?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ContactCreateInput = {
@@ -32763,6 +35632,111 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CommentCreateInput = {
+    id?: string
+    message: string
+    createdAt?: Date | string
+    order?: OrderCreateNestedOneWithoutCommentInput
+    ratings?: MasterRatingCreateNestedManyWithoutCommentInput
+    user: UserCreateNestedOneWithoutCommentInput
+  }
+
+  export type CommentUncheckedCreateInput = {
+    id?: string
+    message: string
+    orderId?: string | null
+    userId: string
+    createdAt?: Date | string
+    ratings?: MasterRatingUncheckedCreateNestedManyWithoutCommentInput
+  }
+
+  export type CommentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: OrderUpdateOneWithoutCommentNestedInput
+    ratings?: MasterRatingUpdateManyWithoutCommentNestedInput
+    user?: UserUpdateOneRequiredWithoutCommentNestedInput
+  }
+
+  export type CommentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    orderId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratings?: MasterRatingUncheckedUpdateManyWithoutCommentNestedInput
+  }
+
+  export type CommentCreateManyInput = {
+    id?: string
+    message: string
+    orderId?: string | null
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type CommentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    orderId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MasterRatingCreateInput = {
+    id?: string
+    star: number
+    master?: MasterCreateNestedOneWithoutMasterRatingInput
+    comment: CommentCreateNestedOneWithoutRatingsInput
+  }
+
+  export type MasterRatingUncheckedCreateInput = {
+    id?: string
+    masterId?: string | null
+    commentId: string
+    star: number
+  }
+
+  export type MasterRatingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    star?: FloatFieldUpdateOperationsInput | number
+    master?: MasterUpdateOneWithoutMasterRatingNestedInput
+    comment?: CommentUpdateOneRequiredWithoutRatingsNestedInput
+  }
+
+  export type MasterRatingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    masterId?: NullableStringFieldUpdateOperationsInput | string | null
+    commentId?: StringFieldUpdateOperationsInput | string
+    star?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type MasterRatingCreateManyInput = {
+    id?: string
+    masterId?: string | null
+    commentId: string
+    star: number
+  }
+
+  export type MasterRatingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    star?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type MasterRatingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    masterId?: NullableStringFieldUpdateOperationsInput | string | null
+    commentId?: StringFieldUpdateOperationsInput | string
+    star?: FloatFieldUpdateOperationsInput | number
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -32825,6 +35799,12 @@ export namespace Prisma {
     none?: SessionWhereInput
   }
 
+  export type CommentListRelationFilter = {
+    every?: CommentWhereInput
+    some?: CommentWhereInput
+    none?: CommentWhereInput
+  }
+
   export type OrderOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -32838,6 +35818,10 @@ export namespace Prisma {
   }
 
   export type SessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CommentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -32989,17 +35973,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type FloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
   export type CompanyCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -33008,13 +35981,8 @@ export namespace Prisma {
     address?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
-    salary?: SortOrder
     bank?: SortOrder
     mfo?: SortOrder
-  }
-
-  export type CompanyAvgOrderByAggregateInput = {
-    salary?: SortOrder
   }
 
   export type CompanyMaxOrderByAggregateInput = {
@@ -33025,7 +35993,6 @@ export namespace Prisma {
     address?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
-    salary?: SortOrder
     bank?: SortOrder
     mfo?: SortOrder
   }
@@ -33038,29 +36005,8 @@ export namespace Prisma {
     address?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
-    salary?: SortOrder
     bank?: SortOrder
     mfo?: SortOrder
-  }
-
-  export type CompanySumOrderByAggregateInput = {
-    salary?: SortOrder
-  }
-
-  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type UserListRelationFilter = {
@@ -33293,19 +36239,19 @@ export namespace Prisma {
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
-  export type BrandScalarRelationFilter = {
-    is?: BrandWhereInput
-    isNot?: BrandWhereInput
+  export type BrandNullableScalarRelationFilter = {
+    is?: BrandWhereInput | null
+    isNot?: BrandWhereInput | null
   }
 
-  export type CapacityScalarRelationFilter = {
-    is?: CapacityWhereInput
-    isNot?: CapacityWhereInput
+  export type CapacityNullableScalarRelationFilter = {
+    is?: CapacityWhereInput | null
+    isNot?: CapacityWhereInput | null
   }
 
-  export type SizeScalarRelationFilter = {
-    is?: SizeWhereInput
-    isNot?: SizeWhereInput
+  export type SizeNullableScalarRelationFilter = {
+    is?: SizeWhereInput | null
+    isNot?: SizeWhereInput | null
   }
 
   export type ProfessionToolListRelationFilter = {
@@ -33433,7 +36379,17 @@ export namespace Prisma {
     none?: OrderMasterWhereInput
   }
 
+  export type MasterRatingListRelationFilter = {
+    every?: MasterRatingWhereInput
+    some?: MasterRatingWhereInput
+    none?: MasterRatingWhereInput
+  }
+
   export type OrderMasterOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MasterRatingOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -33616,9 +36572,14 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
-  export type ToolScalarRelationFilter = {
-    is?: ToolWhereInput
-    isNot?: ToolWhereInput
+  export type ProfessionNullableScalarRelationFilter = {
+    is?: ProfessionWhereInput | null
+    isNot?: ProfessionWhereInput | null
+  }
+
+  export type ToolNullableScalarRelationFilter = {
+    is?: ToolWhereInput | null
+    isNot?: ToolWhereInput | null
   }
 
   export type professionToolCountOrderByAggregateInput = {
@@ -33752,6 +36713,16 @@ export namespace Prisma {
     id?: SortOrder
     orderId?: SortOrder
     masterId?: SortOrder
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type LevelNullableScalarRelationFilter = {
+    is?: LevelWhereInput | null
+    isNot?: LevelWhereInput | null
   }
 
   export type BasketCountOrderByAggregateInput = {
@@ -33961,6 +36932,101 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type OrderNullableScalarRelationFilter = {
+    is?: OrderWhereInput | null
+    isNot?: OrderWhereInput | null
+  }
+
+  export type CommentCountOrderByAggregateInput = {
+    id?: SortOrder
+    message?: SortOrder
+    orderId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CommentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    message?: SortOrder
+    orderId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CommentMinOrderByAggregateInput = {
+    id?: SortOrder
+    message?: SortOrder
+    orderId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type MasterNullableScalarRelationFilter = {
+    is?: MasterWhereInput | null
+    isNot?: MasterWhereInput | null
+  }
+
+  export type CommentScalarRelationFilter = {
+    is?: CommentWhereInput
+    isNot?: CommentWhereInput
+  }
+
+  export type MasterRatingCountOrderByAggregateInput = {
+    id?: SortOrder
+    masterId?: SortOrder
+    commentId?: SortOrder
+    star?: SortOrder
+  }
+
+  export type MasterRatingAvgOrderByAggregateInput = {
+    star?: SortOrder
+  }
+
+  export type MasterRatingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    masterId?: SortOrder
+    commentId?: SortOrder
+    star?: SortOrder
+  }
+
+  export type MasterRatingMinOrderByAggregateInput = {
+    id?: SortOrder
+    masterId?: SortOrder
+    commentId?: SortOrder
+    star?: SortOrder
+  }
+
+  export type MasterRatingSumOrderByAggregateInput = {
+    star?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
   export type RegionCreateNestedOneWithoutUserInput = {
     create?: XOR<RegionCreateWithoutUserInput, RegionUncheckedCreateWithoutUserInput>
     connectOrCreate?: RegionCreateOrConnectWithoutUserInput
@@ -33995,6 +37061,13 @@ export namespace Prisma {
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
+  export type CommentCreateNestedManyWithoutUserInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
   export type OrderUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<OrderCreateWithoutUserInput, OrderUncheckedCreateWithoutUserInput> | OrderCreateWithoutUserInput[] | OrderUncheckedCreateWithoutUserInput[]
     connectOrCreate?: OrderCreateOrConnectWithoutUserInput | OrderCreateOrConnectWithoutUserInput[]
@@ -34021,6 +37094,13 @@ export namespace Prisma {
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
     createMany?: SessionCreateManyUserInputEnvelope
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
+  export type CommentUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -34099,6 +37179,20 @@ export namespace Prisma {
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
+  export type CommentUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutUserInput | CommentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutUserInput | CommentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutUserInput | CommentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
   export type OrderUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<OrderCreateWithoutUserInput, OrderUncheckedCreateWithoutUserInput> | OrderCreateWithoutUserInput[] | OrderUncheckedCreateWithoutUserInput[]
     connectOrCreate?: OrderCreateOrConnectWithoutUserInput | OrderCreateOrConnectWithoutUserInput[]
@@ -34155,6 +37249,20 @@ export namespace Prisma {
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
+  export type CommentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutUserInput | CommentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutUserInput | CommentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutUserInput | CommentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutSessionInput = {
     create?: XOR<UserCreateWithoutSessionInput, UserUncheckedCreateWithoutSessionInput>
     connectOrCreate?: UserCreateOrConnectWithoutSessionInput
@@ -34177,14 +37285,6 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput>
     connectOrCreate?: UserCreateOrConnectWithoutCompanyInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type NullableFloatFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type UserUpdateOneRequiredWithoutCompanyNestedInput = {
@@ -34611,26 +37711,32 @@ export namespace Prisma {
     set?: boolean | null
   }
 
-  export type BrandUpdateOneRequiredWithoutToolNestedInput = {
+  export type BrandUpdateOneWithoutToolNestedInput = {
     create?: XOR<BrandCreateWithoutToolInput, BrandUncheckedCreateWithoutToolInput>
     connectOrCreate?: BrandCreateOrConnectWithoutToolInput
     upsert?: BrandUpsertWithoutToolInput
+    disconnect?: BrandWhereInput | boolean
+    delete?: BrandWhereInput | boolean
     connect?: BrandWhereUniqueInput
     update?: XOR<XOR<BrandUpdateToOneWithWhereWithoutToolInput, BrandUpdateWithoutToolInput>, BrandUncheckedUpdateWithoutToolInput>
   }
 
-  export type CapacityUpdateOneRequiredWithoutToolNestedInput = {
+  export type CapacityUpdateOneWithoutToolNestedInput = {
     create?: XOR<CapacityCreateWithoutToolInput, CapacityUncheckedCreateWithoutToolInput>
     connectOrCreate?: CapacityCreateOrConnectWithoutToolInput
     upsert?: CapacityUpsertWithoutToolInput
+    disconnect?: CapacityWhereInput | boolean
+    delete?: CapacityWhereInput | boolean
     connect?: CapacityWhereUniqueInput
     update?: XOR<XOR<CapacityUpdateToOneWithWhereWithoutToolInput, CapacityUpdateWithoutToolInput>, CapacityUncheckedUpdateWithoutToolInput>
   }
 
-  export type SizeUpdateOneRequiredWithoutToolNestedInput = {
+  export type SizeUpdateOneWithoutToolNestedInput = {
     create?: XOR<SizeCreateWithoutToolInput, SizeUncheckedCreateWithoutToolInput>
     connectOrCreate?: SizeCreateOrConnectWithoutToolInput
     upsert?: SizeUpsertWithoutToolInput
+    disconnect?: SizeWhereInput | boolean
+    delete?: SizeWhereInput | boolean
     connect?: SizeWhereUniqueInput
     update?: XOR<XOR<SizeUpdateToOneWithWhereWithoutToolInput, SizeUpdateWithoutToolInput>, SizeUncheckedUpdateWithoutToolInput>
   }
@@ -34733,6 +37839,13 @@ export namespace Prisma {
     connect?: OrderMasterWhereUniqueInput | OrderMasterWhereUniqueInput[]
   }
 
+  export type MasterRatingCreateNestedManyWithoutMasterInput = {
+    create?: XOR<MasterRatingCreateWithoutMasterInput, MasterRatingUncheckedCreateWithoutMasterInput> | MasterRatingCreateWithoutMasterInput[] | MasterRatingUncheckedCreateWithoutMasterInput[]
+    connectOrCreate?: MasterRatingCreateOrConnectWithoutMasterInput | MasterRatingCreateOrConnectWithoutMasterInput[]
+    createMany?: MasterRatingCreateManyMasterInputEnvelope
+    connect?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+  }
+
   export type MasterProfessionUncheckedCreateNestedManyWithoutMasterInput = {
     create?: XOR<MasterProfessionCreateWithoutMasterInput, MasterProfessionUncheckedCreateWithoutMasterInput> | MasterProfessionCreateWithoutMasterInput[] | MasterProfessionUncheckedCreateWithoutMasterInput[]
     connectOrCreate?: MasterProfessionCreateOrConnectWithoutMasterInput | MasterProfessionCreateOrConnectWithoutMasterInput[]
@@ -34745,6 +37858,13 @@ export namespace Prisma {
     connectOrCreate?: OrderMasterCreateOrConnectWithoutMasterInput | OrderMasterCreateOrConnectWithoutMasterInput[]
     createMany?: OrderMasterCreateManyMasterInputEnvelope
     connect?: OrderMasterWhereUniqueInput | OrderMasterWhereUniqueInput[]
+  }
+
+  export type MasterRatingUncheckedCreateNestedManyWithoutMasterInput = {
+    create?: XOR<MasterRatingCreateWithoutMasterInput, MasterRatingUncheckedCreateWithoutMasterInput> | MasterRatingCreateWithoutMasterInput[] | MasterRatingUncheckedCreateWithoutMasterInput[]
+    connectOrCreate?: MasterRatingCreateOrConnectWithoutMasterInput | MasterRatingCreateOrConnectWithoutMasterInput[]
+    createMany?: MasterRatingCreateManyMasterInputEnvelope
+    connect?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
   }
 
   export type MasterProfessionUpdateManyWithoutMasterNestedInput = {
@@ -34775,6 +37895,20 @@ export namespace Prisma {
     deleteMany?: OrderMasterScalarWhereInput | OrderMasterScalarWhereInput[]
   }
 
+  export type MasterRatingUpdateManyWithoutMasterNestedInput = {
+    create?: XOR<MasterRatingCreateWithoutMasterInput, MasterRatingUncheckedCreateWithoutMasterInput> | MasterRatingCreateWithoutMasterInput[] | MasterRatingUncheckedCreateWithoutMasterInput[]
+    connectOrCreate?: MasterRatingCreateOrConnectWithoutMasterInput | MasterRatingCreateOrConnectWithoutMasterInput[]
+    upsert?: MasterRatingUpsertWithWhereUniqueWithoutMasterInput | MasterRatingUpsertWithWhereUniqueWithoutMasterInput[]
+    createMany?: MasterRatingCreateManyMasterInputEnvelope
+    set?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+    disconnect?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+    delete?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+    connect?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+    update?: MasterRatingUpdateWithWhereUniqueWithoutMasterInput | MasterRatingUpdateWithWhereUniqueWithoutMasterInput[]
+    updateMany?: MasterRatingUpdateManyWithWhereWithoutMasterInput | MasterRatingUpdateManyWithWhereWithoutMasterInput[]
+    deleteMany?: MasterRatingScalarWhereInput | MasterRatingScalarWhereInput[]
+  }
+
   export type MasterProfessionUncheckedUpdateManyWithoutMasterNestedInput = {
     create?: XOR<MasterProfessionCreateWithoutMasterInput, MasterProfessionUncheckedCreateWithoutMasterInput> | MasterProfessionCreateWithoutMasterInput[] | MasterProfessionUncheckedCreateWithoutMasterInput[]
     connectOrCreate?: MasterProfessionCreateOrConnectWithoutMasterInput | MasterProfessionCreateOrConnectWithoutMasterInput[]
@@ -34801,6 +37935,20 @@ export namespace Prisma {
     update?: OrderMasterUpdateWithWhereUniqueWithoutMasterInput | OrderMasterUpdateWithWhereUniqueWithoutMasterInput[]
     updateMany?: OrderMasterUpdateManyWithWhereWithoutMasterInput | OrderMasterUpdateManyWithWhereWithoutMasterInput[]
     deleteMany?: OrderMasterScalarWhereInput | OrderMasterScalarWhereInput[]
+  }
+
+  export type MasterRatingUncheckedUpdateManyWithoutMasterNestedInput = {
+    create?: XOR<MasterRatingCreateWithoutMasterInput, MasterRatingUncheckedCreateWithoutMasterInput> | MasterRatingCreateWithoutMasterInput[] | MasterRatingUncheckedCreateWithoutMasterInput[]
+    connectOrCreate?: MasterRatingCreateOrConnectWithoutMasterInput | MasterRatingCreateOrConnectWithoutMasterInput[]
+    upsert?: MasterRatingUpsertWithWhereUniqueWithoutMasterInput | MasterRatingUpsertWithWhereUniqueWithoutMasterInput[]
+    createMany?: MasterRatingCreateManyMasterInputEnvelope
+    set?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+    disconnect?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+    delete?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+    connect?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+    update?: MasterRatingUpdateWithWhereUniqueWithoutMasterInput | MasterRatingUpdateWithWhereUniqueWithoutMasterInput[]
+    updateMany?: MasterRatingUpdateManyWithWhereWithoutMasterInput | MasterRatingUpdateManyWithWhereWithoutMasterInput[]
+    deleteMany?: MasterRatingScalarWhereInput | MasterRatingScalarWhereInput[]
   }
 
   export type MasterProfessionCreateNestedManyWithoutPofessionInput = {
@@ -35079,18 +38227,22 @@ export namespace Prisma {
     connect?: ToolWhereUniqueInput
   }
 
-  export type ProfessionUpdateOneRequiredWithoutProfessionToolNestedInput = {
+  export type ProfessionUpdateOneWithoutProfessionToolNestedInput = {
     create?: XOR<ProfessionCreateWithoutProfessionToolInput, ProfessionUncheckedCreateWithoutProfessionToolInput>
     connectOrCreate?: ProfessionCreateOrConnectWithoutProfessionToolInput
     upsert?: ProfessionUpsertWithoutProfessionToolInput
+    disconnect?: ProfessionWhereInput | boolean
+    delete?: ProfessionWhereInput | boolean
     connect?: ProfessionWhereUniqueInput
     update?: XOR<XOR<ProfessionUpdateToOneWithWhereWithoutProfessionToolInput, ProfessionUpdateWithoutProfessionToolInput>, ProfessionUncheckedUpdateWithoutProfessionToolInput>
   }
 
-  export type ToolUpdateOneRequiredWithoutProfessionToolNestedInput = {
+  export type ToolUpdateOneWithoutProfessionToolNestedInput = {
     create?: XOR<ToolCreateWithoutProfessionToolInput, ToolUncheckedCreateWithoutProfessionToolInput>
     connectOrCreate?: ToolCreateOrConnectWithoutProfessionToolInput
     upsert?: ToolUpsertWithoutProfessionToolInput
+    disconnect?: ToolWhereInput | boolean
+    delete?: ToolWhereInput | boolean
     connect?: ToolWhereUniqueInput
     update?: XOR<XOR<ToolUpdateToOneWithWhereWithoutProfessionToolInput, ToolUpdateWithoutProfessionToolInput>, ToolUncheckedUpdateWithoutProfessionToolInput>
   }
@@ -35143,6 +38295,13 @@ export namespace Prisma {
     connect?: orderProductWhereUniqueInput | orderProductWhereUniqueInput[]
   }
 
+  export type CommentCreateNestedManyWithoutOrderInput = {
+    create?: XOR<CommentCreateWithoutOrderInput, CommentUncheckedCreateWithoutOrderInput> | CommentCreateWithoutOrderInput[] | CommentUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutOrderInput | CommentCreateOrConnectWithoutOrderInput[]
+    createMany?: CommentCreateManyOrderInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
   export type OrderMasterUncheckedCreateNestedManyWithoutOrderInput = {
     create?: XOR<OrderMasterCreateWithoutOrderInput, OrderMasterUncheckedCreateWithoutOrderInput> | OrderMasterCreateWithoutOrderInput[] | OrderMasterUncheckedCreateWithoutOrderInput[]
     connectOrCreate?: OrderMasterCreateOrConnectWithoutOrderInput | OrderMasterCreateOrConnectWithoutOrderInput[]
@@ -35155,6 +38314,13 @@ export namespace Prisma {
     connectOrCreate?: orderProductCreateOrConnectWithoutOrderInput | orderProductCreateOrConnectWithoutOrderInput[]
     createMany?: orderProductCreateManyOrderInputEnvelope
     connect?: orderProductWhereUniqueInput | orderProductWhereUniqueInput[]
+  }
+
+  export type CommentUncheckedCreateNestedManyWithoutOrderInput = {
+    create?: XOR<CommentCreateWithoutOrderInput, CommentUncheckedCreateWithoutOrderInput> | CommentCreateWithoutOrderInput[] | CommentUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutOrderInput | CommentCreateOrConnectWithoutOrderInput[]
+    createMany?: CommentCreateManyOrderInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutOrderNestedInput = {
@@ -35193,6 +38359,20 @@ export namespace Prisma {
     deleteMany?: orderProductScalarWhereInput | orderProductScalarWhereInput[]
   }
 
+  export type CommentUpdateManyWithoutOrderNestedInput = {
+    create?: XOR<CommentCreateWithoutOrderInput, CommentUncheckedCreateWithoutOrderInput> | CommentCreateWithoutOrderInput[] | CommentUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutOrderInput | CommentCreateOrConnectWithoutOrderInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutOrderInput | CommentUpsertWithWhereUniqueWithoutOrderInput[]
+    createMany?: CommentCreateManyOrderInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutOrderInput | CommentUpdateWithWhereUniqueWithoutOrderInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutOrderInput | CommentUpdateManyWithWhereWithoutOrderInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
   export type OrderMasterUncheckedUpdateManyWithoutOrderNestedInput = {
     create?: XOR<OrderMasterCreateWithoutOrderInput, OrderMasterUncheckedCreateWithoutOrderInput> | OrderMasterCreateWithoutOrderInput[] | OrderMasterUncheckedCreateWithoutOrderInput[]
     connectOrCreate?: OrderMasterCreateOrConnectWithoutOrderInput | OrderMasterCreateOrConnectWithoutOrderInput[]
@@ -35219,6 +38399,20 @@ export namespace Prisma {
     update?: orderProductUpdateWithWhereUniqueWithoutOrderInput | orderProductUpdateWithWhereUniqueWithoutOrderInput[]
     updateMany?: orderProductUpdateManyWithWhereWithoutOrderInput | orderProductUpdateManyWithWhereWithoutOrderInput[]
     deleteMany?: orderProductScalarWhereInput | orderProductScalarWhereInput[]
+  }
+
+  export type CommentUncheckedUpdateManyWithoutOrderNestedInput = {
+    create?: XOR<CommentCreateWithoutOrderInput, CommentUncheckedCreateWithoutOrderInput> | CommentCreateWithoutOrderInput[] | CommentUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutOrderInput | CommentCreateOrConnectWithoutOrderInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutOrderInput | CommentUpsertWithWhereUniqueWithoutOrderInput[]
+    createMany?: CommentCreateManyOrderInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutOrderInput | CommentUpdateWithWhereUniqueWithoutOrderInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutOrderInput | CommentUpdateManyWithWhereWithoutOrderInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
   export type OrderCreateNestedOneWithoutOrderMasterInput = {
@@ -35273,34 +38467,42 @@ export namespace Prisma {
     connect?: LevelWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutBasketNestedInput = {
+  export type UserUpdateOneWithoutBasketNestedInput = {
     create?: XOR<UserCreateWithoutBasketInput, UserUncheckedCreateWithoutBasketInput>
     connectOrCreate?: UserCreateOrConnectWithoutBasketInput
     upsert?: UserUpsertWithoutBasketInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBasketInput, UserUpdateWithoutBasketInput>, UserUncheckedUpdateWithoutBasketInput>
   }
 
-  export type ProfessionUpdateOneRequiredWithoutBasketNestedInput = {
+  export type ProfessionUpdateOneWithoutBasketNestedInput = {
     create?: XOR<ProfessionCreateWithoutBasketInput, ProfessionUncheckedCreateWithoutBasketInput>
     connectOrCreate?: ProfessionCreateOrConnectWithoutBasketInput
     upsert?: ProfessionUpsertWithoutBasketInput
+    disconnect?: ProfessionWhereInput | boolean
+    delete?: ProfessionWhereInput | boolean
     connect?: ProfessionWhereUniqueInput
     update?: XOR<XOR<ProfessionUpdateToOneWithWhereWithoutBasketInput, ProfessionUpdateWithoutBasketInput>, ProfessionUncheckedUpdateWithoutBasketInput>
   }
 
-  export type ToolUpdateOneRequiredWithoutBasketNestedInput = {
+  export type ToolUpdateOneWithoutBasketNestedInput = {
     create?: XOR<ToolCreateWithoutBasketInput, ToolUncheckedCreateWithoutBasketInput>
     connectOrCreate?: ToolCreateOrConnectWithoutBasketInput
     upsert?: ToolUpsertWithoutBasketInput
+    disconnect?: ToolWhereInput | boolean
+    delete?: ToolWhereInput | boolean
     connect?: ToolWhereUniqueInput
     update?: XOR<XOR<ToolUpdateToOneWithWhereWithoutBasketInput, ToolUpdateWithoutBasketInput>, ToolUncheckedUpdateWithoutBasketInput>
   }
 
-  export type LevelUpdateOneRequiredWithoutBasketNestedInput = {
+  export type LevelUpdateOneWithoutBasketNestedInput = {
     create?: XOR<LevelCreateWithoutBasketInput, LevelUncheckedCreateWithoutBasketInput>
     connectOrCreate?: LevelCreateOrConnectWithoutBasketInput
     upsert?: LevelUpsertWithoutBasketInput
+    disconnect?: LevelWhereInput | boolean
+    delete?: LevelWhereInput | boolean
     connect?: LevelWhereUniqueInput
     update?: XOR<XOR<LevelUpdateToOneWithWhereWithoutBasketInput, LevelUpdateWithoutBasketInput>, LevelUncheckedUpdateWithoutBasketInput>
   }
@@ -35337,28 +38539,144 @@ export namespace Prisma {
     update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutOrderProductInput, OrderUpdateWithoutOrderProductInput>, OrderUncheckedUpdateWithoutOrderProductInput>
   }
 
-  export type ProfessionUpdateOneRequiredWithoutOrderProductNestedInput = {
+  export type ProfessionUpdateOneWithoutOrderProductNestedInput = {
     create?: XOR<ProfessionCreateWithoutOrderProductInput, ProfessionUncheckedCreateWithoutOrderProductInput>
     connectOrCreate?: ProfessionCreateOrConnectWithoutOrderProductInput
     upsert?: ProfessionUpsertWithoutOrderProductInput
+    disconnect?: ProfessionWhereInput | boolean
+    delete?: ProfessionWhereInput | boolean
     connect?: ProfessionWhereUniqueInput
     update?: XOR<XOR<ProfessionUpdateToOneWithWhereWithoutOrderProductInput, ProfessionUpdateWithoutOrderProductInput>, ProfessionUncheckedUpdateWithoutOrderProductInput>
   }
 
-  export type ToolUpdateOneRequiredWithoutOrderProductNestedInput = {
+  export type ToolUpdateOneWithoutOrderProductNestedInput = {
     create?: XOR<ToolCreateWithoutOrderProductInput, ToolUncheckedCreateWithoutOrderProductInput>
     connectOrCreate?: ToolCreateOrConnectWithoutOrderProductInput
     upsert?: ToolUpsertWithoutOrderProductInput
+    disconnect?: ToolWhereInput | boolean
+    delete?: ToolWhereInput | boolean
     connect?: ToolWhereUniqueInput
     update?: XOR<XOR<ToolUpdateToOneWithWhereWithoutOrderProductInput, ToolUpdateWithoutOrderProductInput>, ToolUncheckedUpdateWithoutOrderProductInput>
   }
 
-  export type LevelUpdateOneRequiredWithoutOrderProductNestedInput = {
+  export type LevelUpdateOneWithoutOrderProductNestedInput = {
     create?: XOR<LevelCreateWithoutOrderProductInput, LevelUncheckedCreateWithoutOrderProductInput>
     connectOrCreate?: LevelCreateOrConnectWithoutOrderProductInput
     upsert?: LevelUpsertWithoutOrderProductInput
+    disconnect?: LevelWhereInput | boolean
+    delete?: LevelWhereInput | boolean
     connect?: LevelWhereUniqueInput
     update?: XOR<XOR<LevelUpdateToOneWithWhereWithoutOrderProductInput, LevelUpdateWithoutOrderProductInput>, LevelUncheckedUpdateWithoutOrderProductInput>
+  }
+
+  export type OrderCreateNestedOneWithoutCommentInput = {
+    create?: XOR<OrderCreateWithoutCommentInput, OrderUncheckedCreateWithoutCommentInput>
+    connectOrCreate?: OrderCreateOrConnectWithoutCommentInput
+    connect?: OrderWhereUniqueInput
+  }
+
+  export type MasterRatingCreateNestedManyWithoutCommentInput = {
+    create?: XOR<MasterRatingCreateWithoutCommentInput, MasterRatingUncheckedCreateWithoutCommentInput> | MasterRatingCreateWithoutCommentInput[] | MasterRatingUncheckedCreateWithoutCommentInput[]
+    connectOrCreate?: MasterRatingCreateOrConnectWithoutCommentInput | MasterRatingCreateOrConnectWithoutCommentInput[]
+    createMany?: MasterRatingCreateManyCommentInputEnvelope
+    connect?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedOneWithoutCommentInput = {
+    create?: XOR<UserCreateWithoutCommentInput, UserUncheckedCreateWithoutCommentInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCommentInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type MasterRatingUncheckedCreateNestedManyWithoutCommentInput = {
+    create?: XOR<MasterRatingCreateWithoutCommentInput, MasterRatingUncheckedCreateWithoutCommentInput> | MasterRatingCreateWithoutCommentInput[] | MasterRatingUncheckedCreateWithoutCommentInput[]
+    connectOrCreate?: MasterRatingCreateOrConnectWithoutCommentInput | MasterRatingCreateOrConnectWithoutCommentInput[]
+    createMany?: MasterRatingCreateManyCommentInputEnvelope
+    connect?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+  }
+
+  export type OrderUpdateOneWithoutCommentNestedInput = {
+    create?: XOR<OrderCreateWithoutCommentInput, OrderUncheckedCreateWithoutCommentInput>
+    connectOrCreate?: OrderCreateOrConnectWithoutCommentInput
+    upsert?: OrderUpsertWithoutCommentInput
+    disconnect?: OrderWhereInput | boolean
+    delete?: OrderWhereInput | boolean
+    connect?: OrderWhereUniqueInput
+    update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutCommentInput, OrderUpdateWithoutCommentInput>, OrderUncheckedUpdateWithoutCommentInput>
+  }
+
+  export type MasterRatingUpdateManyWithoutCommentNestedInput = {
+    create?: XOR<MasterRatingCreateWithoutCommentInput, MasterRatingUncheckedCreateWithoutCommentInput> | MasterRatingCreateWithoutCommentInput[] | MasterRatingUncheckedCreateWithoutCommentInput[]
+    connectOrCreate?: MasterRatingCreateOrConnectWithoutCommentInput | MasterRatingCreateOrConnectWithoutCommentInput[]
+    upsert?: MasterRatingUpsertWithWhereUniqueWithoutCommentInput | MasterRatingUpsertWithWhereUniqueWithoutCommentInput[]
+    createMany?: MasterRatingCreateManyCommentInputEnvelope
+    set?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+    disconnect?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+    delete?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+    connect?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+    update?: MasterRatingUpdateWithWhereUniqueWithoutCommentInput | MasterRatingUpdateWithWhereUniqueWithoutCommentInput[]
+    updateMany?: MasterRatingUpdateManyWithWhereWithoutCommentInput | MasterRatingUpdateManyWithWhereWithoutCommentInput[]
+    deleteMany?: MasterRatingScalarWhereInput | MasterRatingScalarWhereInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutCommentNestedInput = {
+    create?: XOR<UserCreateWithoutCommentInput, UserUncheckedCreateWithoutCommentInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCommentInput
+    upsert?: UserUpsertWithoutCommentInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCommentInput, UserUpdateWithoutCommentInput>, UserUncheckedUpdateWithoutCommentInput>
+  }
+
+  export type MasterRatingUncheckedUpdateManyWithoutCommentNestedInput = {
+    create?: XOR<MasterRatingCreateWithoutCommentInput, MasterRatingUncheckedCreateWithoutCommentInput> | MasterRatingCreateWithoutCommentInput[] | MasterRatingUncheckedCreateWithoutCommentInput[]
+    connectOrCreate?: MasterRatingCreateOrConnectWithoutCommentInput | MasterRatingCreateOrConnectWithoutCommentInput[]
+    upsert?: MasterRatingUpsertWithWhereUniqueWithoutCommentInput | MasterRatingUpsertWithWhereUniqueWithoutCommentInput[]
+    createMany?: MasterRatingCreateManyCommentInputEnvelope
+    set?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+    disconnect?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+    delete?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+    connect?: MasterRatingWhereUniqueInput | MasterRatingWhereUniqueInput[]
+    update?: MasterRatingUpdateWithWhereUniqueWithoutCommentInput | MasterRatingUpdateWithWhereUniqueWithoutCommentInput[]
+    updateMany?: MasterRatingUpdateManyWithWhereWithoutCommentInput | MasterRatingUpdateManyWithWhereWithoutCommentInput[]
+    deleteMany?: MasterRatingScalarWhereInput | MasterRatingScalarWhereInput[]
+  }
+
+  export type MasterCreateNestedOneWithoutMasterRatingInput = {
+    create?: XOR<MasterCreateWithoutMasterRatingInput, MasterUncheckedCreateWithoutMasterRatingInput>
+    connectOrCreate?: MasterCreateOrConnectWithoutMasterRatingInput
+    connect?: MasterWhereUniqueInput
+  }
+
+  export type CommentCreateNestedOneWithoutRatingsInput = {
+    create?: XOR<CommentCreateWithoutRatingsInput, CommentUncheckedCreateWithoutRatingsInput>
+    connectOrCreate?: CommentCreateOrConnectWithoutRatingsInput
+    connect?: CommentWhereUniqueInput
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type MasterUpdateOneWithoutMasterRatingNestedInput = {
+    create?: XOR<MasterCreateWithoutMasterRatingInput, MasterUncheckedCreateWithoutMasterRatingInput>
+    connectOrCreate?: MasterCreateOrConnectWithoutMasterRatingInput
+    upsert?: MasterUpsertWithoutMasterRatingInput
+    disconnect?: MasterWhereInput | boolean
+    delete?: MasterWhereInput | boolean
+    connect?: MasterWhereUniqueInput
+    update?: XOR<XOR<MasterUpdateToOneWithWhereWithoutMasterRatingInput, MasterUpdateWithoutMasterRatingInput>, MasterUncheckedUpdateWithoutMasterRatingInput>
+  }
+
+  export type CommentUpdateOneRequiredWithoutRatingsNestedInput = {
+    create?: XOR<CommentCreateWithoutRatingsInput, CommentUncheckedCreateWithoutRatingsInput>
+    connectOrCreate?: CommentCreateOrConnectWithoutRatingsInput
+    upsert?: CommentUpsertWithoutRatingsInput
+    connect?: CommentWhereUniqueInput
+    update?: XOR<XOR<CommentUpdateToOneWithWhereWithoutRatingsInput, CommentUpdateWithoutRatingsInput>, CommentUncheckedUpdateWithoutRatingsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -35487,33 +38805,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
   export type NestedBoolNullableFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
@@ -35560,6 +38851,17 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -35610,6 +38912,22 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
   export type RegionCreateWithoutUserInput = {
     id?: string
     name_uz: string
@@ -35645,6 +38963,7 @@ export namespace Prisma {
     createdAt?: Date | string
     OrderMaster?: OrderMasterCreateNestedManyWithoutOrderInput
     orderProduct?: orderProductCreateNestedManyWithoutOrderInput
+    Comment?: CommentCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUncheckedCreateWithoutUserInput = {
@@ -35661,6 +38980,7 @@ export namespace Prisma {
     createdAt?: Date | string
     OrderMaster?: OrderMasterUncheckedCreateNestedManyWithoutOrderInput
     orderProduct?: orderProductUncheckedCreateNestedManyWithoutOrderInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutOrderInput
   }
 
   export type OrderCreateOrConnectWithoutUserInput = {
@@ -35676,21 +38996,21 @@ export namespace Prisma {
   export type BasketCreateWithoutUserInput = {
     id?: string
     count: number
-    workingTime: number
+    workingTime?: number | null
     totalPrice: Decimal | DecimalJsLike | number | string
     timeUnit: string
-    Profession: ProfessionCreateNestedOneWithoutBasketInput
-    Tool: ToolCreateNestedOneWithoutBasketInput
-    Level: LevelCreateNestedOneWithoutBasketInput
+    Profession?: ProfessionCreateNestedOneWithoutBasketInput
+    Tool?: ToolCreateNestedOneWithoutBasketInput
+    Level?: LevelCreateNestedOneWithoutBasketInput
   }
 
   export type BasketUncheckedCreateWithoutUserInput = {
     id?: string
-    professionId: string
-    toolId: string
-    levelId: string
+    professionId?: string | null
+    toolId?: string | null
+    levelId?: string | null
     count: number
-    workingTime: number
+    workingTime?: number | null
     totalPrice: Decimal | DecimalJsLike | number | string
     timeUnit: string
   }
@@ -35712,7 +39032,6 @@ export namespace Prisma {
     account: string
     address: string
     createdAt?: Date | string
-    salary?: number | null
     bank?: string | null
     mfo?: string | null
   }
@@ -35724,7 +39043,6 @@ export namespace Prisma {
     account: string
     address: string
     createdAt?: Date | string
-    salary?: number | null
     bank?: string | null
     mfo?: string | null
   }
@@ -35766,6 +39084,32 @@ export namespace Prisma {
 
   export type SessionCreateManyUserInputEnvelope = {
     data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CommentCreateWithoutUserInput = {
+    id?: string
+    message: string
+    createdAt?: Date | string
+    order?: OrderCreateNestedOneWithoutCommentInput
+    ratings?: MasterRatingCreateNestedManyWithoutCommentInput
+  }
+
+  export type CommentUncheckedCreateWithoutUserInput = {
+    id?: string
+    message: string
+    orderId?: string | null
+    createdAt?: Date | string
+    ratings?: MasterRatingUncheckedCreateNestedManyWithoutCommentInput
+  }
+
+  export type CommentCreateOrConnectWithoutUserInput = {
+    where: CommentWhereUniqueInput
+    create: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput>
+  }
+
+  export type CommentCreateManyUserInputEnvelope = {
+    data: CommentCreateManyUserInput | CommentCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -35851,12 +39195,12 @@ export namespace Prisma {
     OR?: BasketScalarWhereInput[]
     NOT?: BasketScalarWhereInput | BasketScalarWhereInput[]
     id?: StringFilter<"Basket"> | string
-    userId?: StringFilter<"Basket"> | string
-    professionId?: StringFilter<"Basket"> | string
-    toolId?: StringFilter<"Basket"> | string
-    levelId?: StringFilter<"Basket"> | string
+    userId?: StringNullableFilter<"Basket"> | string | null
+    professionId?: StringNullableFilter<"Basket"> | string | null
+    toolId?: StringNullableFilter<"Basket"> | string | null
+    levelId?: StringNullableFilter<"Basket"> | string | null
     count?: IntFilter<"Basket"> | number
-    workingTime?: IntFilter<"Basket"> | number
+    workingTime?: IntNullableFilter<"Basket"> | number | null
     totalPrice?: DecimalFilter<"Basket"> | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFilter<"Basket"> | string
   }
@@ -35888,7 +39232,6 @@ export namespace Prisma {
     address?: StringFilter<"Company"> | string
     userId?: StringFilter<"Company"> | string
     createdAt?: DateTimeFilter<"Company"> | Date | string
-    salary?: FloatNullableFilter<"Company"> | number | null
     bank?: StringNullableFilter<"Company"> | string | null
     mfo?: StringNullableFilter<"Company"> | string | null
   }
@@ -35923,6 +39266,33 @@ export namespace Prisma {
     expiresAt?: DateTimeFilter<"Session"> | Date | string
   }
 
+  export type CommentUpsertWithWhereUniqueWithoutUserInput = {
+    where: CommentWhereUniqueInput
+    update: XOR<CommentUpdateWithoutUserInput, CommentUncheckedUpdateWithoutUserInput>
+    create: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput>
+  }
+
+  export type CommentUpdateWithWhereUniqueWithoutUserInput = {
+    where: CommentWhereUniqueInput
+    data: XOR<CommentUpdateWithoutUserInput, CommentUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CommentUpdateManyWithWhereWithoutUserInput = {
+    where: CommentScalarWhereInput
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CommentScalarWhereInput = {
+    AND?: CommentScalarWhereInput | CommentScalarWhereInput[]
+    OR?: CommentScalarWhereInput[]
+    NOT?: CommentScalarWhereInput | CommentScalarWhereInput[]
+    id?: StringFilter<"Comment"> | string
+    message?: StringFilter<"Comment"> | string
+    orderId?: StringNullableFilter<"Comment"> | string | null
+    userId?: StringFilter<"Comment"> | string
+    createdAt?: DateTimeFilter<"Comment"> | Date | string
+  }
+
   export type UserCreateWithoutSessionInput = {
     id?: string
     fullName: string
@@ -35934,6 +39304,7 @@ export namespace Prisma {
     Order?: OrderCreateNestedManyWithoutUserInput
     Basket?: BasketCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedManyWithoutUserInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionInput = {
@@ -35947,6 +39318,7 @@ export namespace Prisma {
     Order?: OrderUncheckedCreateNestedManyWithoutUserInput
     Basket?: BasketUncheckedCreateNestedManyWithoutUserInput
     Company?: CompanyUncheckedCreateNestedManyWithoutUserInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionInput = {
@@ -35976,6 +39348,7 @@ export namespace Prisma {
     Order?: OrderUpdateManyWithoutUserNestedInput
     Basket?: BasketUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateManyWithoutUserNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionInput = {
@@ -35989,6 +39362,7 @@ export namespace Prisma {
     Order?: OrderUncheckedUpdateManyWithoutUserNestedInput
     Basket?: BasketUncheckedUpdateManyWithoutUserNestedInput
     Company?: CompanyUncheckedUpdateManyWithoutUserNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutCompanyInput = {
@@ -36002,6 +39376,7 @@ export namespace Prisma {
     Order?: OrderCreateNestedManyWithoutUserInput
     Basket?: BasketCreateNestedManyWithoutUserInput
     Session?: SessionCreateNestedManyWithoutUserInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCompanyInput = {
@@ -36015,6 +39390,7 @@ export namespace Prisma {
     Order?: OrderUncheckedCreateNestedManyWithoutUserInput
     Basket?: BasketUncheckedCreateNestedManyWithoutUserInput
     Session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCompanyInput = {
@@ -36044,6 +39420,7 @@ export namespace Prisma {
     Order?: OrderUpdateManyWithoutUserNestedInput
     Basket?: BasketUpdateManyWithoutUserNestedInput
     Session?: SessionUpdateManyWithoutUserNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyInput = {
@@ -36057,6 +39434,7 @@ export namespace Prisma {
     Order?: OrderUncheckedUpdateManyWithoutUserNestedInput
     Basket?: BasketUncheckedUpdateManyWithoutUserNestedInput
     Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutRegionInput = {
@@ -36070,6 +39448,7 @@ export namespace Prisma {
     Basket?: BasketCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedManyWithoutUserInput
     Session?: SessionCreateNestedManyWithoutUserInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRegionInput = {
@@ -36083,6 +39462,7 @@ export namespace Prisma {
     Basket?: BasketUncheckedCreateNestedManyWithoutUserInput
     Company?: CompanyUncheckedCreateNestedManyWithoutUserInput
     Session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRegionInput = {
@@ -36138,8 +39518,8 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    Brand: BrandCreateNestedOneWithoutToolInput
-    Size: SizeCreateNestedOneWithoutToolInput
+    Brand?: BrandCreateNestedOneWithoutToolInput
+    Size?: SizeCreateNestedOneWithoutToolInput
     professionTool?: professionToolCreateNestedManyWithoutToolInput
     Basket?: BasketCreateNestedManyWithoutToolInput
     orderProduct?: orderProductCreateNestedManyWithoutToolInput
@@ -36159,8 +39539,8 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    brandId: string
-    sizeId: string
+    brandId?: string | null
+    sizeId?: string | null
     professionTool?: professionToolUncheckedCreateNestedManyWithoutToolInput
     Basket?: BasketUncheckedCreateNestedManyWithoutToolInput
     orderProduct?: orderProductUncheckedCreateNestedManyWithoutToolInput
@@ -36209,9 +39589,9 @@ export namespace Prisma {
     code?: IntNullableFilter<"Tool"> | number | null
     isActive?: BoolNullableFilter<"Tool"> | boolean | null
     createdAt?: DateTimeFilter<"Tool"> | Date | string
-    brandId?: StringFilter<"Tool"> | string
-    capacityId?: StringFilter<"Tool"> | string
-    sizeId?: StringFilter<"Tool"> | string
+    brandId?: StringNullableFilter<"Tool"> | string | null
+    capacityId?: StringNullableFilter<"Tool"> | string | null
+    sizeId?: StringNullableFilter<"Tool"> | string | null
   }
 
   export type ToolCreateWithoutBrandInput = {
@@ -36228,8 +39608,8 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    Capacity: CapacityCreateNestedOneWithoutToolInput
-    Size: SizeCreateNestedOneWithoutToolInput
+    Capacity?: CapacityCreateNestedOneWithoutToolInput
+    Size?: SizeCreateNestedOneWithoutToolInput
     professionTool?: professionToolCreateNestedManyWithoutToolInput
     Basket?: BasketCreateNestedManyWithoutToolInput
     orderProduct?: orderProductCreateNestedManyWithoutToolInput
@@ -36249,8 +39629,8 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    capacityId: string
-    sizeId: string
+    capacityId?: string | null
+    sizeId?: string | null
     professionTool?: professionToolUncheckedCreateNestedManyWithoutToolInput
     Basket?: BasketUncheckedCreateNestedManyWithoutToolInput
     orderProduct?: orderProductUncheckedCreateNestedManyWithoutToolInput
@@ -36296,8 +39676,8 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    Brand: BrandCreateNestedOneWithoutToolInput
-    Capacity: CapacityCreateNestedOneWithoutToolInput
+    Brand?: BrandCreateNestedOneWithoutToolInput
+    Capacity?: CapacityCreateNestedOneWithoutToolInput
     professionTool?: professionToolCreateNestedManyWithoutToolInput
     Basket?: BasketCreateNestedManyWithoutToolInput
     orderProduct?: orderProductCreateNestedManyWithoutToolInput
@@ -36317,8 +39697,8 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    brandId: string
-    capacityId: string
+    brandId?: string | null
+    capacityId?: string | null
     professionTool?: professionToolUncheckedCreateNestedManyWithoutToolInput
     Basket?: BasketUncheckedCreateNestedManyWithoutToolInput
     orderProduct?: orderProductUncheckedCreateNestedManyWithoutToolInput
@@ -36409,21 +39789,21 @@ export namespace Prisma {
   export type BasketCreateWithoutLevelInput = {
     id?: string
     count: number
-    workingTime: number
+    workingTime?: number | null
     totalPrice: Decimal | DecimalJsLike | number | string
     timeUnit: string
-    User: UserCreateNestedOneWithoutBasketInput
-    Profession: ProfessionCreateNestedOneWithoutBasketInput
-    Tool: ToolCreateNestedOneWithoutBasketInput
+    User?: UserCreateNestedOneWithoutBasketInput
+    Profession?: ProfessionCreateNestedOneWithoutBasketInput
+    Tool?: ToolCreateNestedOneWithoutBasketInput
   }
 
   export type BasketUncheckedCreateWithoutLevelInput = {
     id?: string
-    userId: string
-    professionId: string
-    toolId: string
+    userId?: string | null
+    professionId?: string | null
+    toolId?: string | null
     count: number
-    workingTime: number
+    workingTime?: number | null
     totalPrice: Decimal | DecimalJsLike | number | string
     timeUnit: string
   }
@@ -36440,24 +39820,24 @@ export namespace Prisma {
 
   export type orderProductCreateWithoutLevelInput = {
     id?: string
-    workingTime: number
+    workingTime?: number | null
     price: Decimal | DecimalJsLike | number | string
     count: number
-    timeUnit: string
+    timeUnit?: string | null
     Order: OrderCreateNestedOneWithoutOrderProductInput
-    Profession: ProfessionCreateNestedOneWithoutOrderProductInput
-    Tool: ToolCreateNestedOneWithoutOrderProductInput
+    Profession?: ProfessionCreateNestedOneWithoutOrderProductInput
+    Tool?: ToolCreateNestedOneWithoutOrderProductInput
   }
 
   export type orderProductUncheckedCreateWithoutLevelInput = {
     id?: string
     orderId: string
-    professionId: string
-    toolId: string
-    workingTime: number
+    professionId?: string | null
+    toolId?: string | null
+    workingTime?: number | null
     price: Decimal | DecimalJsLike | number | string
     count: number
-    timeUnit: string
+    timeUnit?: string | null
   }
 
   export type orderProductCreateOrConnectWithoutLevelInput = {
@@ -36566,13 +39946,13 @@ export namespace Prisma {
     NOT?: orderProductScalarWhereInput | orderProductScalarWhereInput[]
     id?: StringFilter<"orderProduct"> | string
     orderId?: StringFilter<"orderProduct"> | string
-    professionId?: StringFilter<"orderProduct"> | string
-    toolId?: StringFilter<"orderProduct"> | string
-    levelId?: StringFilter<"orderProduct"> | string
-    workingTime?: IntFilter<"orderProduct"> | number
+    professionId?: StringNullableFilter<"orderProduct"> | string | null
+    toolId?: StringNullableFilter<"orderProduct"> | string | null
+    levelId?: StringNullableFilter<"orderProduct"> | string | null
+    workingTime?: IntNullableFilter<"orderProduct"> | number | null
     price?: DecimalFilter<"orderProduct"> | Decimal | DecimalJsLike | number | string
     count?: IntFilter<"orderProduct"> | number
-    timeUnit?: StringFilter<"orderProduct"> | string
+    timeUnit?: StringNullableFilter<"orderProduct"> | string | null
   }
 
   export type BrandCreateWithoutToolInput = {
@@ -36640,12 +40020,12 @@ export namespace Prisma {
 
   export type professionToolCreateWithoutToolInput = {
     id?: string
-    Profession: ProfessionCreateNestedOneWithoutProfessionToolInput
+    Profession?: ProfessionCreateNestedOneWithoutProfessionToolInput
   }
 
   export type professionToolUncheckedCreateWithoutToolInput = {
     id?: string
-    professionId: string
+    professionId?: string | null
   }
 
   export type professionToolCreateOrConnectWithoutToolInput = {
@@ -36661,21 +40041,21 @@ export namespace Prisma {
   export type BasketCreateWithoutToolInput = {
     id?: string
     count: number
-    workingTime: number
+    workingTime?: number | null
     totalPrice: Decimal | DecimalJsLike | number | string
     timeUnit: string
-    User: UserCreateNestedOneWithoutBasketInput
-    Profession: ProfessionCreateNestedOneWithoutBasketInput
-    Level: LevelCreateNestedOneWithoutBasketInput
+    User?: UserCreateNestedOneWithoutBasketInput
+    Profession?: ProfessionCreateNestedOneWithoutBasketInput
+    Level?: LevelCreateNestedOneWithoutBasketInput
   }
 
   export type BasketUncheckedCreateWithoutToolInput = {
     id?: string
-    userId: string
-    professionId: string
-    levelId: string
+    userId?: string | null
+    professionId?: string | null
+    levelId?: string | null
     count: number
-    workingTime: number
+    workingTime?: number | null
     totalPrice: Decimal | DecimalJsLike | number | string
     timeUnit: string
   }
@@ -36692,24 +40072,24 @@ export namespace Prisma {
 
   export type orderProductCreateWithoutToolInput = {
     id?: string
-    workingTime: number
+    workingTime?: number | null
     price: Decimal | DecimalJsLike | number | string
     count: number
-    timeUnit: string
+    timeUnit?: string | null
     Order: OrderCreateNestedOneWithoutOrderProductInput
-    Profession: ProfessionCreateNestedOneWithoutOrderProductInput
-    Level: LevelCreateNestedOneWithoutOrderProductInput
+    Profession?: ProfessionCreateNestedOneWithoutOrderProductInput
+    Level?: LevelCreateNestedOneWithoutOrderProductInput
   }
 
   export type orderProductUncheckedCreateWithoutToolInput = {
     id?: string
     orderId: string
-    professionId: string
-    levelId: string
-    workingTime: number
+    professionId?: string | null
+    levelId?: string | null
+    workingTime?: number | null
     price: Decimal | DecimalJsLike | number | string
     count: number
-    timeUnit: string
+    timeUnit?: string | null
   }
 
   export type orderProductCreateOrConnectWithoutToolInput = {
@@ -36824,8 +40204,8 @@ export namespace Prisma {
     OR?: professionToolScalarWhereInput[]
     NOT?: professionToolScalarWhereInput | professionToolScalarWhereInput[]
     id?: StringFilter<"professionTool"> | string
-    professionId?: StringFilter<"professionTool"> | string
-    toolId?: StringFilter<"professionTool"> | string
+    professionId?: StringNullableFilter<"professionTool"> | string | null
+    toolId?: StringNullableFilter<"professionTool"> | string | null
   }
 
   export type BasketUpsertWithWhereUniqueWithoutToolInput = {
@@ -36910,6 +40290,28 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MasterRatingCreateWithoutMasterInput = {
+    id?: string
+    star: number
+    comment: CommentCreateNestedOneWithoutRatingsInput
+  }
+
+  export type MasterRatingUncheckedCreateWithoutMasterInput = {
+    id?: string
+    commentId: string
+    star: number
+  }
+
+  export type MasterRatingCreateOrConnectWithoutMasterInput = {
+    where: MasterRatingWhereUniqueInput
+    create: XOR<MasterRatingCreateWithoutMasterInput, MasterRatingUncheckedCreateWithoutMasterInput>
+  }
+
+  export type MasterRatingCreateManyMasterInputEnvelope = {
+    data: MasterRatingCreateManyMasterInput | MasterRatingCreateManyMasterInput[]
+    skipDuplicates?: boolean
+  }
+
   export type MasterProfessionUpsertWithWhereUniqueWithoutMasterInput = {
     where: MasterProfessionWhereUniqueInput
     update: XOR<MasterProfessionUpdateWithoutMasterInput, MasterProfessionUncheckedUpdateWithoutMasterInput>
@@ -36951,6 +40353,32 @@ export namespace Prisma {
     masterId?: StringFilter<"OrderMaster"> | string
   }
 
+  export type MasterRatingUpsertWithWhereUniqueWithoutMasterInput = {
+    where: MasterRatingWhereUniqueInput
+    update: XOR<MasterRatingUpdateWithoutMasterInput, MasterRatingUncheckedUpdateWithoutMasterInput>
+    create: XOR<MasterRatingCreateWithoutMasterInput, MasterRatingUncheckedCreateWithoutMasterInput>
+  }
+
+  export type MasterRatingUpdateWithWhereUniqueWithoutMasterInput = {
+    where: MasterRatingWhereUniqueInput
+    data: XOR<MasterRatingUpdateWithoutMasterInput, MasterRatingUncheckedUpdateWithoutMasterInput>
+  }
+
+  export type MasterRatingUpdateManyWithWhereWithoutMasterInput = {
+    where: MasterRatingScalarWhereInput
+    data: XOR<MasterRatingUpdateManyMutationInput, MasterRatingUncheckedUpdateManyWithoutMasterInput>
+  }
+
+  export type MasterRatingScalarWhereInput = {
+    AND?: MasterRatingScalarWhereInput | MasterRatingScalarWhereInput[]
+    OR?: MasterRatingScalarWhereInput[]
+    NOT?: MasterRatingScalarWhereInput | MasterRatingScalarWhereInput[]
+    id?: StringFilter<"MasterRating"> | string
+    masterId?: StringNullableFilter<"MasterRating"> | string | null
+    commentId?: StringFilter<"MasterRating"> | string
+    star?: FloatFilter<"MasterRating"> | number
+  }
+
   export type MasterProfessionCreateWithoutPofessionInput = {
     id?: string
     minWorkingHours: number
@@ -36983,12 +40411,12 @@ export namespace Prisma {
 
   export type professionToolCreateWithoutProfessionInput = {
     id?: string
-    Tool: ToolCreateNestedOneWithoutProfessionToolInput
+    Tool?: ToolCreateNestedOneWithoutProfessionToolInput
   }
 
   export type professionToolUncheckedCreateWithoutProfessionInput = {
     id?: string
-    toolId: string
+    toolId?: string | null
   }
 
   export type professionToolCreateOrConnectWithoutProfessionInput = {
@@ -37030,21 +40458,21 @@ export namespace Prisma {
   export type BasketCreateWithoutProfessionInput = {
     id?: string
     count: number
-    workingTime: number
+    workingTime?: number | null
     totalPrice: Decimal | DecimalJsLike | number | string
     timeUnit: string
-    User: UserCreateNestedOneWithoutBasketInput
-    Tool: ToolCreateNestedOneWithoutBasketInput
-    Level: LevelCreateNestedOneWithoutBasketInput
+    User?: UserCreateNestedOneWithoutBasketInput
+    Tool?: ToolCreateNestedOneWithoutBasketInput
+    Level?: LevelCreateNestedOneWithoutBasketInput
   }
 
   export type BasketUncheckedCreateWithoutProfessionInput = {
     id?: string
-    userId: string
-    toolId: string
-    levelId: string
+    userId?: string | null
+    toolId?: string | null
+    levelId?: string | null
     count: number
-    workingTime: number
+    workingTime?: number | null
     totalPrice: Decimal | DecimalJsLike | number | string
     timeUnit: string
   }
@@ -37061,24 +40489,24 @@ export namespace Prisma {
 
   export type orderProductCreateWithoutProfessionInput = {
     id?: string
-    workingTime: number
+    workingTime?: number | null
     price: Decimal | DecimalJsLike | number | string
     count: number
-    timeUnit: string
+    timeUnit?: string | null
     Order: OrderCreateNestedOneWithoutOrderProductInput
-    Tool: ToolCreateNestedOneWithoutOrderProductInput
-    Level: LevelCreateNestedOneWithoutOrderProductInput
+    Tool?: ToolCreateNestedOneWithoutOrderProductInput
+    Level?: LevelCreateNestedOneWithoutOrderProductInput
   }
 
   export type orderProductUncheckedCreateWithoutProfessionInput = {
     id?: string
     orderId: string
-    toolId: string
-    levelId: string
-    workingTime: number
+    toolId?: string | null
+    levelId?: string | null
+    workingTime?: number | null
     price: Decimal | DecimalJsLike | number | string
     count: number
-    timeUnit: string
+    timeUnit?: string | null
   }
 
   export type orderProductCreateOrConnectWithoutProfessionInput = {
@@ -37216,6 +40644,7 @@ export namespace Prisma {
     about: string
     createdAt?: Date | string
     OrderMaster?: OrderMasterCreateNestedManyWithoutMasterInput
+    MasterRating?: MasterRatingCreateNestedManyWithoutMasterInput
   }
 
   export type MasterUncheckedCreateWithoutMasterProfessionInput = {
@@ -37230,6 +40659,7 @@ export namespace Prisma {
     about: string
     createdAt?: Date | string
     OrderMaster?: OrderMasterUncheckedCreateNestedManyWithoutMasterInput
+    MasterRating?: MasterRatingUncheckedCreateNestedManyWithoutMasterInput
   }
 
   export type MasterCreateOrConnectWithoutMasterProfessionInput = {
@@ -37326,6 +40756,7 @@ export namespace Prisma {
     about?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OrderMaster?: OrderMasterUpdateManyWithoutMasterNestedInput
+    MasterRating?: MasterRatingUpdateManyWithoutMasterNestedInput
   }
 
   export type MasterUncheckedUpdateWithoutMasterProfessionInput = {
@@ -37340,6 +40771,7 @@ export namespace Prisma {
     about?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OrderMaster?: OrderMasterUncheckedUpdateManyWithoutMasterNestedInput
+    MasterRating?: MasterRatingUncheckedUpdateManyWithoutMasterNestedInput
   }
 
   export type LevelUpsertWithoutMasterProfessionInput = {
@@ -37422,9 +40854,9 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    Brand: BrandCreateNestedOneWithoutToolInput
-    Capacity: CapacityCreateNestedOneWithoutToolInput
-    Size: SizeCreateNestedOneWithoutToolInput
+    Brand?: BrandCreateNestedOneWithoutToolInput
+    Capacity?: CapacityCreateNestedOneWithoutToolInput
+    Size?: SizeCreateNestedOneWithoutToolInput
     Basket?: BasketCreateNestedManyWithoutToolInput
     orderProduct?: orderProductCreateNestedManyWithoutToolInput
   }
@@ -37443,9 +40875,9 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    brandId: string
-    capacityId: string
-    sizeId: string
+    brandId?: string | null
+    capacityId?: string | null
+    sizeId?: string | null
     Basket?: BasketUncheckedCreateNestedManyWithoutToolInput
     orderProduct?: orderProductUncheckedCreateNestedManyWithoutToolInput
   }
@@ -37519,9 +40951,9 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Brand?: BrandUpdateOneRequiredWithoutToolNestedInput
-    Capacity?: CapacityUpdateOneRequiredWithoutToolNestedInput
-    Size?: SizeUpdateOneRequiredWithoutToolNestedInput
+    Brand?: BrandUpdateOneWithoutToolNestedInput
+    Capacity?: CapacityUpdateOneWithoutToolNestedInput
+    Size?: SizeUpdateOneWithoutToolNestedInput
     Basket?: BasketUpdateManyWithoutToolNestedInput
     orderProduct?: orderProductUpdateManyWithoutToolNestedInput
   }
@@ -37540,9 +40972,9 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    brandId?: StringFieldUpdateOperationsInput | string
-    capacityId?: StringFieldUpdateOperationsInput | string
-    sizeId?: StringFieldUpdateOperationsInput | string
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    capacityId?: NullableStringFieldUpdateOperationsInput | string | null
+    sizeId?: NullableStringFieldUpdateOperationsInput | string | null
     Basket?: BasketUncheckedUpdateManyWithoutToolNestedInput
     orderProduct?: orderProductUncheckedUpdateManyWithoutToolNestedInput
   }
@@ -37690,6 +41122,7 @@ export namespace Prisma {
     Basket?: BasketCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedManyWithoutUserInput
     Session?: SessionCreateNestedManyWithoutUserInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOrderInput = {
@@ -37703,6 +41136,7 @@ export namespace Prisma {
     Basket?: BasketUncheckedCreateNestedManyWithoutUserInput
     Company?: CompanyUncheckedCreateNestedManyWithoutUserInput
     Session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOrderInput = {
@@ -37732,24 +41166,24 @@ export namespace Prisma {
 
   export type orderProductCreateWithoutOrderInput = {
     id?: string
-    workingTime: number
+    workingTime?: number | null
     price: Decimal | DecimalJsLike | number | string
     count: number
-    timeUnit: string
-    Profession: ProfessionCreateNestedOneWithoutOrderProductInput
-    Tool: ToolCreateNestedOneWithoutOrderProductInput
-    Level: LevelCreateNestedOneWithoutOrderProductInput
+    timeUnit?: string | null
+    Profession?: ProfessionCreateNestedOneWithoutOrderProductInput
+    Tool?: ToolCreateNestedOneWithoutOrderProductInput
+    Level?: LevelCreateNestedOneWithoutOrderProductInput
   }
 
   export type orderProductUncheckedCreateWithoutOrderInput = {
     id?: string
-    professionId: string
-    toolId: string
-    levelId: string
-    workingTime: number
+    professionId?: string | null
+    toolId?: string | null
+    levelId?: string | null
+    workingTime?: number | null
     price: Decimal | DecimalJsLike | number | string
     count: number
-    timeUnit: string
+    timeUnit?: string | null
   }
 
   export type orderProductCreateOrConnectWithoutOrderInput = {
@@ -37759,6 +41193,32 @@ export namespace Prisma {
 
   export type orderProductCreateManyOrderInputEnvelope = {
     data: orderProductCreateManyOrderInput | orderProductCreateManyOrderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CommentCreateWithoutOrderInput = {
+    id?: string
+    message: string
+    createdAt?: Date | string
+    ratings?: MasterRatingCreateNestedManyWithoutCommentInput
+    user: UserCreateNestedOneWithoutCommentInput
+  }
+
+  export type CommentUncheckedCreateWithoutOrderInput = {
+    id?: string
+    message: string
+    userId: string
+    createdAt?: Date | string
+    ratings?: MasterRatingUncheckedCreateNestedManyWithoutCommentInput
+  }
+
+  export type CommentCreateOrConnectWithoutOrderInput = {
+    where: CommentWhereUniqueInput
+    create: XOR<CommentCreateWithoutOrderInput, CommentUncheckedCreateWithoutOrderInput>
+  }
+
+  export type CommentCreateManyOrderInputEnvelope = {
+    data: CommentCreateManyOrderInput | CommentCreateManyOrderInput[]
     skipDuplicates?: boolean
   }
 
@@ -37784,6 +41244,7 @@ export namespace Prisma {
     Basket?: BasketUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateManyWithoutUserNestedInput
     Session?: SessionUpdateManyWithoutUserNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOrderInput = {
@@ -37797,6 +41258,7 @@ export namespace Prisma {
     Basket?: BasketUncheckedUpdateManyWithoutUserNestedInput
     Company?: CompanyUncheckedUpdateManyWithoutUserNestedInput
     Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type OrderMasterUpsertWithWhereUniqueWithoutOrderInput = {
@@ -37831,6 +41293,22 @@ export namespace Prisma {
     data: XOR<orderProductUpdateManyMutationInput, orderProductUncheckedUpdateManyWithoutOrderInput>
   }
 
+  export type CommentUpsertWithWhereUniqueWithoutOrderInput = {
+    where: CommentWhereUniqueInput
+    update: XOR<CommentUpdateWithoutOrderInput, CommentUncheckedUpdateWithoutOrderInput>
+    create: XOR<CommentCreateWithoutOrderInput, CommentUncheckedCreateWithoutOrderInput>
+  }
+
+  export type CommentUpdateWithWhereUniqueWithoutOrderInput = {
+    where: CommentWhereUniqueInput
+    data: XOR<CommentUpdateWithoutOrderInput, CommentUncheckedUpdateWithoutOrderInput>
+  }
+
+  export type CommentUpdateManyWithWhereWithoutOrderInput = {
+    where: CommentScalarWhereInput
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutOrderInput>
+  }
+
   export type OrderCreateWithoutOrderMasterInput = {
     id?: string
     address: string
@@ -37845,6 +41323,7 @@ export namespace Prisma {
     createdAt?: Date | string
     User: UserCreateNestedOneWithoutOrderInput
     orderProduct?: orderProductCreateNestedManyWithoutOrderInput
+    Comment?: CommentCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUncheckedCreateWithoutOrderMasterInput = {
@@ -37861,6 +41340,7 @@ export namespace Prisma {
     deliveryComment?: string | null
     createdAt?: Date | string
     orderProduct?: orderProductUncheckedCreateNestedManyWithoutOrderInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutOrderInput
   }
 
   export type OrderCreateOrConnectWithoutOrderMasterInput = {
@@ -37880,6 +41360,7 @@ export namespace Prisma {
     about: string
     createdAt?: Date | string
     MasterProfession?: MasterProfessionCreateNestedManyWithoutMasterInput
+    MasterRating?: MasterRatingCreateNestedManyWithoutMasterInput
   }
 
   export type MasterUncheckedCreateWithoutOrderMasterInput = {
@@ -37894,6 +41375,7 @@ export namespace Prisma {
     about: string
     createdAt?: Date | string
     MasterProfession?: MasterProfessionUncheckedCreateNestedManyWithoutMasterInput
+    MasterRating?: MasterRatingUncheckedCreateNestedManyWithoutMasterInput
   }
 
   export type MasterCreateOrConnectWithoutOrderMasterInput = {
@@ -37926,6 +41408,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     User?: UserUpdateOneRequiredWithoutOrderNestedInput
     orderProduct?: orderProductUpdateManyWithoutOrderNestedInput
+    Comment?: CommentUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutOrderMasterInput = {
@@ -37942,6 +41425,7 @@ export namespace Prisma {
     deliveryComment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orderProduct?: orderProductUncheckedUpdateManyWithoutOrderNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutOrderNestedInput
   }
 
   export type MasterUpsertWithoutOrderMasterInput = {
@@ -37967,6 +41451,7 @@ export namespace Prisma {
     about?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     MasterProfession?: MasterProfessionUpdateManyWithoutMasterNestedInput
+    MasterRating?: MasterRatingUpdateManyWithoutMasterNestedInput
   }
 
   export type MasterUncheckedUpdateWithoutOrderMasterInput = {
@@ -37981,6 +41466,7 @@ export namespace Prisma {
     about?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     MasterProfession?: MasterProfessionUncheckedUpdateManyWithoutMasterNestedInput
+    MasterRating?: MasterRatingUncheckedUpdateManyWithoutMasterNestedInput
   }
 
   export type UserCreateWithoutBasketInput = {
@@ -37994,6 +41480,7 @@ export namespace Prisma {
     Order?: OrderCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedManyWithoutUserInput
     Session?: SessionCreateNestedManyWithoutUserInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBasketInput = {
@@ -38007,6 +41494,7 @@ export namespace Prisma {
     Order?: OrderUncheckedCreateNestedManyWithoutUserInput
     Company?: CompanyUncheckedCreateNestedManyWithoutUserInput
     Session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBasketInput = {
@@ -38061,9 +41549,9 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    Brand: BrandCreateNestedOneWithoutToolInput
-    Capacity: CapacityCreateNestedOneWithoutToolInput
-    Size: SizeCreateNestedOneWithoutToolInput
+    Brand?: BrandCreateNestedOneWithoutToolInput
+    Capacity?: CapacityCreateNestedOneWithoutToolInput
+    Size?: SizeCreateNestedOneWithoutToolInput
     professionTool?: professionToolCreateNestedManyWithoutToolInput
     orderProduct?: orderProductCreateNestedManyWithoutToolInput
   }
@@ -38082,9 +41570,9 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    brandId: string
-    capacityId: string
-    sizeId: string
+    brandId?: string | null
+    capacityId?: string | null
+    sizeId?: string | null
     professionTool?: professionToolUncheckedCreateNestedManyWithoutToolInput
     orderProduct?: orderProductUncheckedCreateNestedManyWithoutToolInput
   }
@@ -38143,6 +41631,7 @@ export namespace Prisma {
     Order?: OrderUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateManyWithoutUserNestedInput
     Session?: SessionUpdateManyWithoutUserNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBasketInput = {
@@ -38156,6 +41645,7 @@ export namespace Prisma {
     Order?: OrderUncheckedUpdateManyWithoutUserNestedInput
     Company?: CompanyUncheckedUpdateManyWithoutUserNestedInput
     Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProfessionUpsertWithoutBasketInput = {
@@ -38222,9 +41712,9 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Brand?: BrandUpdateOneRequiredWithoutToolNestedInput
-    Capacity?: CapacityUpdateOneRequiredWithoutToolNestedInput
-    Size?: SizeUpdateOneRequiredWithoutToolNestedInput
+    Brand?: BrandUpdateOneWithoutToolNestedInput
+    Capacity?: CapacityUpdateOneWithoutToolNestedInput
+    Size?: SizeUpdateOneWithoutToolNestedInput
     professionTool?: professionToolUpdateManyWithoutToolNestedInput
     orderProduct?: orderProductUpdateManyWithoutToolNestedInput
   }
@@ -38243,9 +41733,9 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    brandId?: StringFieldUpdateOperationsInput | string
-    capacityId?: StringFieldUpdateOperationsInput | string
-    sizeId?: StringFieldUpdateOperationsInput | string
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    capacityId?: NullableStringFieldUpdateOperationsInput | string | null
+    sizeId?: NullableStringFieldUpdateOperationsInput | string | null
     professionTool?: professionToolUncheckedUpdateManyWithoutToolNestedInput
     orderProduct?: orderProductUncheckedUpdateManyWithoutToolNestedInput
   }
@@ -38297,6 +41787,7 @@ export namespace Prisma {
     createdAt?: Date | string
     User: UserCreateNestedOneWithoutOrderInput
     OrderMaster?: OrderMasterCreateNestedManyWithoutOrderInput
+    Comment?: CommentCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUncheckedCreateWithoutOrderProductInput = {
@@ -38313,6 +41804,7 @@ export namespace Prisma {
     deliveryComment?: string | null
     createdAt?: Date | string
     OrderMaster?: OrderMasterUncheckedCreateNestedManyWithoutOrderInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutOrderInput
   }
 
   export type OrderCreateOrConnectWithoutOrderProductInput = {
@@ -38367,9 +41859,9 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    Brand: BrandCreateNestedOneWithoutToolInput
-    Capacity: CapacityCreateNestedOneWithoutToolInput
-    Size: SizeCreateNestedOneWithoutToolInput
+    Brand?: BrandCreateNestedOneWithoutToolInput
+    Capacity?: CapacityCreateNestedOneWithoutToolInput
+    Size?: SizeCreateNestedOneWithoutToolInput
     professionTool?: professionToolCreateNestedManyWithoutToolInput
     Basket?: BasketCreateNestedManyWithoutToolInput
   }
@@ -38388,9 +41880,9 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    brandId: string
-    capacityId: string
-    sizeId: string
+    brandId?: string | null
+    capacityId?: string | null
+    sizeId?: string | null
     professionTool?: professionToolUncheckedCreateNestedManyWithoutToolInput
     Basket?: BasketUncheckedCreateNestedManyWithoutToolInput
   }
@@ -38452,6 +41944,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     User?: UserUpdateOneRequiredWithoutOrderNestedInput
     OrderMaster?: OrderMasterUpdateManyWithoutOrderNestedInput
+    Comment?: CommentUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutOrderProductInput = {
@@ -38468,6 +41961,7 @@ export namespace Prisma {
     deliveryComment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OrderMaster?: OrderMasterUncheckedUpdateManyWithoutOrderNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutOrderNestedInput
   }
 
   export type ProfessionUpsertWithoutOrderProductInput = {
@@ -38534,9 +42028,9 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Brand?: BrandUpdateOneRequiredWithoutToolNestedInput
-    Capacity?: CapacityUpdateOneRequiredWithoutToolNestedInput
-    Size?: SizeUpdateOneRequiredWithoutToolNestedInput
+    Brand?: BrandUpdateOneWithoutToolNestedInput
+    Capacity?: CapacityUpdateOneWithoutToolNestedInput
+    Size?: SizeUpdateOneWithoutToolNestedInput
     professionTool?: professionToolUpdateManyWithoutToolNestedInput
     Basket?: BasketUpdateManyWithoutToolNestedInput
   }
@@ -38555,9 +42049,9 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    brandId?: StringFieldUpdateOperationsInput | string
-    capacityId?: StringFieldUpdateOperationsInput | string
-    sizeId?: StringFieldUpdateOperationsInput | string
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    capacityId?: NullableStringFieldUpdateOperationsInput | string | null
+    sizeId?: NullableStringFieldUpdateOperationsInput | string | null
     professionTool?: professionToolUncheckedUpdateManyWithoutToolNestedInput
     Basket?: BasketUncheckedUpdateManyWithoutToolNestedInput
   }
@@ -38595,6 +42089,324 @@ export namespace Prisma {
     Basket?: BasketUncheckedUpdateManyWithoutLevelNestedInput
   }
 
+  export type OrderCreateWithoutCommentInput = {
+    id?: string
+    address: string
+    latitude: string
+    longitude: string
+    date?: Date | string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    paymentType: string
+    withDelivery: boolean
+    status: string
+    deliveryComment?: string | null
+    createdAt?: Date | string
+    User: UserCreateNestedOneWithoutOrderInput
+    OrderMaster?: OrderMasterCreateNestedManyWithoutOrderInput
+    orderProduct?: orderProductCreateNestedManyWithoutOrderInput
+  }
+
+  export type OrderUncheckedCreateWithoutCommentInput = {
+    id?: string
+    userId: string
+    address: string
+    latitude: string
+    longitude: string
+    date?: Date | string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    paymentType: string
+    withDelivery: boolean
+    status: string
+    deliveryComment?: string | null
+    createdAt?: Date | string
+    OrderMaster?: OrderMasterUncheckedCreateNestedManyWithoutOrderInput
+    orderProduct?: orderProductUncheckedCreateNestedManyWithoutOrderInput
+  }
+
+  export type OrderCreateOrConnectWithoutCommentInput = {
+    where: OrderWhereUniqueInput
+    create: XOR<OrderCreateWithoutCommentInput, OrderUncheckedCreateWithoutCommentInput>
+  }
+
+  export type MasterRatingCreateWithoutCommentInput = {
+    id?: string
+    star: number
+    master?: MasterCreateNestedOneWithoutMasterRatingInput
+  }
+
+  export type MasterRatingUncheckedCreateWithoutCommentInput = {
+    id?: string
+    masterId?: string | null
+    star: number
+  }
+
+  export type MasterRatingCreateOrConnectWithoutCommentInput = {
+    where: MasterRatingWhereUniqueInput
+    create: XOR<MasterRatingCreateWithoutCommentInput, MasterRatingUncheckedCreateWithoutCommentInput>
+  }
+
+  export type MasterRatingCreateManyCommentInputEnvelope = {
+    data: MasterRatingCreateManyCommentInput | MasterRatingCreateManyCommentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserCreateWithoutCommentInput = {
+    id?: string
+    fullName: string
+    phone: string
+    password: string
+    role?: $Enums.UserRole
+    createdAt?: Date | string
+    Region: RegionCreateNestedOneWithoutUserInput
+    Order?: OrderCreateNestedManyWithoutUserInput
+    Basket?: BasketCreateNestedManyWithoutUserInput
+    Company?: CompanyCreateNestedManyWithoutUserInput
+    Session?: SessionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCommentInput = {
+    id?: string
+    fullName: string
+    phone: string
+    password: string
+    role?: $Enums.UserRole
+    createdAt?: Date | string
+    regionId: string
+    Order?: OrderUncheckedCreateNestedManyWithoutUserInput
+    Basket?: BasketUncheckedCreateNestedManyWithoutUserInput
+    Company?: CompanyUncheckedCreateNestedManyWithoutUserInput
+    Session?: SessionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCommentInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCommentInput, UserUncheckedCreateWithoutCommentInput>
+  }
+
+  export type OrderUpsertWithoutCommentInput = {
+    update: XOR<OrderUpdateWithoutCommentInput, OrderUncheckedUpdateWithoutCommentInput>
+    create: XOR<OrderCreateWithoutCommentInput, OrderUncheckedCreateWithoutCommentInput>
+    where?: OrderWhereInput
+  }
+
+  export type OrderUpdateToOneWithWhereWithoutCommentInput = {
+    where?: OrderWhereInput
+    data: XOR<OrderUpdateWithoutCommentInput, OrderUncheckedUpdateWithoutCommentInput>
+  }
+
+  export type OrderUpdateWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    latitude?: StringFieldUpdateOperationsInput | string
+    longitude?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentType?: StringFieldUpdateOperationsInput | string
+    withDelivery?: BoolFieldUpdateOperationsInput | boolean
+    status?: StringFieldUpdateOperationsInput | string
+    deliveryComment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    User?: UserUpdateOneRequiredWithoutOrderNestedInput
+    OrderMaster?: OrderMasterUpdateManyWithoutOrderNestedInput
+    orderProduct?: orderProductUpdateManyWithoutOrderNestedInput
+  }
+
+  export type OrderUncheckedUpdateWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    latitude?: StringFieldUpdateOperationsInput | string
+    longitude?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentType?: StringFieldUpdateOperationsInput | string
+    withDelivery?: BoolFieldUpdateOperationsInput | boolean
+    status?: StringFieldUpdateOperationsInput | string
+    deliveryComment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    OrderMaster?: OrderMasterUncheckedUpdateManyWithoutOrderNestedInput
+    orderProduct?: orderProductUncheckedUpdateManyWithoutOrderNestedInput
+  }
+
+  export type MasterRatingUpsertWithWhereUniqueWithoutCommentInput = {
+    where: MasterRatingWhereUniqueInput
+    update: XOR<MasterRatingUpdateWithoutCommentInput, MasterRatingUncheckedUpdateWithoutCommentInput>
+    create: XOR<MasterRatingCreateWithoutCommentInput, MasterRatingUncheckedCreateWithoutCommentInput>
+  }
+
+  export type MasterRatingUpdateWithWhereUniqueWithoutCommentInput = {
+    where: MasterRatingWhereUniqueInput
+    data: XOR<MasterRatingUpdateWithoutCommentInput, MasterRatingUncheckedUpdateWithoutCommentInput>
+  }
+
+  export type MasterRatingUpdateManyWithWhereWithoutCommentInput = {
+    where: MasterRatingScalarWhereInput
+    data: XOR<MasterRatingUpdateManyMutationInput, MasterRatingUncheckedUpdateManyWithoutCommentInput>
+  }
+
+  export type UserUpsertWithoutCommentInput = {
+    update: XOR<UserUpdateWithoutCommentInput, UserUncheckedUpdateWithoutCommentInput>
+    create: XOR<UserCreateWithoutCommentInput, UserUncheckedCreateWithoutCommentInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCommentInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCommentInput, UserUncheckedUpdateWithoutCommentInput>
+  }
+
+  export type UserUpdateWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Region?: RegionUpdateOneRequiredWithoutUserNestedInput
+    Order?: OrderUpdateManyWithoutUserNestedInput
+    Basket?: BasketUpdateManyWithoutUserNestedInput
+    Company?: CompanyUpdateManyWithoutUserNestedInput
+    Session?: SessionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    regionId?: StringFieldUpdateOperationsInput | string
+    Order?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    Basket?: BasketUncheckedUpdateManyWithoutUserNestedInput
+    Company?: CompanyUncheckedUpdateManyWithoutUserNestedInput
+    Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type MasterCreateWithoutMasterRatingInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    phone: string
+    birthYear: number
+    isActive?: boolean | null
+    image?: string | null
+    passportImg?: string | null
+    about: string
+    createdAt?: Date | string
+    MasterProfession?: MasterProfessionCreateNestedManyWithoutMasterInput
+    OrderMaster?: OrderMasterCreateNestedManyWithoutMasterInput
+  }
+
+  export type MasterUncheckedCreateWithoutMasterRatingInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    phone: string
+    birthYear: number
+    isActive?: boolean | null
+    image?: string | null
+    passportImg?: string | null
+    about: string
+    createdAt?: Date | string
+    MasterProfession?: MasterProfessionUncheckedCreateNestedManyWithoutMasterInput
+    OrderMaster?: OrderMasterUncheckedCreateNestedManyWithoutMasterInput
+  }
+
+  export type MasterCreateOrConnectWithoutMasterRatingInput = {
+    where: MasterWhereUniqueInput
+    create: XOR<MasterCreateWithoutMasterRatingInput, MasterUncheckedCreateWithoutMasterRatingInput>
+  }
+
+  export type CommentCreateWithoutRatingsInput = {
+    id?: string
+    message: string
+    createdAt?: Date | string
+    order?: OrderCreateNestedOneWithoutCommentInput
+    user: UserCreateNestedOneWithoutCommentInput
+  }
+
+  export type CommentUncheckedCreateWithoutRatingsInput = {
+    id?: string
+    message: string
+    orderId?: string | null
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type CommentCreateOrConnectWithoutRatingsInput = {
+    where: CommentWhereUniqueInput
+    create: XOR<CommentCreateWithoutRatingsInput, CommentUncheckedCreateWithoutRatingsInput>
+  }
+
+  export type MasterUpsertWithoutMasterRatingInput = {
+    update: XOR<MasterUpdateWithoutMasterRatingInput, MasterUncheckedUpdateWithoutMasterRatingInput>
+    create: XOR<MasterCreateWithoutMasterRatingInput, MasterUncheckedCreateWithoutMasterRatingInput>
+    where?: MasterWhereInput
+  }
+
+  export type MasterUpdateToOneWithWhereWithoutMasterRatingInput = {
+    where?: MasterWhereInput
+    data: XOR<MasterUpdateWithoutMasterRatingInput, MasterUncheckedUpdateWithoutMasterRatingInput>
+  }
+
+  export type MasterUpdateWithoutMasterRatingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    birthYear?: IntFieldUpdateOperationsInput | number
+    isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    passportImg?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    MasterProfession?: MasterProfessionUpdateManyWithoutMasterNestedInput
+    OrderMaster?: OrderMasterUpdateManyWithoutMasterNestedInput
+  }
+
+  export type MasterUncheckedUpdateWithoutMasterRatingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    birthYear?: IntFieldUpdateOperationsInput | number
+    isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    passportImg?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    MasterProfession?: MasterProfessionUncheckedUpdateManyWithoutMasterNestedInput
+    OrderMaster?: OrderMasterUncheckedUpdateManyWithoutMasterNestedInput
+  }
+
+  export type CommentUpsertWithoutRatingsInput = {
+    update: XOR<CommentUpdateWithoutRatingsInput, CommentUncheckedUpdateWithoutRatingsInput>
+    create: XOR<CommentCreateWithoutRatingsInput, CommentUncheckedCreateWithoutRatingsInput>
+    where?: CommentWhereInput
+  }
+
+  export type CommentUpdateToOneWithWhereWithoutRatingsInput = {
+    where?: CommentWhereInput
+    data: XOR<CommentUpdateWithoutRatingsInput, CommentUncheckedUpdateWithoutRatingsInput>
+  }
+
+  export type CommentUpdateWithoutRatingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: OrderUpdateOneWithoutCommentNestedInput
+    user?: UserUpdateOneRequiredWithoutCommentNestedInput
+  }
+
+  export type CommentUncheckedUpdateWithoutRatingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    orderId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type OrderCreateManyUserInput = {
     id?: string
     address: string
@@ -38611,11 +42423,11 @@ export namespace Prisma {
 
   export type BasketCreateManyUserInput = {
     id?: string
-    professionId: string
-    toolId: string
-    levelId: string
+    professionId?: string | null
+    toolId?: string | null
+    levelId?: string | null
     count: number
-    workingTime: number
+    workingTime?: number | null
     totalPrice: Decimal | DecimalJsLike | number | string
     timeUnit: string
   }
@@ -38627,7 +42439,6 @@ export namespace Prisma {
     account: string
     address: string
     createdAt?: Date | string
-    salary?: number | null
     bank?: string | null
     mfo?: string | null
   }
@@ -38640,6 +42451,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     expiresAt: Date | string
+  }
+
+  export type CommentCreateManyUserInput = {
+    id?: string
+    message: string
+    orderId?: string | null
+    createdAt?: Date | string
   }
 
   export type OrderUpdateWithoutUserInput = {
@@ -38656,6 +42474,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OrderMaster?: OrderMasterUpdateManyWithoutOrderNestedInput
     orderProduct?: orderProductUpdateManyWithoutOrderNestedInput
+    Comment?: CommentUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutUserInput = {
@@ -38672,6 +42491,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OrderMaster?: OrderMasterUncheckedUpdateManyWithoutOrderNestedInput
     orderProduct?: orderProductUncheckedUpdateManyWithoutOrderNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateManyWithoutUserInput = {
@@ -38691,32 +42511,32 @@ export namespace Prisma {
   export type BasketUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     count?: IntFieldUpdateOperationsInput | number
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFieldUpdateOperationsInput | string
-    Profession?: ProfessionUpdateOneRequiredWithoutBasketNestedInput
-    Tool?: ToolUpdateOneRequiredWithoutBasketNestedInput
-    Level?: LevelUpdateOneRequiredWithoutBasketNestedInput
+    Profession?: ProfessionUpdateOneWithoutBasketNestedInput
+    Tool?: ToolUpdateOneWithoutBasketNestedInput
+    Level?: LevelUpdateOneWithoutBasketNestedInput
   }
 
   export type BasketUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
-    levelId?: StringFieldUpdateOperationsInput | string
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
+    levelId?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFieldUpdateOperationsInput | string
   }
 
   export type BasketUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
-    levelId?: StringFieldUpdateOperationsInput | string
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
+    levelId?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFieldUpdateOperationsInput | string
   }
@@ -38728,7 +42548,6 @@ export namespace Prisma {
     account?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    salary?: NullableFloatFieldUpdateOperationsInput | number | null
     bank?: NullableStringFieldUpdateOperationsInput | string | null
     mfo?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -38740,7 +42559,6 @@ export namespace Prisma {
     account?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    salary?: NullableFloatFieldUpdateOperationsInput | number | null
     bank?: NullableStringFieldUpdateOperationsInput | string | null
     mfo?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -38752,7 +42570,6 @@ export namespace Prisma {
     account?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    salary?: NullableFloatFieldUpdateOperationsInput | number | null
     bank?: NullableStringFieldUpdateOperationsInput | string | null
     mfo?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -38787,6 +42604,29 @@ export namespace Prisma {
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CommentUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: OrderUpdateOneWithoutCommentNestedInput
+    ratings?: MasterRatingUpdateManyWithoutCommentNestedInput
+  }
+
+  export type CommentUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    orderId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratings?: MasterRatingUncheckedUpdateManyWithoutCommentNestedInput
+  }
+
+  export type CommentUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    orderId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateManyRegionInput = {
     id?: string
     fullName: string
@@ -38807,6 +42647,7 @@ export namespace Prisma {
     Basket?: BasketUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateManyWithoutUserNestedInput
     Session?: SessionUpdateManyWithoutUserNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRegionInput = {
@@ -38820,6 +42661,7 @@ export namespace Prisma {
     Basket?: BasketUncheckedUpdateManyWithoutUserNestedInput
     Company?: CompanyUncheckedUpdateManyWithoutUserNestedInput
     Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutRegionInput = {
@@ -38845,8 +42687,8 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    brandId: string
-    sizeId: string
+    brandId?: string | null
+    sizeId?: string | null
   }
 
   export type ToolUpdateWithoutCapacityInput = {
@@ -38863,8 +42705,8 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Brand?: BrandUpdateOneRequiredWithoutToolNestedInput
-    Size?: SizeUpdateOneRequiredWithoutToolNestedInput
+    Brand?: BrandUpdateOneWithoutToolNestedInput
+    Size?: SizeUpdateOneWithoutToolNestedInput
     professionTool?: professionToolUpdateManyWithoutToolNestedInput
     Basket?: BasketUpdateManyWithoutToolNestedInput
     orderProduct?: orderProductUpdateManyWithoutToolNestedInput
@@ -38884,8 +42726,8 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    brandId?: StringFieldUpdateOperationsInput | string
-    sizeId?: StringFieldUpdateOperationsInput | string
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    sizeId?: NullableStringFieldUpdateOperationsInput | string | null
     professionTool?: professionToolUncheckedUpdateManyWithoutToolNestedInput
     Basket?: BasketUncheckedUpdateManyWithoutToolNestedInput
     orderProduct?: orderProductUncheckedUpdateManyWithoutToolNestedInput
@@ -38905,8 +42747,8 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    brandId?: StringFieldUpdateOperationsInput | string
-    sizeId?: StringFieldUpdateOperationsInput | string
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    sizeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ToolCreateManyBrandInput = {
@@ -38923,8 +42765,8 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    capacityId: string
-    sizeId: string
+    capacityId?: string | null
+    sizeId?: string | null
   }
 
   export type ToolUpdateWithoutBrandInput = {
@@ -38941,8 +42783,8 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Capacity?: CapacityUpdateOneRequiredWithoutToolNestedInput
-    Size?: SizeUpdateOneRequiredWithoutToolNestedInput
+    Capacity?: CapacityUpdateOneWithoutToolNestedInput
+    Size?: SizeUpdateOneWithoutToolNestedInput
     professionTool?: professionToolUpdateManyWithoutToolNestedInput
     Basket?: BasketUpdateManyWithoutToolNestedInput
     orderProduct?: orderProductUpdateManyWithoutToolNestedInput
@@ -38962,8 +42804,8 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    capacityId?: StringFieldUpdateOperationsInput | string
-    sizeId?: StringFieldUpdateOperationsInput | string
+    capacityId?: NullableStringFieldUpdateOperationsInput | string | null
+    sizeId?: NullableStringFieldUpdateOperationsInput | string | null
     professionTool?: professionToolUncheckedUpdateManyWithoutToolNestedInput
     Basket?: BasketUncheckedUpdateManyWithoutToolNestedInput
     orderProduct?: orderProductUncheckedUpdateManyWithoutToolNestedInput
@@ -38983,8 +42825,8 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    capacityId?: StringFieldUpdateOperationsInput | string
-    sizeId?: StringFieldUpdateOperationsInput | string
+    capacityId?: NullableStringFieldUpdateOperationsInput | string | null
+    sizeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ToolCreateManySizeInput = {
@@ -39001,8 +42843,8 @@ export namespace Prisma {
     code?: number | null
     isActive?: boolean | null
     createdAt?: Date | string
-    brandId: string
-    capacityId: string
+    brandId?: string | null
+    capacityId?: string | null
   }
 
   export type ToolUpdateWithoutSizeInput = {
@@ -39019,8 +42861,8 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Brand?: BrandUpdateOneRequiredWithoutToolNestedInput
-    Capacity?: CapacityUpdateOneRequiredWithoutToolNestedInput
+    Brand?: BrandUpdateOneWithoutToolNestedInput
+    Capacity?: CapacityUpdateOneWithoutToolNestedInput
     professionTool?: professionToolUpdateManyWithoutToolNestedInput
     Basket?: BasketUpdateManyWithoutToolNestedInput
     orderProduct?: orderProductUpdateManyWithoutToolNestedInput
@@ -39040,8 +42882,8 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    brandId?: StringFieldUpdateOperationsInput | string
-    capacityId?: StringFieldUpdateOperationsInput | string
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    capacityId?: NullableStringFieldUpdateOperationsInput | string | null
     professionTool?: professionToolUncheckedUpdateManyWithoutToolNestedInput
     Basket?: BasketUncheckedUpdateManyWithoutToolNestedInput
     orderProduct?: orderProductUncheckedUpdateManyWithoutToolNestedInput
@@ -39061,8 +42903,8 @@ export namespace Prisma {
     code?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    brandId?: StringFieldUpdateOperationsInput | string
-    capacityId?: StringFieldUpdateOperationsInput | string
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    capacityId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MasterProfessionCreateManyLevelInput = {
@@ -39085,11 +42927,11 @@ export namespace Prisma {
 
   export type BasketCreateManyLevelInput = {
     id?: string
-    userId: string
-    professionId: string
-    toolId: string
+    userId?: string | null
+    professionId?: string | null
+    toolId?: string | null
     count: number
-    workingTime: number
+    workingTime?: number | null
     totalPrice: Decimal | DecimalJsLike | number | string
     timeUnit: string
   }
@@ -39097,12 +42939,12 @@ export namespace Prisma {
   export type orderProductCreateManyLevelInput = {
     id?: string
     orderId: string
-    professionId: string
-    toolId: string
-    workingTime: number
+    professionId?: string | null
+    toolId?: string | null
+    workingTime?: number | null
     price: Decimal | DecimalJsLike | number | string
     count: number
-    timeUnit: string
+    timeUnit?: string | null
   }
 
   export type MasterProfessionUpdateWithoutLevelInput = {
@@ -39162,81 +43004,81 @@ export namespace Prisma {
   export type BasketUpdateWithoutLevelInput = {
     id?: StringFieldUpdateOperationsInput | string
     count?: IntFieldUpdateOperationsInput | number
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFieldUpdateOperationsInput | string
-    User?: UserUpdateOneRequiredWithoutBasketNestedInput
-    Profession?: ProfessionUpdateOneRequiredWithoutBasketNestedInput
-    Tool?: ToolUpdateOneRequiredWithoutBasketNestedInput
+    User?: UserUpdateOneWithoutBasketNestedInput
+    Profession?: ProfessionUpdateOneWithoutBasketNestedInput
+    Tool?: ToolUpdateOneWithoutBasketNestedInput
   }
 
   export type BasketUncheckedUpdateWithoutLevelInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFieldUpdateOperationsInput | string
   }
 
   export type BasketUncheckedUpdateManyWithoutLevelInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFieldUpdateOperationsInput | string
   }
 
   export type orderProductUpdateWithoutLevelInput = {
     id?: StringFieldUpdateOperationsInput | string
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     count?: IntFieldUpdateOperationsInput | number
-    timeUnit?: StringFieldUpdateOperationsInput | string
+    timeUnit?: NullableStringFieldUpdateOperationsInput | string | null
     Order?: OrderUpdateOneRequiredWithoutOrderProductNestedInput
-    Profession?: ProfessionUpdateOneRequiredWithoutOrderProductNestedInput
-    Tool?: ToolUpdateOneRequiredWithoutOrderProductNestedInput
+    Profession?: ProfessionUpdateOneWithoutOrderProductNestedInput
+    Tool?: ToolUpdateOneWithoutOrderProductNestedInput
   }
 
   export type orderProductUncheckedUpdateWithoutLevelInput = {
     id?: StringFieldUpdateOperationsInput | string
     orderId?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
-    workingTime?: IntFieldUpdateOperationsInput | number
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     count?: IntFieldUpdateOperationsInput | number
-    timeUnit?: StringFieldUpdateOperationsInput | string
+    timeUnit?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type orderProductUncheckedUpdateManyWithoutLevelInput = {
     id?: StringFieldUpdateOperationsInput | string
     orderId?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
-    workingTime?: IntFieldUpdateOperationsInput | number
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     count?: IntFieldUpdateOperationsInput | number
-    timeUnit?: StringFieldUpdateOperationsInput | string
+    timeUnit?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type professionToolCreateManyToolInput = {
     id?: string
-    professionId: string
+    professionId?: string | null
   }
 
   export type BasketCreateManyToolInput = {
     id?: string
-    userId: string
-    professionId: string
-    levelId: string
+    userId?: string | null
+    professionId?: string | null
+    levelId?: string | null
     count: number
-    workingTime: number
+    workingTime?: number | null
     totalPrice: Decimal | DecimalJsLike | number | string
     timeUnit: string
   }
@@ -39244,93 +43086,93 @@ export namespace Prisma {
   export type orderProductCreateManyToolInput = {
     id?: string
     orderId: string
-    professionId: string
-    levelId: string
-    workingTime: number
+    professionId?: string | null
+    levelId?: string | null
+    workingTime?: number | null
     price: Decimal | DecimalJsLike | number | string
     count: number
-    timeUnit: string
+    timeUnit?: string | null
   }
 
   export type professionToolUpdateWithoutToolInput = {
     id?: StringFieldUpdateOperationsInput | string
-    Profession?: ProfessionUpdateOneRequiredWithoutProfessionToolNestedInput
+    Profession?: ProfessionUpdateOneWithoutProfessionToolNestedInput
   }
 
   export type professionToolUncheckedUpdateWithoutToolInput = {
     id?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type professionToolUncheckedUpdateManyWithoutToolInput = {
     id?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BasketUpdateWithoutToolInput = {
     id?: StringFieldUpdateOperationsInput | string
     count?: IntFieldUpdateOperationsInput | number
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFieldUpdateOperationsInput | string
-    User?: UserUpdateOneRequiredWithoutBasketNestedInput
-    Profession?: ProfessionUpdateOneRequiredWithoutBasketNestedInput
-    Level?: LevelUpdateOneRequiredWithoutBasketNestedInput
+    User?: UserUpdateOneWithoutBasketNestedInput
+    Profession?: ProfessionUpdateOneWithoutBasketNestedInput
+    Level?: LevelUpdateOneWithoutBasketNestedInput
   }
 
   export type BasketUncheckedUpdateWithoutToolInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    levelId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    levelId?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFieldUpdateOperationsInput | string
   }
 
   export type BasketUncheckedUpdateManyWithoutToolInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    levelId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    levelId?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFieldUpdateOperationsInput | string
   }
 
   export type orderProductUpdateWithoutToolInput = {
     id?: StringFieldUpdateOperationsInput | string
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     count?: IntFieldUpdateOperationsInput | number
-    timeUnit?: StringFieldUpdateOperationsInput | string
+    timeUnit?: NullableStringFieldUpdateOperationsInput | string | null
     Order?: OrderUpdateOneRequiredWithoutOrderProductNestedInput
-    Profession?: ProfessionUpdateOneRequiredWithoutOrderProductNestedInput
-    Level?: LevelUpdateOneRequiredWithoutOrderProductNestedInput
+    Profession?: ProfessionUpdateOneWithoutOrderProductNestedInput
+    Level?: LevelUpdateOneWithoutOrderProductNestedInput
   }
 
   export type orderProductUncheckedUpdateWithoutToolInput = {
     id?: StringFieldUpdateOperationsInput | string
     orderId?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    levelId?: StringFieldUpdateOperationsInput | string
-    workingTime?: IntFieldUpdateOperationsInput | number
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    levelId?: NullableStringFieldUpdateOperationsInput | string | null
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     count?: IntFieldUpdateOperationsInput | number
-    timeUnit?: StringFieldUpdateOperationsInput | string
+    timeUnit?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type orderProductUncheckedUpdateManyWithoutToolInput = {
     id?: StringFieldUpdateOperationsInput | string
     orderId?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    levelId?: StringFieldUpdateOperationsInput | string
-    workingTime?: IntFieldUpdateOperationsInput | number
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    levelId?: NullableStringFieldUpdateOperationsInput | string | null
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     count?: IntFieldUpdateOperationsInput | number
-    timeUnit?: StringFieldUpdateOperationsInput | string
+    timeUnit?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MasterProfessionCreateManyMasterInput = {
@@ -39346,6 +43188,12 @@ export namespace Prisma {
   export type OrderMasterCreateManyMasterInput = {
     id?: string
     orderId: string
+  }
+
+  export type MasterRatingCreateManyMasterInput = {
+    id?: string
+    commentId: string
+    star: number
   }
 
   export type MasterProfessionUpdateWithoutMasterInput = {
@@ -39393,6 +43241,24 @@ export namespace Prisma {
     orderId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type MasterRatingUpdateWithoutMasterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    star?: FloatFieldUpdateOperationsInput | number
+    comment?: CommentUpdateOneRequiredWithoutRatingsNestedInput
+  }
+
+  export type MasterRatingUncheckedUpdateWithoutMasterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    commentId?: StringFieldUpdateOperationsInput | string
+    star?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type MasterRatingUncheckedUpdateManyWithoutMasterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    commentId?: StringFieldUpdateOperationsInput | string
+    star?: FloatFieldUpdateOperationsInput | number
+  }
+
   export type MasterProfessionCreateManyPofessionInput = {
     id?: string
     masterId: string
@@ -39405,7 +43271,7 @@ export namespace Prisma {
 
   export type professionToolCreateManyProfessionInput = {
     id?: string
-    toolId: string
+    toolId?: string | null
   }
 
   export type professionLevelCreateManyProfessionInput = {
@@ -39418,11 +43284,11 @@ export namespace Prisma {
 
   export type BasketCreateManyProfessionInput = {
     id?: string
-    userId: string
-    toolId: string
-    levelId: string
+    userId?: string | null
+    toolId?: string | null
+    levelId?: string | null
     count: number
-    workingTime: number
+    workingTime?: number | null
     totalPrice: Decimal | DecimalJsLike | number | string
     timeUnit: string
   }
@@ -39430,12 +43296,12 @@ export namespace Prisma {
   export type orderProductCreateManyProfessionInput = {
     id?: string
     orderId: string
-    toolId: string
-    levelId: string
-    workingTime: number
+    toolId?: string | null
+    levelId?: string | null
+    workingTime?: number | null
     price: Decimal | DecimalJsLike | number | string
     count: number
-    timeUnit: string
+    timeUnit?: string | null
   }
 
   export type MasterProfessionUpdateWithoutPofessionInput = {
@@ -39470,17 +43336,17 @@ export namespace Prisma {
 
   export type professionToolUpdateWithoutProfessionInput = {
     id?: StringFieldUpdateOperationsInput | string
-    Tool?: ToolUpdateOneRequiredWithoutProfessionToolNestedInput
+    Tool?: ToolUpdateOneWithoutProfessionToolNestedInput
   }
 
   export type professionToolUncheckedUpdateWithoutProfessionInput = {
     id?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type professionToolUncheckedUpdateManyWithoutProfessionInput = {
     id?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type professionLevelUpdateWithoutProfessionInput = {
@@ -39510,67 +43376,67 @@ export namespace Prisma {
   export type BasketUpdateWithoutProfessionInput = {
     id?: StringFieldUpdateOperationsInput | string
     count?: IntFieldUpdateOperationsInput | number
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFieldUpdateOperationsInput | string
-    User?: UserUpdateOneRequiredWithoutBasketNestedInput
-    Tool?: ToolUpdateOneRequiredWithoutBasketNestedInput
-    Level?: LevelUpdateOneRequiredWithoutBasketNestedInput
+    User?: UserUpdateOneWithoutBasketNestedInput
+    Tool?: ToolUpdateOneWithoutBasketNestedInput
+    Level?: LevelUpdateOneWithoutBasketNestedInput
   }
 
   export type BasketUncheckedUpdateWithoutProfessionInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
-    levelId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
+    levelId?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFieldUpdateOperationsInput | string
   }
 
   export type BasketUncheckedUpdateManyWithoutProfessionInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
-    levelId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
+    levelId?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     timeUnit?: StringFieldUpdateOperationsInput | string
   }
 
   export type orderProductUpdateWithoutProfessionInput = {
     id?: StringFieldUpdateOperationsInput | string
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     count?: IntFieldUpdateOperationsInput | number
-    timeUnit?: StringFieldUpdateOperationsInput | string
+    timeUnit?: NullableStringFieldUpdateOperationsInput | string | null
     Order?: OrderUpdateOneRequiredWithoutOrderProductNestedInput
-    Tool?: ToolUpdateOneRequiredWithoutOrderProductNestedInput
-    Level?: LevelUpdateOneRequiredWithoutOrderProductNestedInput
+    Tool?: ToolUpdateOneWithoutOrderProductNestedInput
+    Level?: LevelUpdateOneWithoutOrderProductNestedInput
   }
 
   export type orderProductUncheckedUpdateWithoutProfessionInput = {
     id?: StringFieldUpdateOperationsInput | string
     orderId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
-    levelId?: StringFieldUpdateOperationsInput | string
-    workingTime?: IntFieldUpdateOperationsInput | number
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
+    levelId?: NullableStringFieldUpdateOperationsInput | string | null
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     count?: IntFieldUpdateOperationsInput | number
-    timeUnit?: StringFieldUpdateOperationsInput | string
+    timeUnit?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type orderProductUncheckedUpdateManyWithoutProfessionInput = {
     id?: StringFieldUpdateOperationsInput | string
     orderId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
-    levelId?: StringFieldUpdateOperationsInput | string
-    workingTime?: IntFieldUpdateOperationsInput | number
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
+    levelId?: NullableStringFieldUpdateOperationsInput | string | null
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     count?: IntFieldUpdateOperationsInput | number
-    timeUnit?: StringFieldUpdateOperationsInput | string
+    timeUnit?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type OrderMasterCreateManyOrderInput = {
@@ -39580,13 +43446,20 @@ export namespace Prisma {
 
   export type orderProductCreateManyOrderInput = {
     id?: string
-    professionId: string
-    toolId: string
-    levelId: string
-    workingTime: number
+    professionId?: string | null
+    toolId?: string | null
+    levelId?: string | null
+    workingTime?: number | null
     price: Decimal | DecimalJsLike | number | string
     count: number
-    timeUnit: string
+    timeUnit?: string | null
+  }
+
+  export type CommentCreateManyOrderInput = {
+    id?: string
+    message: string
+    userId: string
+    createdAt?: Date | string
   }
 
   export type OrderMasterUpdateWithoutOrderInput = {
@@ -39606,35 +43479,82 @@ export namespace Prisma {
 
   export type orderProductUpdateWithoutOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
-    workingTime?: IntFieldUpdateOperationsInput | number
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     count?: IntFieldUpdateOperationsInput | number
-    timeUnit?: StringFieldUpdateOperationsInput | string
-    Profession?: ProfessionUpdateOneRequiredWithoutOrderProductNestedInput
-    Tool?: ToolUpdateOneRequiredWithoutOrderProductNestedInput
-    Level?: LevelUpdateOneRequiredWithoutOrderProductNestedInput
+    timeUnit?: NullableStringFieldUpdateOperationsInput | string | null
+    Profession?: ProfessionUpdateOneWithoutOrderProductNestedInput
+    Tool?: ToolUpdateOneWithoutOrderProductNestedInput
+    Level?: LevelUpdateOneWithoutOrderProductNestedInput
   }
 
   export type orderProductUncheckedUpdateWithoutOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
-    levelId?: StringFieldUpdateOperationsInput | string
-    workingTime?: IntFieldUpdateOperationsInput | number
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
+    levelId?: NullableStringFieldUpdateOperationsInput | string | null
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     count?: IntFieldUpdateOperationsInput | number
-    timeUnit?: StringFieldUpdateOperationsInput | string
+    timeUnit?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type orderProductUncheckedUpdateManyWithoutOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
-    professionId?: StringFieldUpdateOperationsInput | string
-    toolId?: StringFieldUpdateOperationsInput | string
-    levelId?: StringFieldUpdateOperationsInput | string
-    workingTime?: IntFieldUpdateOperationsInput | number
+    professionId?: NullableStringFieldUpdateOperationsInput | string | null
+    toolId?: NullableStringFieldUpdateOperationsInput | string | null
+    levelId?: NullableStringFieldUpdateOperationsInput | string | null
+    workingTime?: NullableIntFieldUpdateOperationsInput | number | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     count?: IntFieldUpdateOperationsInput | number
-    timeUnit?: StringFieldUpdateOperationsInput | string
+    timeUnit?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CommentUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratings?: MasterRatingUpdateManyWithoutCommentNestedInput
+    user?: UserUpdateOneRequiredWithoutCommentNestedInput
+  }
+
+  export type CommentUncheckedUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratings?: MasterRatingUncheckedUpdateManyWithoutCommentNestedInput
+  }
+
+  export type CommentUncheckedUpdateManyWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MasterRatingCreateManyCommentInput = {
+    id?: string
+    masterId?: string | null
+    star: number
+  }
+
+  export type MasterRatingUpdateWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    star?: FloatFieldUpdateOperationsInput | number
+    master?: MasterUpdateOneWithoutMasterRatingNestedInput
+  }
+
+  export type MasterRatingUncheckedUpdateWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    masterId?: NullableStringFieldUpdateOperationsInput | string | null
+    star?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type MasterRatingUncheckedUpdateManyWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    masterId?: NullableStringFieldUpdateOperationsInput | string | null
+    star?: FloatFieldUpdateOperationsInput | number
   }
 
 

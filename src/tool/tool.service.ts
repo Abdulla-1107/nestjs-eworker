@@ -36,7 +36,7 @@ export class ToolService {
     console.log(randomNumber);
     try {
       const newTool = await this.prisma.tool.create({
-        data: { ...createToolDto, code: randomNumber, isActive: false },
+        data: { ...createToolDto, code: randomNumber, isActive: true },
       });
       return { data: newTool };
     } catch (error) {

@@ -28,6 +28,7 @@ import { AuthGuard } from 'src/auth-guard/auth.guard';
 import { Roles, UsersRole } from 'src/Enums/user.role';
 import { RegisterDto } from './dto/register-user.dto';
 import { Request } from 'express';
+import { ChangePasswordDto } from './dto/reset-password.dto';
 
 @ApiBearerAuth()
 @ApiTags('user')
@@ -70,7 +71,7 @@ export class UserController {
     return this.userService.verifyOtp(verifyOtpDto.phone, verifyOtpDto.code);
   }
 
-  @Post('register')
+  @Post('register/user')
   @ApiOperation({ summary: 'Foydalanuvchini ro‘yxatdan o‘tkazish' })
   @ApiResponse({
     status: 201,
@@ -104,10 +105,26 @@ export class UserController {
     return this.userService.login(dto, request);
   }
 
+  @Post('/reset-password')
   @ApiOperation({ summary: 'Reset password' })
   @UseGuards(AuthGuard)
-  @Post('/reset-password')
-  resetPassword(@Req() req: Request) {
+  async resetPassword(@Body() dto: ChangePasswordDto, @Req() req: Request) {
+    const userId = req['user'].id;
+    return this.userService.ResetPassword(dto, userId);
+  }
+
+  @Get('/sessions')
+  @ApiOperation({ summary: 'Foydalanuvchining barcha sessiyalarini olish' })
+  @UseGuards(AuthGuard)
+  getSessions(@Req() req: Request) {
+    const userId = req['user'].id;
+    return this.userService.getSessions(userId);
+  }
+
+  @ApiOperation({ summary: "User barcha ma'lumotlarni olish" })
+  @UseGuards(AuthGuard)
+  @Get('/me')
+  async me(@Req() req: Request) {
     const userId = req['user'].id;
     return this.userService.me(userId);
   }
@@ -121,11 +138,11 @@ export class UserController {
     return this.userService.delete(id);
   }
 
-  @ApiOperation({ summary: "User barcha ma'lumotlarni olish" })
+  @Delete('/session/:id')
+  @ApiOperation({ summary: "Foydalanuvchining sessiyasini o'chirish" })
   @UseGuards(AuthGuard)
-  @Get('/me')
-  async me(@Req() req: Request) {
+  deleteSession(@Param('id') sessionId: string, @Req() req: Request) {
     const userId = req['user'].id;
-    return this.userService.me(userId);
+    return this.userService.deleteSession(sessionId, userId);
   }
 }

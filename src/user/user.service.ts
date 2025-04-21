@@ -30,14 +30,14 @@ export class UserService {
   }
 
   async requestOtp(phone: string) {
-    const existingUser = await this.prisma.user.findFirst({
-      where: { phone },
-    });
-    if (existingUser) {
-      throw new BadRequestException(
-        'Bu telefon raqami allaqachon ro‘yxatdan o‘tgan',
-      );
-    }
+    // const existingUser = await this.prisma.user.findFirst({
+    //   where: { phone },
+    // });
+    // if (existingUser) {
+    //   throw new BadRequestException(
+    //     'Bu telefon raqami allaqachon ro‘yxatdan o‘tgan',
+    //   );
+    // }
 
     return this.otpService.sendOtp(phone);
   }
@@ -47,10 +47,11 @@ export class UserService {
   }
 
   async register(dto: RegisterDto) {
-    // const isVerified = await this.otpService.isPhoneVerified(dto.phone);
-    // if (!isVerified) {
-    //   throw new BadRequestException('Telefon raqami OTP bilan tasdiqlanmagan');
-    // }
+    const isVerified = await this.otpService.isPhoneVerified(dto.phone);
+    if (!isVerified) {
+      throw new BadRequestException('Telefon raqami OTP bilan tasdiqlanmagan');
+    }
+    
     const region = await this.prisma.region.findFirst({
       where: { id: dto.regionId },
     });
@@ -74,7 +75,6 @@ export class UserService {
                   inn: company.inn,
                   account: company.account,
                   address: company.address,
-                  salary: company.salary, // salary maydoni qo'shildi
                   bank: company.bank,
                   mfo: company.mfo,
                 })),
@@ -123,53 +123,44 @@ export class UserService {
   }
 
   async login(dto: LoginUser, request: Request) {
-    // Foydalanuvchini telefon raqamiga ko'ra qidiramiz
     const user = await this.prisma.user.findFirst({
       where: { phone: dto.phone },
     });
 
-    // Agar foydalanuvchi topilmasa
     if (!user) {
       throw new NotFoundException('User topilmadi');
     }
 
-    // Parolni tekshirish
     const match = await bcrypt.compare(dto.password, user.password);
-
     if (!match) {
       throw new BadRequestException('Xato parol');
     }
 
-    // Access token yaratish
     const accessToken = this.jwt.sign(
       {
         id: user.id,
         phone: user.phone,
         role: user.role,
       },
-      { expiresIn: '1h' }, // Access tokenning muddati 1 soat
+      { expiresIn: '1h' },
     );
 
-    // Refresh token yaratish
     const refreshToken = this.jwt.sign(
       {
         id: user.id,
         phone: user.phone,
         role: user.role,
       },
-      { expiresIn: '7d' }, // Refresh tokenning muddati 7 kun
+      { expiresIn: '7d' },
     );
 
-    // Foydalanuvchi uchun IP va qurilma ma'lumotlarini olish
     const ip = request.ip;
     const device = request.headers['user-agent'];
 
-    // Sessiyani tekshirish va yangilash
     let session = await this.prisma.session.findFirst({
       where: { userId: user.id, ip, device },
     });
 
-    // Agar sessiya topilmasa, yangi sessiya yaratish
     if (!session) {
       session = await this.prisma.session.create({
         data: {
@@ -181,17 +172,16 @@ export class UserService {
         },
       });
     } else {
-      // Agar sessiya mavjud bo'lsa, refresh tokenni yangilash
       session = await this.prisma.session.update({
         where: { id: session.id },
         data: {
           refreshToken,
           updatedAt: new Date(),
+          expiresAt: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
         },
       });
     }
 
-    // Tokenlarni qaytarish
     return {
       access_token: accessToken,
       refresh_token: refreshToken,
@@ -206,14 +196,9 @@ export class UserService {
     order?: 'asc' | 'desc';
     regionId?: string;
   }) {
-    const {
-      page = 1,
-      limit = 10,
-      search,
-      sortBy = 'createdAt',
-      order = 'desc',
-      regionId,
-    } = query;
+    const page = Number(query.page) || 1;
+    const limit = Number(query.limit) || 10;
+    const { search, sortBy = 'createdAt', order = 'desc', regionId } = query;
 
     const skip = (page - 1) * limit;
 
@@ -268,30 +253,25 @@ export class UserService {
 
   // user.service.ts
   async ResetPassword(dto: ChangePasswordDto, userId: string) {
-    const user = await this.prisma.user.findUnique({
-      where: { id: userId },
+    // Step 1: Find user by phone number
+    const user = await this.prisma.user.findFirst({
+      where: { phone: dto.phone },
     });
 
     if (!user) {
-      throw new NotFoundException('Foydalanuvchi topilmadi');
+      throw new Error('Telefon raqam topilmadi');
     }
 
-    const isOldPasswordValid = await bcrypt.compare(
-      dto.oldPassword,
-      user.password,
-    );
-    if (!isOldPasswordValid) {
-      throw new BadRequestException('Eski parol noto‘g‘ri');
-    }
+    // Step 2: Hash the new password
+    const hashedPassword = await bcrypt.hashPassword(dto.newPassword);
 
-    const hashedPassword = await bcrypt.hash(dto.newPassword, 10);
-
-    await this.prisma.user.update({
+    // Step 3: Update the user’s password
+    const updatedUser = await this.prisma.user.update({
       where: { id: user.id },
-      data: { password: hashedPassword },
+      data: { password: hashedPassword }, // Update the password
     });
 
-    return { message: 'Parol muvaffaqiyatli yangilandi' };
+    return { message: 'Parol yangilandi' };
   }
 
   async delete(id: string) {
@@ -323,5 +303,39 @@ export class UserService {
     } catch (error) {
       throw new Error(`Xatolik: ${error.message}`);
     }
+  }
+
+  async getSessions(userId: string) {
+    const sessions = await this.prisma.session.findMany({
+      where: { userId: userId },
+    });
+
+    if (!sessions || sessions.length == 0) {
+      throw new NotFoundException('Sessiyalar topilmadi');
+    }
+
+    return { sessions };
+  }
+
+  async deleteSession(sessionId: string, userId: string) {
+    const session = await this.prisma.session.findFirst({
+      where: {
+        id: sessionId,
+        userId: userId,
+      },
+    });
+
+    if (!session) {
+      throw new NotFoundException('Sessiya topilmadi');
+    }
+
+    // Sessiyani o'chiramiz
+    await this.prisma.session.delete({
+      where: {
+        id: session.id,
+      },
+    });
+
+    return { message: "Sessiya o'chirildi" };
   }
 }

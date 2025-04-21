@@ -11,4 +11,7 @@ export enum PaymentType {
   CLICK = 'CLICK',
 }
 
-
+export enum TimeUnit {
+  HOURLY = 'HOURLY',
+  DAILY = 'DAILY',
+}

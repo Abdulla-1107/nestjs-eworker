@@ -72,17 +72,11 @@ export class CreateToolDto {
   isActive?: boolean;
 
   @ApiProperty({ example: 'brand-uuid', description: 'Brend ID (UUID)' })
-    @IsUUID()
-  @IsNotEmpty()
-  brandId: string;
+  brandId?: string;
 
   @ApiProperty({ example: 'capacity-uuid', description: 'Sig‘im ID (UUID)' })
-    @IsUUID()
-  @IsNotEmpty()
-  capacityId: string;
+  capacityId?: string;
 
   @ApiProperty({ example: 'size-uuid', description: 'O‘lcham ID (UUID)' })
-    @IsUUID()
-  @IsNotEmpty()
-  sizeId: string;
+  sizeId?: string;
 }

@@ -6,11 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { SizeService } from './size.service';
 import { CreateSizeDto } from './dto/create-size.dto';
 import { UpdateSizeDto } from './dto/update-size.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { SizeQueryDto } from './dto/size-query.dto';
 
 @ApiTags('Sizes') // Swaggerda 'Sizes' nomli guruh yaratadi
 @Controller('size')
@@ -30,19 +32,13 @@ export class SizeController {
   create(@Body() createSizeDto: CreateSizeDto) {
     return this.sizeService.create(createSizeDto);
   }
-
   @Get('/all')
-  @ApiOperation({ summary: 'Barcha hajmlarni olish' })
-  @ApiResponse({
-    status: 200,
-    description: 'Barcha hajmlar muvaffaqiyatli qaytarildi',
+  @ApiOperation({
+    summary: 'Hajmlarni filter, pagination, sort va search bilan olish',
   })
-  @ApiResponse({
-    status: 500,
-    description: 'Xatolik yuz berdi',
-  })
-  findAll() {
-    return this.sizeService.findAll();
+  @ApiResponse({ status: 200, description: 'Hajmlar ro‘yxati' })
+  findAll(@Query() query: SizeQueryDto) {
+    return this.sizeService.findAll(query);
   }
 
   @Get(':id')

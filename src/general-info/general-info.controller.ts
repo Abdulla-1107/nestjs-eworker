@@ -6,17 +6,25 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { GeneralInfoService } from './general-info.service';
 import { CreateGeneralInfoDto } from './dto/create-general-info.dto';
 import { UpdateGeneralInfoDto } from './dto/update-general-info.dto';
 import { ApiOperation, ApiResponse, ApiParam, ApiTags } from '@nestjs/swagger';
+import { Role } from 'src/decorators/role.decorator';
+import { UsersRole } from 'src/Enums/user.role';
+import { RolesGuard } from 'src/auth-guard/role.guard';
+import { AuthGuard } from 'src/auth-guard/auth.guard';
 
 @ApiTags('GeneralInfo')
 @Controller('general-info')
 export class GeneralInfoController {
   constructor(private readonly generalInfoService: GeneralInfoService) {}
 
+  @Role(UsersRole.ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Post('/create')
   @ApiOperation({ summary: "Yangi umumiy ma'lumot yaratish" })
   @ApiResponse({
@@ -41,6 +49,9 @@ export class GeneralInfoController {
     return this.generalInfoService.findGeneralInfo();
   }
 
+  @Role(UsersRole.ADMIN, UsersRole.SUPER_ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Patch('/update/:id')
   @ApiOperation({ summary: "Umumiy ma'lumotni yangilash" })
   @ApiParam({ name: 'id', description: "Umumiy ma'lumot IDsi" })
@@ -59,6 +70,9 @@ export class GeneralInfoController {
     return this.generalInfoService.update(id, updateGeneralInfoDto);
   }
 
+  @Role(UsersRole.ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Delete('/delete/:id')
   @ApiOperation({ summary: "Umumiy ma'lumotni o'chirish" })
   @ApiParam({ name: 'id', description: "Umumiy ma'lumot IDsi" })

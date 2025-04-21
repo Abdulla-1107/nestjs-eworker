@@ -42,9 +42,6 @@ export class RegionController {
     return this.regionService.create(createRegionDto);
   }
 
-  // @Role(UsersRole.ADMIN, UsersRole.SUPER_ADMIN)
-  // @UseGuards(RolesGuard)
-  // @UseGuards(AuthGuard)
   @Get('all')
   @ApiOperation({ summary: 'Barcha regionlarni olish' })
   @ApiQuery({

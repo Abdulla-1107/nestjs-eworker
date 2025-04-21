@@ -1,35 +1,50 @@
 // create-company.dto.ts
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsOptional, IsNumber } from 'class-validator';
+import { IsString, IsOptional } from 'class-validator';
 
 export class CreateCompanyDto {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Company Name',
+    example: 'TechCorp LLC',
+  })
   @IsString()
   name: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Company INN',
+    example: '123456789',
+  })
   @IsString()
   inn: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Company Account Number',
+    example: 'UA12345678901234567890123456',
+  })
   @IsString()
   account: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Company Address',
+    example: '123 Tech Street, Tashkent, Uzbekistan',
+  })
   @IsString()
   address: string;
 
-  @ApiProperty()
-  @IsOptional()
-  @IsNumber()
-  salary?: number;
-
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Bank Name (Optional)',
+    example: 'TechBank',
+    required: false,
+  })
   @IsOptional()
   @IsString()
   bank?: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'MFO Code (Optional)',
+    example: '123456',
+    required: false,
+  })
   @IsOptional()
   @IsString()
   mfo?: string;

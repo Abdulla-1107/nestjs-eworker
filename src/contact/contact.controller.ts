@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ContactService } from './contact.service';
 import { CreateContactDto } from './dto/create-contact.dto';
@@ -19,6 +20,10 @@ import {
   ApiBody,
   ApiQuery,
 } from '@nestjs/swagger';
+import { Role } from 'src/decorators/role.decorator';
+import { UsersRole } from 'src/Enums/user.role';
+import { RolesGuard } from 'src/auth-guard/role.guard';
+import { AuthGuard } from 'src/auth-guard/auth.guard';
 
 @ApiTags('Contact') // Swagger'da tag nomi
 @Controller('contact')
@@ -36,11 +41,37 @@ export class ContactController {
   @Get('/all')
   @ApiOperation({ summary: 'Barcha contactlarni olish' })
   @ApiResponse({ status: 200, description: 'Contactlar ro‘yxati' })
-  @ApiQuery({ name: 'limit', required: false, type: Number, description: "Har sahifada nechta natija ko'rsatiladi" })
-  @ApiQuery({ name: 'page', required: false, type: Number, description: 'Sahifa raqami' })
-  @ApiQuery({ name: 'order', required: false, enum: ['asc', 'desc'], description: 'Saralash tartibi: asc | desc' })
-  @ApiQuery({ name: 'sortBy', required: false, enum: ['name', 'phone'], type: String, description: 'Saralash maydoni (masalan: name, phone)' })
-  @ApiQuery({ name: 'search', required: false, type: String, description: 'Contactlar ichidan qidirish' })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    type: Number,
+    description: "Har sahifada nechta natija ko'rsatiladi",
+  })
+  @ApiQuery({
+    name: 'page',
+    required: false,
+    type: Number,
+    description: 'Sahifa raqami',
+  })
+  @ApiQuery({
+    name: 'order',
+    required: false,
+    enum: ['asc', 'desc'],
+    description: 'Saralash tartibi: asc | desc',
+  })
+  @ApiQuery({
+    name: 'sortBy',
+    required: false,
+    enum: ['name', 'phone'],
+    type: String,
+    description: 'Saralash maydoni (masalan: name, phone)',
+  })
+  @ApiQuery({
+    name: 'search',
+    required: false,
+    type: String,
+    description: 'Contactlar ichidan qidirish',
+  })
   findAll(
     @Query('limit') limit?: number,
     @Query('page') page?: number,
@@ -51,7 +82,6 @@ export class ContactController {
     return this.contactService.findAll({ limit, page, order, sortBy, search });
   }
 
-
   @Get(':id')
   @ApiOperation({ summary: 'ID orqali bitta contactni olish' })
   @ApiParam({ name: 'id', description: 'Contact ID raqami' })
@@ -61,6 +91,9 @@ export class ContactController {
     return this.contactService.findOne(id);
   }
 
+  @Role(UsersRole.ADMIN, UsersRole.SUPER_ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Patch('/update/:id')
   @ApiOperation({ summary: 'Contactni yangilash' })
   @ApiParam({
@@ -75,6 +108,9 @@ export class ContactController {
     return this.contactService.update(id, updateContactDto);
   }
 
+  @Role(UsersRole.ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Delete('/delete/:id')
   @ApiOperation({ summary: 'Contactni o‘chirish' })
   @ApiParam({

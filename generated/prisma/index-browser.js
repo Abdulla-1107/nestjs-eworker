@@ -146,7 +146,6 @@ exports.Prisma.CompanyScalarFieldEnum = {
   address: 'address',
   userId: 'userId',
   createdAt: 'createdAt',
-  salary: 'salary',
   bank: 'bank',
   mfo: 'mfo'
 };
@@ -352,6 +351,21 @@ exports.Prisma.FaqScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  message: 'message',
+  orderId: 'orderId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MasterRatingScalarFieldEnum = {
+  id: 'id',
+  masterId: 'masterId',
+  commentId: 'commentId',
+  star: 'star'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -397,7 +411,9 @@ exports.Prisma.ModelName = {
   Contact: 'Contact',
   Showcase: 'Showcase',
   Partners: 'Partners',
-  faq: 'faq'
+  faq: 'faq',
+  Comment: 'Comment',
+  MasterRating: 'MasterRating'
 };
 
 /**

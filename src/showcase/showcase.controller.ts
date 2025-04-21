@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ShowcaseService } from './showcase.service';
 import { CreateShowcaseDto } from './dto/create-showcase.dto';
 import { UpdateShowcaseDto } from './dto/update-showcase.dto';
@@ -17,18 +25,16 @@ export class ShowcaseController {
     return this.showcaseService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.showcaseService.findOne(+id);
-  }
-
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateShowcaseDto: UpdateShowcaseDto) {
-    return this.showcaseService.update(+id, updateShowcaseDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateShowcaseDto: UpdateShowcaseDto,
+  ) {
+    return this.showcaseService.update(id, updateShowcaseDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.showcaseService.remove(+id);
+    return this.showcaseService.remove(id);
   }
 }

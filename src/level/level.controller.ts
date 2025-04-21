@@ -7,17 +7,25 @@ import {
   Param,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { LevelService } from './level.service';
 import { CreateLevelDto } from './dto/create-level.dto';
 import { UpdateLevelDto } from './dto/update-level.dto';
 import { ApiTags, ApiOperation, ApiResponse, ApiQuery } from '@nestjs/swagger';
+import { Role } from 'src/decorators/role.decorator';
+import { UsersRole } from 'src/Enums/user.role';
+import { RolesGuard } from 'src/auth-guard/role.guard';
+import { AuthGuard } from 'src/auth-guard/auth.guard';
 
-@ApiTags('Levels') // Swagger tags
+@ApiTags('Level') 
 @Controller('level')
 export class LevelController {
   constructor(private readonly levelService: LevelService) {}
 
+  @Role(UsersRole.ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Post('/create')
   @ApiOperation({ summary: 'Yangi daraja yaratish' })
   @ApiResponse({
@@ -92,6 +100,9 @@ export class LevelController {
     return this.levelService.findOne(id);
   }
 
+  @Role(UsersRole.ADMIN, UsersRole.SUPER_ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Patch('/update/:id')
   @ApiOperation({ summary: 'Darajani yangilash' })
   @ApiResponse({
@@ -110,6 +121,9 @@ export class LevelController {
     return this.levelService.update(id, updateLevelDto);
   }
 
+  @Role(UsersRole.ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Delete('/delete/:id')
   @ApiOperation({ summary: 'Darajani o‘chirish' })
   @ApiResponse({

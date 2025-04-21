@@ -26,23 +26,24 @@ export class UploadController {
       },
     },
   })
-  @Post()
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
         destination: (req, file, cb) => {
           cb(null, './images');
         },
-
         filename: (req, file, cb) => {
           cb(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
       }),
     }),
   )
-  uploadImage(@UploadedFile() file) {
+  uploadImage(@UploadedFile() file: Express.Multer.File) {
     console.log(file);
+    if (!file) {
+      return { message: 'Fayl yuklanmadi' };
+    }
 
-    return { image: `https://abdulla.uz/${file.filename} ` };
+    return { image: `https://abdulla.uz/${file.filename}` };
   }
 }

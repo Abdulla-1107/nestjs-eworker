@@ -19,11 +19,13 @@ import { join } from 'path';
 import { MasterModule } from './master/master.module';
 import { ProfessionModule } from './profession/profession.module';
 import { OrderModule } from './order/order.module';
-import { OrderProductModule } from './order-product/order-product.module';
 import { ContactModule } from './contact/contact.module';
 import { GeneralInfoModule } from './general-info/general-info.module';
 import { PartnerModule } from './partner/partner.module';
 import { ShowcaseModule } from './showcase/showcase.module';
+import { BasketModule } from './basket/basket.module';
+import { FaqModule } from './faq/faq.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
   imports: [
@@ -59,11 +61,13 @@ import { ShowcaseModule } from './showcase/showcase.module';
     MasterModule,
     ProfessionModule,
     OrderModule,
-    OrderProductModule,
     ContactModule,
     GeneralInfoModule,
     PartnerModule,
     ShowcaseModule,
+    BasketModule,
+    FaqModule,
+    CommentModule,
   ],
   controllers: [AppController, UploadController],
   providers: [AppService, PrismaService],

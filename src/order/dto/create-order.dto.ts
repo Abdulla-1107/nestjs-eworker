@@ -1,92 +1,101 @@
 import {
-  IsUUID,
   IsString,
-  IsDateString,
-  IsDecimal,
-  IsBoolean,
   IsNotEmpty,
-  Min,
+  IsBoolean,
   IsEnum,
+  IsNumber,
+  Min,
+  ValidateNested,
+  IsDateString,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import { OrderStatus, PaymentType } from 'src/Enums/order.enum';
+import { OrderProductDto } from './create-orderProduct.dto';
 
 export class CreateOrderDto {
-  // @ApiProperty({
-  //   description: 'Foydalanuvchi IDsi (User jadvalidagi id)',
-  //   example: 'a23e4567-e89b-12d3-a456-426614174000',
-  // })
-  // @IsUUID()
-  userId: string;
-
   @ApiProperty({
     description: 'Buyurtma yetkazib beriladigan manzil',
-    example: 'Toshkent shahri, Chilonzor tumani, 10-kvartal, 5-uy',
+    example: '123 Main St',
   })
   @IsString()
   @IsNotEmpty()
   address: string;
 
   @ApiProperty({
-    description: 'Latitude (geolokatsiya bo‘yicha)',
-    example: '41.311081',
+    description: 'Latitude (geolokatsiya)',
+    example: '40.7128',
   })
   @IsString()
   @IsNotEmpty()
   latitude: string;
 
   @ApiProperty({
-    description: 'Longitude (geolokatsiya bo‘yicha)',
-    example: '69.240562',
+    description: 'Longitude (geolokatsiya)',
+    example: '-74.0060',
   })
   @IsString()
   @IsNotEmpty()
   longitude: string;
 
-//   @ApiProperty({
-//     description: 'Buyurtma sanasi va vaqti',
-//     example: '2025-04-15T14:00:00.000Z',
-//   })
-  // @IsDateString()
+  @ApiProperty({
+    description: 'Buyurtma sanasi',
+    example: '2025-04-21T14:00:00Z',
+  })
+  @IsDateString()
   date: string;
 
   @ApiProperty({
     description: 'Buyurtmaning umumiy summasi (so‘mda)',
-    example: 150000.5,
+    example: 100,
   })
+  @IsNumber()
   @Min(0)
-  totalPrice: any; // Decimal uchun string yoki any qabul qilinadi
+  totalPrice: number;
 
   @ApiProperty({
-    description: 'To‘lov turi (masalan: naqd, karta, click)',
-    example: 'CLICK or CASH',
+    description: 'To‘lov turi',
+    enum: PaymentType,
+    example: PaymentType.CASH,
   })
-  @IsString()
   @IsEnum(PaymentType)
-  //   @IsNotEmpty()
   paymentType: PaymentType;
 
   @ApiProperty({
-    description: 'Yetkazib berish kerakmi yoki yo‘q',
+    description: 'Yetkazib berish kerakmi',
     example: true,
   })
   @IsBoolean()
   withDelivery: boolean;
 
-    // @ApiProperty({
-    //   description: 'Buyurtma holati (masalan: pending, accepted, delivered)',
-    //   example: 'pending',
-    // })
-  @IsString()
-  @IsEnum(OrderStatus)
-  //   @IsNotEmpty()
-  status: OrderStatus;
-
   @ApiProperty({
-    description: 'Yetkazib berish bo‘yicha qo‘shimcha izohlar',
-    example: 'Qo‘ng‘iroq qilmang',
+    description: 'Yetkazib berish bo‘yicha izoh',
+    example: 'Leave at the door',
   })
   @IsString()
   @IsNotEmpty()
   deliveryComment: string;
+
+  @ApiProperty({
+    description: 'Buyurtmadagi mahsulotlar yoki xizmatlar ro‘yxati',
+    type: [OrderProductDto],
+    example: [
+      {
+        professionId: 'd1a48805-2ed4-4387-8a59-c8d8582535f0',
+        levelId: 'cf02d2b4-428f-4cce-903b-bd07668052a5',
+        count: 2,
+        timeUnit: 'HOURLY',
+        workingTime: 8,
+        price: 500,
+      },
+      {
+        toolId: '13252aaf-3d57-49e4-8611-e44333d2dff5',
+        count: 10,
+        price: 700,
+      },
+    ],
+  })
+  @ValidateNested({ each: true })
+  @Type(() => OrderProductDto)
+  orderProducts: OrderProductDto[];
 }

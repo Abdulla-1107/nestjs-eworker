@@ -7,16 +7,24 @@ import {
   Param,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { CapacityService } from './capacity.service';
 import { CreateCapacityDto } from './dto/create-capacity.dto';
 import { UpdateCapacityDto } from './dto/update-capacity.dto';
 import { ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@nestjs/swagger';
+import { Role } from 'src/decorators/role.decorator';
+import { UsersRole } from 'src/Enums/user.role';
+import { RolesGuard } from 'src/auth-guard/role.guard';
+import { AuthGuard } from 'src/auth-guard/auth.guard';
 
 @Controller('capacity')
 export class CapacityController {
   constructor(private readonly capacityService: CapacityService) {}
 
+  @Role(UsersRole.ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Post('/create')
   @ApiOperation({ summary: 'Yangi quvvat yaratish' })
   @ApiResponse({
@@ -83,6 +91,9 @@ export class CapacityController {
     return this.capacityService.findOne(id);
   }
 
+  @Role(UsersRole.ADMIN, UsersRole.SUPER_ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Patch('/update/:id')
   @ApiOperation({ summary: 'Quvvatni yangilash' })
   @ApiParam({ name: 'id', description: 'Quvvatning IDsi' })
@@ -105,6 +116,9 @@ export class CapacityController {
     return this.capacityService.update(id, updateCapacityDto);
   }
 
+  @Role(UsersRole.ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Delete('/delete/:id')
   @ApiOperation({ summary: 'Quvvatni o‘chirish' })
   @ApiParam({ name: 'id', description: 'Quvvatning IDsi' })

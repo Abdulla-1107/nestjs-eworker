@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { MasterService } from './master.service';
 import { CreateMasterDto } from './dto/create-master.dto';
@@ -19,13 +20,20 @@ import {
   ApiBody,
 } from '@nestjs/swagger';
 import { MasterQueryDto } from './dto/master-query.dto';
+import { Role } from 'src/decorators/role.decorator';
+import { UsersRole } from 'src/Enums/user.role';
+import { RolesGuard } from 'src/auth-guard/role.guard';
+import { AuthGuard } from 'src/auth-guard/auth.guard';
 
-@ApiTags('Master') 
+@ApiTags('Master')
 @Controller('master')
 export class MasterController {
   constructor(private readonly masterService: MasterService) {}
 
-  @Post("/create")
+  @Role(UsersRole.ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
+  @Post('/create')
   @ApiOperation({ summary: 'Yangi master yaratish' })
   @ApiResponse({
     status: 201,
@@ -39,7 +47,7 @@ export class MasterController {
     return this.masterService.createMaster(createMasterDto);
   }
 
-  @Get("/all")
+  @Get('/all')
   @ApiOperation({ summary: 'Barcha masterlarni olish' })
   @ApiResponse({
     status: 200,
@@ -64,6 +72,9 @@ export class MasterController {
     return this.masterService.findOne(id);
   }
 
+  @Role(UsersRole.ADMIN, UsersRole.SUPER_ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Patch('/update/:id')
   @ApiOperation({ summary: 'Masterni yangilash' })
   @ApiParam({ name: 'id', description: 'Yangilash uchun master IDsi' })
@@ -76,13 +87,13 @@ export class MasterController {
     status: 404,
     description: 'Master topilmadi',
   })
-  update(
-    @Param('id') id: string,
-    @Body() updateMasterDto: UpdateMasterDto,
-  ) {
+  update(@Param('id') id: string, @Body() updateMasterDto: UpdateMasterDto) {
     return this.masterService.update(id, updateMasterDto);
   }
 
+  @Role(UsersRole.ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Delete('/delete/:id')
   @ApiOperation({ summary: 'Masterni o‘chirish' })
   @ApiParam({ name: 'id', description: 'O‘chirish uchun master IDsi' })

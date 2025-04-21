@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Req,
+  Query,
 } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
@@ -16,12 +17,16 @@ import { AuthGuard } from 'src/auth-guard/auth.guard';
 import {
   ApiBearerAuth,
   ApiOperation,
+  ApiQuery,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { Role } from 'src/decorators/role.decorator';
+import { UsersRole } from 'src/Enums/user.role';
+import { RolesGuard } from 'src/auth-guard/role.guard';
 
-@ApiTags('Order') // Swagger sahifasida grouping
-@ApiBearerAuth() // Token kerak bo‘lgan joyda qo‘llaniladi
+@ApiTags('Order')
+@ApiBearerAuth()
 @Controller('order')
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
@@ -41,15 +46,38 @@ export class OrderController {
     const userId = req['user'].id;
     return this.orderService.create(createOrderDto, userId);
   }
-
-  @Get("/all")
-  @ApiOperation({
-    summary: 'Barcha buyurtmalarni olish',
-    description: 'Tizimdagi barcha buyurtmalar ro‘yxatini olish',
-  })
+  @Get('/all')
+  @ApiOperation({ summary: 'Barcha buyurtmalarni olish (filtrlash bilan)' })
   @ApiResponse({ status: 200, description: 'Barcha buyurtmalar ro‘yxati' })
-  findAll() {
-    return this.orderService.findAll();
+
+  @ApiQuery({ name: 'with_delivery', enum: ['true', 'false'], required: false })
+  @ApiQuery({ name: 'payment_type', enum: ['CLICK', 'PAYME', 'CASH'], required: false })
+  @ApiQuery({
+    name: 'status',
+    enum: ['ACTIVE', 'INACTIVE', 'PENDING', 'FINISHED', 'CANCELLED'],
+    required: false,
+  })
+  @ApiQuery({ name: 'page', required: false, type: Number })
+  @ApiQuery({ name: 'limit', required: false, type: Number })
+  @ApiQuery({ name: 'orderBy', enum: ['asc', 'desc'], required: false })
+  findAll(
+    @Query('page') page = 1,
+    @Query('limit') limit = 10,
+    @Query('with_delivery') withDelivery?: string,
+    @Query('payment_type') paymentType?: string,
+    @Query('status') status?: string,
+    @Query('sortBy') sortBy = 'date',
+    @Query('orderBy') orderBy: 'asc' | 'desc' = 'desc',
+  ) {
+    return this.orderService.findAll({
+      page: Number(page),
+      limit: Number(limit),
+      withDelivery,
+      paymentType,
+      status,
+      sortBy,
+      orderBy,
+    });
   }
 
   @Get(':id')
@@ -63,6 +91,9 @@ export class OrderController {
     return this.orderService.findOne(id);
   }
 
+  @Role(UsersRole.ADMIN, UsersRole.SUPER_ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Patch('/update/:id')
   @ApiOperation({
     summary: 'Buyurtmani yangilash',
@@ -77,6 +108,9 @@ export class OrderController {
     return this.orderService.update(id, updateOrderDto);
   }
 
+  @Role(UsersRole.ADMIN)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Delete('/delete/:id')
   @ApiOperation({
     summary: 'Buyurtmani o‘chirish',
