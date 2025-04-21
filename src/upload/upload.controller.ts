@@ -44,6 +44,6 @@ export class UploadController {
       return { message: 'Fayl yuklanmadi' };
     }
 
-    return { image: `https://abdulla.uz/${file.filename}` };
+    return { image: `https://${file.filename}` };
   }
 }

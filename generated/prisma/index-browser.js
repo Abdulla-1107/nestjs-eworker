@@ -198,7 +198,7 @@ exports.Prisma.GeneralInfoScalarFieldEnum = {
   telegram: 'telegram',
   instagram: 'instagram',
   description: 'description',
-  createdAt: 'createdAt'
+  regionId: 'regionId'
 };
 
 exports.Prisma.ToolScalarFieldEnum = {

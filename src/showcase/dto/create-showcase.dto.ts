@@ -1,9 +1,9 @@
-import { IsString, IsNotEmpty, IsUrl } from 'class-validator';
+import { IsString, IsNotEmpty, IsUrl, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateShowcaseDto {
   @ApiProperty({
-    description: 'Mahsulot nomi (O\'zbekcha)',
+    description: "Mahsulot nomi (O'zbekcha)",
     example: 'Telefon',
   })
   @IsString()
@@ -27,7 +27,7 @@ export class CreateShowcaseDto {
   name_en: string;
 
   @ApiProperty({
-    description: 'Mahsulot tavsifi (O\'zbekcha)',
+    description: "Mahsulot tavsifi (O'zbekcha)",
     example: 'Yuqori sifatli telefon',
   })
   @IsString()
@@ -62,7 +62,6 @@ export class CreateShowcaseDto {
     description: 'Mahsulotga olib boruvchi havola',
     example: 'https://www.example.com/product/phone',
   })
-  @IsUrl()
-  @IsNotEmpty()
+  @IsOptional()
   link: string;
 }

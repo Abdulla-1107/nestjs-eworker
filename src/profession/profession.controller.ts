@@ -23,8 +23,8 @@ import { AuthGuard } from 'src/auth-guard/auth.guard';
 export class ProfessionController {
   constructor(private readonly professionService: ProfessionService) {}
 
-  @Role(UsersRole.ADMIN)
-  @UseGuards(RolesGuard)
+  // @Role(UsersRole.ADMIN)
+  // @UseGuards(RolesGuard)
   @UseGuards(AuthGuard)
   @Post('/create')
   @ApiOperation({ summary: 'Yangi kasb yaratish' })

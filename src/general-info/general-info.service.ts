@@ -28,25 +28,37 @@ export class GeneralInfoService {
   }
 
   async update(id: string, updateGeneralInfoDto: UpdateGeneralInfoDto) {
-    const match = await this.prisma.generalInfo.findFirst({ where: { id } });
+    const idNumber = parseInt(id, 10); // `id` ni `number`ga aylantirish
+
+    const match = await this.prisma.generalInfo.findFirst({
+      where: { id: idNumber },
+    });
     if (!match) {
       throw new NotFoundException("Ma'lumotlar topilmadi");
     }
+
     const generalInfo = await this.prisma.generalInfo.update({
-      where: { id },
+      where: { id: idNumber }, // `id` ni `number` sifatida uzatamiz
       data: updateGeneralInfoDto,
     });
+
     return { data: generalInfo };
   }
 
   async remove(id: string) {
-    const match = await this.prisma.generalInfo.findFirst({ where: { id } });
+    const idNumber = parseInt(id, 10); // `id` ni `number`ga aylantiramiz
+
+    const match = await this.prisma.generalInfo.findFirst({
+      where: { id: idNumber },
+    });
     if (!match) {
       throw new NotFoundException("Ma'lumotlar topilmadi");
     }
+
     const generalInfo = await this.prisma.generalInfo.delete({
-      where: { id },
+      where: { id: idNumber }, // `id` ni `number` sifatida uzatamiz
     });
+
     return { message: `GeneralInfo #${id} o'chirildi`, data: generalInfo };
   }
 }

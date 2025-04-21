@@ -26,7 +26,7 @@ import { AuthGuard } from 'src/auth-guard/auth.guard';
 export class ToolController {
   constructor(private readonly toolService: ToolService) {}
 
-  @UseGuards(AuthGuard)
+  // @UseGuards(AuthGuard)
   @Post('/create')
   @ApiOperation({ summary: 'Yangi asbob (tool) yaratish' })
   @ApiResponse({ status: 201, description: 'Asbob muvaffaqiyatli yaratildi' })

@@ -12439,30 +12439,40 @@ export namespace Prisma {
 
   export type AggregateGeneralInfo = {
     _count: GeneralInfoCountAggregateOutputType | null
+    _avg: GeneralInfoAvgAggregateOutputType | null
+    _sum: GeneralInfoSumAggregateOutputType | null
     _min: GeneralInfoMinAggregateOutputType | null
     _max: GeneralInfoMaxAggregateOutputType | null
   }
 
+  export type GeneralInfoAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type GeneralInfoSumAggregateOutputType = {
+    id: number | null
+  }
+
   export type GeneralInfoMinAggregateOutputType = {
-    id: string | null
+    id: number | null
     phone: string | null
     email: string | null
     address: string | null
     telegram: string | null
     instagram: string | null
     description: string | null
-    createdAt: Date | null
+    regionId: string | null
   }
 
   export type GeneralInfoMaxAggregateOutputType = {
-    id: string | null
+    id: number | null
     phone: string | null
     email: string | null
     address: string | null
     telegram: string | null
     instagram: string | null
     description: string | null
-    createdAt: Date | null
+    regionId: string | null
   }
 
   export type GeneralInfoCountAggregateOutputType = {
@@ -12473,10 +12483,18 @@ export namespace Prisma {
     telegram: number
     instagram: number
     description: number
-    createdAt: number
+    regionId: number
     _all: number
   }
 
+
+  export type GeneralInfoAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type GeneralInfoSumAggregateInputType = {
+    id?: true
+  }
 
   export type GeneralInfoMinAggregateInputType = {
     id?: true
@@ -12486,7 +12504,7 @@ export namespace Prisma {
     telegram?: true
     instagram?: true
     description?: true
-    createdAt?: true
+    regionId?: true
   }
 
   export type GeneralInfoMaxAggregateInputType = {
@@ -12497,7 +12515,7 @@ export namespace Prisma {
     telegram?: true
     instagram?: true
     description?: true
-    createdAt?: true
+    regionId?: true
   }
 
   export type GeneralInfoCountAggregateInputType = {
@@ -12508,7 +12526,7 @@ export namespace Prisma {
     telegram?: true
     instagram?: true
     description?: true
-    createdAt?: true
+    regionId?: true
     _all?: true
   }
 
@@ -12550,6 +12568,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: GeneralInfoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GeneralInfoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: GeneralInfoMinAggregateInputType
@@ -12580,20 +12610,24 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: GeneralInfoCountAggregateInputType | true
+    _avg?: GeneralInfoAvgAggregateInputType
+    _sum?: GeneralInfoSumAggregateInputType
     _min?: GeneralInfoMinAggregateInputType
     _max?: GeneralInfoMaxAggregateInputType
   }
 
   export type GeneralInfoGroupByOutputType = {
-    id: string
+    id: number
     phone: string
     email: string
     address: string | null
     telegram: string | null
     instagram: string | null
     description: string | null
-    createdAt: Date
+    regionId: string | null
     _count: GeneralInfoCountAggregateOutputType | null
+    _avg: GeneralInfoAvgAggregateOutputType | null
+    _sum: GeneralInfoSumAggregateOutputType | null
     _min: GeneralInfoMinAggregateOutputType | null
     _max: GeneralInfoMaxAggregateOutputType | null
   }
@@ -12620,7 +12654,7 @@ export namespace Prisma {
     telegram?: boolean
     instagram?: boolean
     description?: boolean
-    createdAt?: boolean
+    regionId?: boolean
   }, ExtArgs["result"]["generalInfo"]>
 
   export type GeneralInfoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -12631,7 +12665,7 @@ export namespace Prisma {
     telegram?: boolean
     instagram?: boolean
     description?: boolean
-    createdAt?: boolean
+    regionId?: boolean
   }, ExtArgs["result"]["generalInfo"]>
 
   export type GeneralInfoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -12642,7 +12676,7 @@ export namespace Prisma {
     telegram?: boolean
     instagram?: boolean
     description?: boolean
-    createdAt?: boolean
+    regionId?: boolean
   }, ExtArgs["result"]["generalInfo"]>
 
   export type GeneralInfoSelectScalar = {
@@ -12653,23 +12687,23 @@ export namespace Prisma {
     telegram?: boolean
     instagram?: boolean
     description?: boolean
-    createdAt?: boolean
+    regionId?: boolean
   }
 
-  export type GeneralInfoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "phone" | "email" | "address" | "telegram" | "instagram" | "description" | "createdAt", ExtArgs["result"]["generalInfo"]>
+  export type GeneralInfoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "phone" | "email" | "address" | "telegram" | "instagram" | "description" | "regionId", ExtArgs["result"]["generalInfo"]>
 
   export type $GeneralInfoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "GeneralInfo"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
-      id: string
+      id: number
       phone: string
       email: string
       address: string | null
       telegram: string | null
       instagram: string | null
       description: string | null
-      createdAt: Date
+      regionId: string | null
     }, ExtArgs["result"]["generalInfo"]>
     composites: {}
   }
@@ -13093,14 +13127,14 @@ export namespace Prisma {
    * Fields of the GeneralInfo model
    */
   interface GeneralInfoFieldRefs {
-    readonly id: FieldRef<"GeneralInfo", 'String'>
+    readonly id: FieldRef<"GeneralInfo", 'Int'>
     readonly phone: FieldRef<"GeneralInfo", 'String'>
     readonly email: FieldRef<"GeneralInfo", 'String'>
     readonly address: FieldRef<"GeneralInfo", 'String'>
     readonly telegram: FieldRef<"GeneralInfo", 'String'>
     readonly instagram: FieldRef<"GeneralInfo", 'String'>
     readonly description: FieldRef<"GeneralInfo", 'String'>
-    readonly createdAt: FieldRef<"GeneralInfo", 'DateTime'>
+    readonly regionId: FieldRef<"GeneralInfo", 'String'>
   }
     
 
@@ -26641,7 +26675,7 @@ export namespace Prisma {
     desc_ru: string
     desc_en: string
     image: string
-    link: string
+    link: string | null
     _count: ShowcaseCountAggregateOutputType | null
     _min: ShowcaseMinAggregateOutputType | null
     _max: ShowcaseMaxAggregateOutputType | null
@@ -26723,7 +26757,7 @@ export namespace Prisma {
       desc_ru: string
       desc_en: string
       image: string
-      link: string
+      link: string | null
     }, ExtArgs["result"]["showcase"]>
     composites: {}
   }
@@ -31839,7 +31873,7 @@ export namespace Prisma {
     telegram: 'telegram',
     instagram: 'instagram',
     description: 'description',
-    createdAt: 'createdAt'
+    regionId: 'regionId'
   };
 
   export type GeneralInfoScalarFieldEnum = (typeof GeneralInfoScalarFieldEnum)[keyof typeof GeneralInfoScalarFieldEnum]
@@ -32694,14 +32728,14 @@ export namespace Prisma {
     AND?: GeneralInfoWhereInput | GeneralInfoWhereInput[]
     OR?: GeneralInfoWhereInput[]
     NOT?: GeneralInfoWhereInput | GeneralInfoWhereInput[]
-    id?: StringFilter<"GeneralInfo"> | string
+    id?: IntFilter<"GeneralInfo"> | number
     phone?: StringFilter<"GeneralInfo"> | string
     email?: StringFilter<"GeneralInfo"> | string
     address?: StringNullableFilter<"GeneralInfo"> | string | null
     telegram?: StringNullableFilter<"GeneralInfo"> | string | null
     instagram?: StringNullableFilter<"GeneralInfo"> | string | null
     description?: StringNullableFilter<"GeneralInfo"> | string | null
-    createdAt?: DateTimeFilter<"GeneralInfo"> | Date | string
+    regionId?: StringNullableFilter<"GeneralInfo"> | string | null
   }
 
   export type GeneralInfoOrderByWithRelationInput = {
@@ -32712,11 +32746,11 @@ export namespace Prisma {
     telegram?: SortOrderInput | SortOrder
     instagram?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
+    regionId?: SortOrderInput | SortOrder
   }
 
   export type GeneralInfoWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    id?: number
     AND?: GeneralInfoWhereInput | GeneralInfoWhereInput[]
     OR?: GeneralInfoWhereInput[]
     NOT?: GeneralInfoWhereInput | GeneralInfoWhereInput[]
@@ -32726,7 +32760,7 @@ export namespace Prisma {
     telegram?: StringNullableFilter<"GeneralInfo"> | string | null
     instagram?: StringNullableFilter<"GeneralInfo"> | string | null
     description?: StringNullableFilter<"GeneralInfo"> | string | null
-    createdAt?: DateTimeFilter<"GeneralInfo"> | Date | string
+    regionId?: StringNullableFilter<"GeneralInfo"> | string | null
   }, "id">
 
   export type GeneralInfoOrderByWithAggregationInput = {
@@ -32737,24 +32771,26 @@ export namespace Prisma {
     telegram?: SortOrderInput | SortOrder
     instagram?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
+    regionId?: SortOrderInput | SortOrder
     _count?: GeneralInfoCountOrderByAggregateInput
+    _avg?: GeneralInfoAvgOrderByAggregateInput
     _max?: GeneralInfoMaxOrderByAggregateInput
     _min?: GeneralInfoMinOrderByAggregateInput
+    _sum?: GeneralInfoSumOrderByAggregateInput
   }
 
   export type GeneralInfoScalarWhereWithAggregatesInput = {
     AND?: GeneralInfoScalarWhereWithAggregatesInput | GeneralInfoScalarWhereWithAggregatesInput[]
     OR?: GeneralInfoScalarWhereWithAggregatesInput[]
     NOT?: GeneralInfoScalarWhereWithAggregatesInput | GeneralInfoScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"GeneralInfo"> | string
+    id?: IntWithAggregatesFilter<"GeneralInfo"> | number
     phone?: StringWithAggregatesFilter<"GeneralInfo"> | string
     email?: StringWithAggregatesFilter<"GeneralInfo"> | string
     address?: StringNullableWithAggregatesFilter<"GeneralInfo"> | string | null
     telegram?: StringNullableWithAggregatesFilter<"GeneralInfo"> | string | null
     instagram?: StringNullableWithAggregatesFilter<"GeneralInfo"> | string | null
     description?: StringNullableWithAggregatesFilter<"GeneralInfo"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"GeneralInfo"> | Date | string
+    regionId?: StringNullableWithAggregatesFilter<"GeneralInfo"> | string | null
   }
 
   export type ToolWhereInput = {
@@ -33635,7 +33671,7 @@ export namespace Prisma {
     desc_ru?: StringFilter<"Showcase"> | string
     desc_en?: StringFilter<"Showcase"> | string
     image?: StringFilter<"Showcase"> | string
-    link?: StringFilter<"Showcase"> | string
+    link?: StringNullableFilter<"Showcase"> | string | null
   }
 
   export type ShowcaseOrderByWithRelationInput = {
@@ -33647,7 +33683,7 @@ export namespace Prisma {
     desc_ru?: SortOrder
     desc_en?: SortOrder
     image?: SortOrder
-    link?: SortOrder
+    link?: SortOrderInput | SortOrder
   }
 
   export type ShowcaseWhereUniqueInput = Prisma.AtLeast<{
@@ -33662,7 +33698,7 @@ export namespace Prisma {
     desc_ru?: StringFilter<"Showcase"> | string
     desc_en?: StringFilter<"Showcase"> | string
     image?: StringFilter<"Showcase"> | string
-    link?: StringFilter<"Showcase"> | string
+    link?: StringNullableFilter<"Showcase"> | string | null
   }, "id">
 
   export type ShowcaseOrderByWithAggregationInput = {
@@ -33674,7 +33710,7 @@ export namespace Prisma {
     desc_ru?: SortOrder
     desc_en?: SortOrder
     image?: SortOrder
-    link?: SortOrder
+    link?: SortOrderInput | SortOrder
     _count?: ShowcaseCountOrderByAggregateInput
     _max?: ShowcaseMaxOrderByAggregateInput
     _min?: ShowcaseMinOrderByAggregateInput
@@ -33692,7 +33728,7 @@ export namespace Prisma {
     desc_ru?: StringWithAggregatesFilter<"Showcase"> | string
     desc_en?: StringWithAggregatesFilter<"Showcase"> | string
     image?: StringWithAggregatesFilter<"Showcase"> | string
-    link?: StringWithAggregatesFilter<"Showcase"> | string
+    link?: StringNullableWithAggregatesFilter<"Showcase"> | string | null
   }
 
   export type PartnersWhereInput = {
@@ -34471,80 +34507,77 @@ export namespace Prisma {
   }
 
   export type GeneralInfoCreateInput = {
-    id?: string
     phone: string
     email: string
     address?: string | null
     telegram?: string | null
     instagram?: string | null
     description?: string | null
-    createdAt?: Date | string
+    regionId?: string | null
   }
 
   export type GeneralInfoUncheckedCreateInput = {
-    id?: string
+    id?: number
     phone: string
     email: string
     address?: string | null
     telegram?: string | null
     instagram?: string | null
     description?: string | null
-    createdAt?: Date | string
+    regionId?: string | null
   }
 
   export type GeneralInfoUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
     telegram?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    regionId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type GeneralInfoUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
     telegram?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    regionId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type GeneralInfoCreateManyInput = {
-    id?: string
+    id?: number
     phone: string
     email: string
     address?: string | null
     telegram?: string | null
     instagram?: string | null
     description?: string | null
-    createdAt?: Date | string
+    regionId?: string | null
   }
 
   export type GeneralInfoUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
     telegram?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    regionId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type GeneralInfoUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
     telegram?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    regionId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ToolCreateInput = {
@@ -35452,7 +35485,7 @@ export namespace Prisma {
     desc_ru: string
     desc_en: string
     image: string
-    link: string
+    link?: string | null
   }
 
   export type ShowcaseUncheckedCreateInput = {
@@ -35464,7 +35497,7 @@ export namespace Prisma {
     desc_ru: string
     desc_en: string
     image: string
-    link: string
+    link?: string | null
   }
 
   export type ShowcaseUpdateInput = {
@@ -35476,7 +35509,7 @@ export namespace Prisma {
     desc_ru?: StringFieldUpdateOperationsInput | string
     desc_en?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    link?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ShowcaseUncheckedUpdateInput = {
@@ -35488,7 +35521,7 @@ export namespace Prisma {
     desc_ru?: StringFieldUpdateOperationsInput | string
     desc_en?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    link?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ShowcaseCreateManyInput = {
@@ -35500,7 +35533,7 @@ export namespace Prisma {
     desc_ru: string
     desc_en: string
     image: string
-    link: string
+    link?: string | null
   }
 
   export type ShowcaseUpdateManyMutationInput = {
@@ -35512,7 +35545,7 @@ export namespace Prisma {
     desc_ru?: StringFieldUpdateOperationsInput | string
     desc_en?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    link?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ShowcaseUncheckedUpdateManyInput = {
@@ -35524,7 +35557,7 @@ export namespace Prisma {
     desc_ru?: StringFieldUpdateOperationsInput | string
     desc_en?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    link?: StringFieldUpdateOperationsInput | string
+    link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PartnersCreateInput = {
@@ -36179,6 +36212,17 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type GeneralInfoCountOrderByAggregateInput = {
     id?: SortOrder
     phone?: SortOrder
@@ -36187,7 +36231,11 @@ export namespace Prisma {
     telegram?: SortOrder
     instagram?: SortOrder
     description?: SortOrder
-    createdAt?: SortOrder
+    regionId?: SortOrder
+  }
+
+  export type GeneralInfoAvgOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type GeneralInfoMaxOrderByAggregateInput = {
@@ -36198,7 +36246,7 @@ export namespace Prisma {
     telegram?: SortOrder
     instagram?: SortOrder
     description?: SortOrder
-    createdAt?: SortOrder
+    regionId?: SortOrder
   }
 
   export type GeneralInfoMinOrderByAggregateInput = {
@@ -36209,10 +36257,14 @@ export namespace Prisma {
     telegram?: SortOrder
     instagram?: SortOrder
     description?: SortOrder
-    createdAt?: SortOrder
+    regionId?: SortOrder
   }
 
-  export type IntFilter<$PrismaModel = never> = {
+  export type GeneralInfoSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
     notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -36220,7 +36272,12 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -36331,22 +36388,6 @@ export namespace Prisma {
     price?: SortOrder
     quantity?: SortOrder
     code?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -37631,6 +37672,14 @@ export namespace Prisma {
     deleteMany?: orderProductScalarWhereInput | orderProductScalarWhereInput[]
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type BrandCreateNestedOneWithoutToolInput = {
     create?: XOR<BrandCreateWithoutToolInput, BrandUncheckedCreateWithoutToolInput>
     connectOrCreate?: BrandCreateOrConnectWithoutToolInput
@@ -37689,14 +37738,6 @@ export namespace Prisma {
     connectOrCreate?: orderProductCreateOrConnectWithoutToolInput | orderProductCreateOrConnectWithoutToolInput[]
     createMany?: orderProductCreateManyToolInputEnvelope
     connect?: orderProductWhereUniqueInput | orderProductWhereUniqueInput[]
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -38805,11 +38846,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedBoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-  }
-
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -38835,6 +38871,11 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
